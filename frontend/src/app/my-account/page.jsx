@@ -5,11 +5,20 @@ import Header from "@/components/Header";
 import MyAccountLayout from "./MyAccountLayout";
 import AccountDetails from "./AccountDetails";
 import { useState } from "react";
-import ScriptTags from "@/components/ScriptTags";
-
+import Dashboard from "./Dashboard";
+import Orders from "./Orders";
 
 const MyAccount = () => {
   const [panel, setPanel] = useState(AccountDetails)
+  const [activePanel, setActivePanel] = useState('dashboard')
+
+  const handlePanelNavigation = (panelName) => {
+    setActivePanel(panelName)
+    if (panelName == 'dashboard') setPanel(Dashboard)
+    if (panelName == 'orders') setPanel(Orders)
+    if (panelName == 'accountDetails') setPanel(AccountDetails)
+  }
+
   return (
     <>
     <Header />
@@ -27,7 +36,7 @@ const MyAccount = () => {
       </section>
       {/* my account */}
       
-      <MyAccountLayout setPanel={setPanel}>
+      <MyAccountLayout activePanel={activePanel} handlePanelNavigation={handlePanelNavigation}>
         {panel}
       </MyAccountLayout>
 
