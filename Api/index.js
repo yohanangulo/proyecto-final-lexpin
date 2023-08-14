@@ -175,7 +175,7 @@ app.post('/users', async (req, res) => {
         const user = new User({
             name: "Dorian",
             lastname: "Matos",
-            email: "aoaoeuie@ddfs.com",
+            email: "yohanangulo@ddfs.com",
             birthdate: 123,
             password: "Programmer19.",
             fechaCreacion: 1234, 

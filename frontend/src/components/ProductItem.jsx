@@ -4,11 +4,11 @@ const ProductItem = () => {
       <div className="product-img">
         <a href="#">
           <img
-            src="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/shop_item_1.jpg"
+            src="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/product-item.jpg"
             alt=""
           />
           <img
-            src="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/shop_item_1_back.jpg"
+            src="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/product-item.jpg"
             alt=""
             className="back-img"
           />
