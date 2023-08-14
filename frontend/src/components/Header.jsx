@@ -10,7 +10,7 @@ const Header = () => {
               <div className="top-bar-links">
                 <ul className="col-sm-6 top-bar-acc">
                   <li className="top-bar-link">
-                    <Link href="#">Mi cuenta</Link>
+                    <Link href="/my-account">My account</Link>
                   </li>
                   {/* <li className="top-bar-link">
                     <a href="#">My Wishlist</a>
@@ -19,7 +19,7 @@ const Header = () => {
                     <a href="#">Newsletter</a>
                   </li> */}
                   <li className="top-bar-link">
-                    <Link href="sign-in">Iniciar sesion</Link>
+                    <Link href="sign-in">Login</Link>
                   </li>
                   {/* <li className="top-bar-link">
                     <a href="contact.html">Contact</a>

@@ -1,3 +1,5 @@
+import Loader from "@/components/ui/Loader";
+
 export const metadata = {
   title: "Cool Store",
   description: "Tiendo en linea para la venta de ropa deportiva",
@@ -5,7 +7,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" style={{scrollBehavior: 'smooth'}}>
       <head>
         <link
           rel="stylesheet"
@@ -62,7 +64,10 @@ export default function RootLayout({ children }) {
           href="img/apple-touch-icon-114x114.png"
         />
       </head>
-      <body className="relative">{children}</body>
+      <body className="relative">
+        {/* <Loader /> */}
+        {children}
+        </body>
     </html>
   );
 }
