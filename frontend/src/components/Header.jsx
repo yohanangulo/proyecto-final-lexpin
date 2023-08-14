@@ -10,11 +10,7 @@ const Header = ({isLoggedIn }) => {
               <div className="top-bar-links">
                 <ul className="col-sm-6 top-bar-acc">
                   <li className="top-bar-link">
-<<<<<<< HEAD
-                    <Link href="/">Mi cuenta</Link>
-=======
                     <Link href="/my-account">My account</Link>
->>>>>>> 915aa14f9cd233dfd9bdcb62aad74735a72ca9ac
                   </li>
                   {/* <li className="top-bar-link">
                     <a href="#">My Wishlist</a>

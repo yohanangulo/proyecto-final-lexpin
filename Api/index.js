@@ -89,15 +89,30 @@ const productSchema = new mongoose.Schema({
 
 
 //Esquemas
-const userSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema(
+  {
     name: { type: String, required: true, minlength: 3, maxlength: 50 },
     lastname: { type: String, required: true, minlength: 3, maxlength: 50 },
-    email: { type: String, required: true, unique: true, minlength: 3, maxlength: 50 },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      minlength: 3,
+      maxlength: 50,
+    },
     birthdate: { type: Date, required: true, validate: [isValidAge] },
-    password: { type: String, required: true, minlength: 8, maxlength: 50, validate: [isValidPassword] },
+    password: {
+      type: String,
+      required: true,
+      minlength: 8,
+      maxlength: 50,
+      validate: [isValidPassword],
+    },
     fechaCreacion: { type: Date, default: Date.now },
     fechaActualizacion: { type: Date, default: Date.now },
-});
+  },
+  { versionKey: false }
+);
 
 const ProductsSchema = new mongoose.Schema({
     nombre: { type: String, required: true, minlength: 3, maxlength: 100 },
@@ -160,7 +175,7 @@ app.post('/users', async (req, res) => {
         const user = new User({
             name: "Dorian",
             lastname: "Matos",
-            email: "dorian@ddfs.com",
+            email: "aoaoeuie@ddfs.com",
             birthdate: 123,
             password: "Programmer19.",
             fechaCreacion: 1234, 
