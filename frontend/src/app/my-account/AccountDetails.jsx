@@ -1,6 +1,6 @@
 const AccountDetails = () => {
   return (
-    <div className="woocommerce-MyAccount-content">
+    <>
       <form
         className="woocommerce-EditAccountForm edit-account"
         action=""
@@ -114,7 +114,7 @@ const AccountDetails = () => {
         </p>
         <div className="clear" />
       </form>
-    </div>
+    </>
   );
 };
 export default AccountDetails;

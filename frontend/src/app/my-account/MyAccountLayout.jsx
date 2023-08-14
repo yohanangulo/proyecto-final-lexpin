@@ -13,7 +13,7 @@ const MyAccountLayout = ({ children, handlePanelNavigation, activePanel }) => {
                 }`}
                 onClick={() => handlePanelNavigation("dashboard")}
               >
-                <a href="#top">Dashboard</a>
+                <a href="#my-account">Dashboard</a>
               </li>
               <li
                 className={`woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--orders ${
@@ -21,7 +21,7 @@ const MyAccountLayout = ({ children, handlePanelNavigation, activePanel }) => {
                 }`}
                 onClick={() => handlePanelNavigation("orders")}
               >
-                <a href="#top">Orders</a>
+                <a href="#my-account">Orders</a>
               </li>
               <li
                 onClick={() => handlePanelNavigation("accountDetails")}
@@ -29,14 +29,14 @@ const MyAccountLayout = ({ children, handlePanelNavigation, activePanel }) => {
                   activePanel == "accountDetails" && "is-active"
                 }`}
               >
-                <a href="#top">Account details</a>
+                <a href="#my-account">Account details</a>
               </li>
               <li className="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--customer-logout">
                 <Link href="/">Logout</Link>
               </li>
             </ul>
           </nav>
-          {children}
+          <div className="woocommerce-MyAccount-content">{children}</div>
         </div>
       </div>
     </section>

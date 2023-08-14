@@ -10,7 +10,7 @@ import Orders from "./Orders";
 
 const MyAccount = () => {
   const [panel, setPanel] = useState(AccountDetails)
-  const [activePanel, setActivePanel] = useState('dashboard')
+  const [activePanel, setActivePanel] = useState('accountDetails')
 
   const handlePanelNavigation = (panelName) => {
     setActivePanel(panelName)
@@ -22,7 +22,7 @@ const MyAccount = () => {
   return (
     <>
     <Header />
-    <main id="top" className="content-wrapper oh">
+    <main className="content-wrapper oh">
       {/* page title */}
       <section className="page-title text-center">
         <div className="container relative clearfix">
