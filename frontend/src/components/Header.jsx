@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const Header = () => {
+const Header = ({isLoggedIn }) => {
   return (
     <header className="nav-type-1">
       <div className="top-bar hidden-sm hidden-xs">
@@ -10,7 +10,7 @@ const Header = () => {
               <div className="top-bar-links">
                 <ul className="col-sm-6 top-bar-acc">
                   <li className="top-bar-link">
-                    <Link href="#">Mi cuenta</Link>
+                    <Link href="/">Mi cuenta</Link>
                   </li>
                   {/* <li className="top-bar-link">
                     <a href="#">My Wishlist</a>
@@ -21,6 +21,11 @@ const Header = () => {
                   <li className="top-bar-link">
                     <Link href="sign-in">Iniciar sesion</Link>
                   </li>
+                  {isLoggedIn && (
+                    <li className="top-bar-link">
+                      <h1>{"Bienvenido" + greeting}</h1>
+                    </li>
+                  )}
                   {/* <li className="top-bar-link">
                     <a href="contact.html">Contact</a>
                   </li> */}

@@ -3,12 +3,14 @@
 import ScriptTags from "@/components/ScriptTags";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import React, { useState } from "react";
 
 export default function Home() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <>
-      <Header />
+      <Header isLoggedIn={isLoggedIn} />
       {/* Hero Slider */}
       <main className="content-wrapper oh">
         <section className="section-wrap nopadding">

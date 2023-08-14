@@ -7,38 +7,47 @@ import axios from "axios";
 
 const Login = () => {
   // Estado para almacenar los valores del formulario de registro
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [registerData, setRegisterData] = useState({
     name: "",
     lastname: "",
     email: "",
     birthdate: "",
     password: "",
-    confirmPassword: ""
+
   });
 
   // Estado para almacenar los valores del formulario
-  const[formData, setFormData] = useState({
-    email: "",
-    password:""
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
   });
 
   // Manejador para actualizar el estado cuando cambian los campos del formulario
-  const handleInputChange = (event) =>{
+  const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({
       ...prevData,
-      [name]: value
+      [name]: value,
     }));
-  }
+  };
 
   // Función para manejar el envío del formulario de inicio de sesión
   const handleLoginSubmit = async (event) => {
     event.preventDefault();
+
     try {
-      const response = await axios.post("http://localhost:3003/users", formData);
-      console.log(response.data); 
+      const response = await axios.post('http://localhost:3003/login', formData);
+
+      if (response.data.success) {
+        alert('Inicio de sesión exitoso');
+        window.location.href = "/"; // Cambia la ruta a donde quieras redirigir después del inicio de sesión exitoso
+      } else {
+        alert('Credenciales incorrectas. Por favor, inténtelo nuevamente.');
+      }
     } catch (error) {
-      console.error("Error de inicio de sesión:", error);
+      console.error('Error de inicio de sesión:', error);
+      alert('Ha ocurrido un error. Por favor, inténtelo nuevamente.');
     }
   };
 
@@ -68,6 +77,7 @@ const Login = () => {
       }, 3000);
     } catch (error) {
       console.error("Error de registro:", error);
+      console.log("Error de registro:", error);
       alert("Error de registro")
     }
   };
@@ -228,7 +238,7 @@ const Login = () => {
                       </abbr>
                     </label>
                     <input
-                      type="text"
+                      type="password"
                       className="input-text"
                       placeholder=""
                       defaultValue=""
@@ -237,23 +247,7 @@ const Login = () => {
                       onChange={handleRegisterInputChange}
                     />
                   </p>
-                  <p className="form-row form-row-wide">
-                    <label>
-                      Confirme password
-                      <abbr className="required" title="required">
-                        *
-                      </abbr>
-                    </label>
-                    <input
-                      type="text"
-                      className="input-text"
-                      placeholder=""
-                      defaultValue=""
-                      name="confirmPassword"
-                      value={registerData.confirmPassword}
-                      onChange={handleRegisterInputChange}
-                    />
-                  </p>
+              
                   <input type="submit" defaultValue="Register" className="btn" />
                   </form>
                 </div>

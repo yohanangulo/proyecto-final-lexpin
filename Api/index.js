@@ -95,7 +95,6 @@ const userSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true, minlength: 3, maxlength: 50 },
     birthdate: { type: Date, required: true, validate: [isValidAge] },
     password: { type: String, required: true, minlength: 8, maxlength: 50, validate: [isValidPassword] },
-    confirmPassword: { type: String, required: true, minlength: 8, maxlength: 50, validate: [isValidPassword] },
     fechaCreacion: { type: Date, default: Date.now },
     fechaActualizacion: { type: Date, default: Date.now },
 });
@@ -114,7 +113,7 @@ const ProductsSchema = new mongoose.Schema({
 });
 
 const saleSchema = new mongoose.Schema({
-    // userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    // userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },z
     productos: { type: [productSchema], required: true },
     precioSinIva: { type: Number, required: true, min: 0 },
     precioConIva: { type: Number, required: true, min: 0 },
@@ -157,17 +156,16 @@ app.get('/users', async (req, res) => {
 
 app.post('/users', async (req, res) => {
     try {
-        const user = new User(req.body);
-        // const user = new User({
-        //     nombre: "Dorian",
-        //     apellido: "Matos",
-        //     correo: "dorian@ddfs.com",
-        //     fechaNacimiento: 123,
-        //     contraseña: "Programador19.",
-        //     rol: "user",
-        //     fechaCreacion: 1234, 
-        //     fechaActualizacion: 1234
-        // })
+        // const user = new User(req.body);
+        const user = new User({
+            name: "Dorian",
+            lastname: "Matos",
+            email: "dorian@ddfs.com",
+            birthdate: 123,
+            password: "Programmer19.",
+            fechaCreacion: 1234, 
+            fechaActualizacion: 1234
+        })
         await user.save();
         res.send('Usuario creado');
     } catch (error) {
