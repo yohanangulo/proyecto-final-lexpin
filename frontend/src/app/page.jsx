@@ -4,10 +4,11 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import React, { useEffect, useState } from "react";
 import ProductItem from "@/components/ProductItem";
-import Scripts from "@/components/Scripts";
-
+import { useScripts } from "@/hooks/useScripts";
 
 export default function Home() {
+  useScripts()
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -15,7 +16,6 @@ export default function Home() {
 
   return (
     <>
-      <Scripts />
       <Header isLoggedIn={isLoggedIn} />
       {/* Hero Slider */}
       <main className="content-wrapper oh">
@@ -264,7 +264,6 @@ export default function Home() {
         {/* end partners */}
       </main>
       <Footer />
-      {/* <ScriptTags /> */}
     </>
   );
 }

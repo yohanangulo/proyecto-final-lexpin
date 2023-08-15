@@ -3,10 +3,8 @@
 import ScrollReveal from '@/assets/js/plugins/scrollReveal'
 import { useEffect } from "react";
 
-const Scripts = () => {
+export const useScripts = () => {
   useEffect(() => {
-    console.log({ run: "useEffect run" });
-
     // jQuery
     window.jQuery = require("jquery");
     // bootstrap js
@@ -601,4 +599,3 @@ jQuery('a[href="#top"]').on('click',function(){
   }, []);
 
 };
-export default Scripts;

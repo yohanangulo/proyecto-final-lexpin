@@ -7,9 +7,11 @@ import AccountDetails from "./AccountDetails";
 import { useState } from "react";
 import Dashboard from "./Dashboard";
 import Orders from "./Orders";
-import Scripts from "@/components/Scripts";
+import { useScripts } from "@/hooks/useScripts";
 
 const MyAccount = () => {
+  useScripts()
+
   const [panel, setPanel] = useState(AccountDetails)
   const [activePanel, setActivePanel] = useState('accountDetails')
 
@@ -22,7 +24,6 @@ const MyAccount = () => {
 
   return (
     <>
-    <Scripts />
     <Header />
     <main className="content-wrapper oh">
       {/* page title */}
@@ -45,7 +46,6 @@ const MyAccount = () => {
       {/* end my account */}
     </main>
     <Footer />
-    {/* <ScriptTags /> */}
     </>
   );
 };

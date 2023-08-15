@@ -2,12 +2,12 @@
 
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import Scripts from "@/components/Scripts";
 import ProductItem from "@/components/ProductItem";
-import ScriptTags from "@/components/ScriptTags";
+import useScripts from "@/hooks/useScripts";
 import { useState } from "react";
 
 const Product = ({ params }) => {
+  useScripts()
   const { slug } = params;
 
   const [qty, setQty] = useState(1);
@@ -34,7 +34,6 @@ const Product = ({ params }) => {
   return (
     <>
       <Header />
-      <Scripts />
       <main className="content-wrapper oh">
         <section className="section-wrap single-product">
           <div className="container relative">
@@ -306,7 +305,6 @@ const Product = ({ params }) => {
         {/* end related products */}
       </main>
       <Footer />
-      {/* <ScriptTags /> */}
     </>
   );
 };

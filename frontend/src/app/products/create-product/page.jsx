@@ -1,7 +1,7 @@
 "use client";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import Scripts from "@/components/Scripts";
+import { useScripts } from "@/hooks/useScripts";
 import { useState } from "react";
 
 const productInitialState = {
@@ -15,6 +15,7 @@ const productInitialState = {
 const categories = ["Hombres", "Mujeres",];
 
 const CreateProduct = () => {
+  useScripts()
   const [productData, setProductData] = useState(productInitialState);
 
   const handleInputChange = (e) => {
@@ -29,7 +30,6 @@ const CreateProduct = () => {
 
   return (
     <>
-      <Scripts />
       <Header />
       <main className="content-wrapper oh">
         <section className="section-wrap">

@@ -4,9 +4,10 @@ import React, { useState } from "react";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import axios from "axios";
-import Scripts from "@/components/Scripts";
+import { useScripts } from "@/hooks/useScripts";
 
 const Login = () => {
+  useScripts()
   // Estado para almacenar los valores del formulario de registro
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [registerData, setRegisterData] = useState({
@@ -89,7 +90,6 @@ const Login = () => {
   };
   return (
     <>
-      <Scripts />
       <Header />
       {/* Page Title */}
       <main className="content-wrapper oh">
@@ -262,7 +262,6 @@ const Login = () => {
         {/* end login */}
       </main>
       <Footer />
-      {/* <ScriptTags /> */}
     </>
   );
 };
