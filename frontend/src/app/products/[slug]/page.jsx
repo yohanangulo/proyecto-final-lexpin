@@ -1,7 +1,8 @@
-'use client';
+"use client";
 
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import Scripts from "@/components/Scripts";
 import ProductItem from "@/components/ProductItem";
 import ScriptTags from "@/components/ScriptTags";
 import { useState } from "react";
@@ -13,20 +14,19 @@ const Product = ({ params }) => {
 
   const handleQtyPress = (e) => {
     console.log(e.target.name);
-    let { name } = e.target
+    let { name } = e.target;
 
-    if (name == 'qty') {
-      if (e.target.value.includes('-')) return
+    if (name == "qty") {
+      if (e.target.value.includes("-")) return;
     }
 
-    if (name == 'add') {
-      setQty(prev => prev + 1)
-    } else if (name == 'subtract') {
-      setQty(prev => prev - 1)
+    if (name == "add") {
+      setQty((prev) => prev + 1);
+    } else if (name == "subtract") {
+      setQty((prev) => prev - 1);
     } else {
-      setQty(+e.target.value)
+      setQty(+e.target.value);
     }
-
   };
 
   console.log(slug);
@@ -34,6 +34,7 @@ const Product = ({ params }) => {
   return (
     <>
       <Header />
+      <Scripts />
       <main className="content-wrapper oh">
         <section className="section-wrap single-product">
           <div className="container relative">
@@ -279,7 +280,7 @@ const Product = ({ params }) => {
             <div className="row heading-row">
               <div className="col-md-12 text-center">
                 <h2 className="heading uppercase">
-                  {/* <small>Related Products</small> */}
+                  <small>Related Products</small>
                 </h2>
               </div>
             </div>
@@ -290,8 +291,13 @@ const Product = ({ params }) => {
               >
                 <ProductItem />
                 <ProductItem />
-              </div>{" "}
-              {/* end owl */}
+                <ProductItem />
+                <ProductItem />
+                <ProductItem />
+                <ProductItem />
+                <ProductItem />
+                <ProductItem />
+              </div>
             </div>{" "}
             {/* end row */}
           </div>{" "}
@@ -300,7 +306,7 @@ const Product = ({ params }) => {
         {/* end related products */}
       </main>
       <Footer />
-      <ScriptTags />
+      {/* <ScriptTags /> */}
     </>
   );
 };

@@ -7,6 +7,7 @@ import AccountDetails from "./AccountDetails";
 import { useState } from "react";
 import Dashboard from "./Dashboard";
 import Orders from "./Orders";
+import Scripts from "@/components/Scripts";
 
 const MyAccount = () => {
   const [panel, setPanel] = useState(AccountDetails)
@@ -21,6 +22,7 @@ const MyAccount = () => {
 
   return (
     <>
+    <Scripts />
     <Header />
     <main className="content-wrapper oh">
       {/* page title */}

@@ -1,9 +1,10 @@
-'use client'
-import React,{useEffect, useState} from "react";
-import ScriptTags from "@/components/ScriptTags";
+"use client";
+
+import React, { useState } from "react";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import axios from "axios";
+import Scripts from "@/components/Scripts";
 
 const Login = () => {
   // Estado para almacenar los valores del formulario de registro
@@ -14,13 +15,12 @@ const Login = () => {
     email: "",
     birthdate: "",
     password: "",
-
   });
 
   // Estado para almacenar los valores del formulario
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
 
   // Manejador para actualizar el estado cuando cambian los campos del formulario
@@ -37,17 +37,20 @@ const Login = () => {
     event.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:3003/login', formData);
+      const response = await axios.post(
+        "http://localhost:3003/login",
+        formData
+      );
 
       if (response.data.success) {
-        alert('Inicio de sesión exitoso');
+        alert("Inicio de sesión exitoso");
         window.location.href = "/"; // Cambia la ruta a donde quieras redirigir después del inicio de sesión exitoso
       } else {
-        alert('Credenciales incorrectas. Por favor, inténtelo nuevamente.');
+        alert("Credenciales incorrectas. Por favor, inténtelo nuevamente.");
       }
     } catch (error) {
-      console.error('Error de inicio de sesión:', error);
-      alert('Ha ocurrido un error. Por favor, inténtelo nuevamente.');
+      console.error("Error de inicio de sesión:", error);
+      alert("Ha ocurrido un error. Por favor, inténtelo nuevamente.");
     }
   };
 
@@ -56,7 +59,7 @@ const Login = () => {
     const { name, value } = event.target;
     setRegisterData((prevData) => ({
       ...prevData,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -69,8 +72,11 @@ const Login = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:3003/users", registerData);
-      console.log(response.data); 
+      const response = await axios.post(
+        "http://localhost:3003/users",
+        registerData
+      );
+      console.log(response.data);
       alert("Registro exitoso");
       setTimeout(() => {
         window.location.reload(); // Recarga la página después de un tiempo
@@ -78,11 +84,12 @@ const Login = () => {
     } catch (error) {
       console.error("Error de registro:", error);
       console.log("Error de registro:", error);
-      alert("Error de registro")
+      alert("Error de registro");
     }
   };
   return (
     <>
+      <Scripts />
       <Header />
       {/* Page Title */}
       <main className="content-wrapper oh">
@@ -105,54 +112,52 @@ const Login = () => {
               <div className="col-sm-5 col-sm-offset-1 mb-40">
                 <div className="login">
                   <h4 className="uppercase">login</h4>
-                 <form  onSubmit={handleLoginSubmit}>
-                 <p className="form-row form-row-wide">
-                    <label>
-                      username or email
-                      <abbr className="required" title="required">
-                        *
-                      </abbr>
-                    </label>
+                  <form onSubmit={handleLoginSubmit}>
+                    <p className="form-row form-row-wide">
+                      <label>
+                        username or email
+                        <abbr className="required" title="required">
+                          *
+                        </abbr>
+                      </label>
+                      <input
+                        type="text"
+                        className="input-text"
+                        placeholder=""
+                        name="username"
+                        value={formData.username}
+                        onChange={handleInputChange}
+                      />
+                    </p>
+                    <p className="form-row form-row-wide">
+                      <label>
+                        password
+                        <abbr className="required" title="required">
+                          *
+                        </abbr>
+                      </label>
+                      <input
+                        type="text"
+                        className="input-text"
+                        placeholder=""
+                        name="password"
+                        value={formData.password}
+                        onChange={handleInputChange}
+                      />
+                    </p>
+                    <input type="submit" value="Login" className="btn" />
                     <input
-                      type="text"
-                      className="input-text"
-                      placeholder=""
-                      defaultValue=""
-                      name="username"
-                      value={formData.username}
-                      onChange={handleInputChange}
+                      type="checkbox"
+                      className="input-checkbox"
+                      id="remember"
+                      name="remember"
+                      value={1}
                     />
-                  </p>
-                  <p className="form-row form-row-wide">
-                    <label>
-                      password
-                      <abbr className="required" title="required">
-                        *
-                      </abbr>
+                    <label htmlFor="remember" className="checkbox">
+                      Remember me
                     </label>
-                    <input
-                      type="text"
-                      className="input-text"
-                      placeholder=""
-                      defaultValue=""
-                      name="password"
-                      value={formData.password}
-                      onChange={handleInputChange}
-                    />
-                  </p>
-                  <input type="submit" defaultValue="Login" className="btn" />
-                  <input
-                    type="checkbox"
-                    className="input-checkbox"
-                    id="remember"
-                    name="remember"
-                    defaultValue={1}
-                  />
-                  <label htmlFor="remember" className="checkbox">
-                    Remember me
-                  </label>
-                  <a href="#">Lost Password?</a>
-                 </form>
+                    <a href="#">Lost Password?</a>
+                  </form>
                 </div>
               </div>
               {/* --------------------- */}
@@ -162,93 +167,92 @@ const Login = () => {
                 <div className="register">
                   <h4 className="uppercase">Register</h4>
                   <form onSubmit={handleRegisterSubmit}>
-                  <p className="form-row form-row-wide">
-                    <label>
-                      name
-                      <abbr className="required" title="required">
-                        *
-                      </abbr>
-                    </label>
+                    <p className="form-row form-row-wide">
+                      <label>
+                        name
+                        <abbr className="required" title="required">
+                          *
+                        </abbr>
+                      </label>
+                      <input
+                        type="text"
+                        className="input-text"
+                        placeholder=""
+                        name="name"
+                        value={registerData.name}
+                        onChange={handleRegisterInputChange}
+                      />
+                    </p>
+                    <p className="form-row form-row-wide">
+                      <label>
+                        Lastname
+                        <abbr className="required" title="required">
+                          *
+                        </abbr>
+                      </label>
+                      <input
+                        type="text"
+                        className="input-text"
+                        placeholder=""
+                        name="lastname"
+                        value={registerData.lastname}
+                        onChange={handleRegisterInputChange}
+                      />
+                    </p>
+                    <p className="form-row form-row-wide">
+                      <label>
+                        email
+                        <abbr className="required" title="required">
+                          *
+                        </abbr>
+                      </label>
+                      <input
+                        type="text"
+                        className="input-text"
+                        placeholder=""
+                        name="email"
+                        value={registerData.email}
+                        onChange={handleRegisterInputChange}
+                      />
+                    </p>
+                    <p className="form-row form-row-wide">
+                      <label>
+                        birthdate
+                        <abbr className="required" title="required">
+                          *
+                        </abbr>
+                      </label>
+                      <input
+                        type="date"
+                        className="input-text"
+                        placeholder=""
+                        name="birthdate"
+                        value={registerData.birthdate}
+                        onChange={handleRegisterInputChange}
+                      />
+                    </p>
+                    <p className="form-row form-row-wide">
+                      <label>
+                        password
+                        <abbr className="required" title="required">
+                          *
+                        </abbr>
+                      </label>
+                      <input
+                        type="password"
+                        className="input-text"
+                        placeholder=""
+                        name="password"
+                        value={registerData.password}
+                        onChange={handleRegisterInputChange}
+                      />
+                    </p>
+
                     <input
-                      type="text"
-                      className="input-text"
-                      placeholder=""
-                      defaultValue=""
-                      name="name"
-                      value={registerData.name}
-                      onChange={handleRegisterInputChange}
+                      type="submit"
+                      defaultValue="Register"
+                      className="btn"
                     />
-                  </p>
-                  <p className="form-row form-row-wide">
-                    <label>
-                      Lastname
-                      <abbr className="required" title="required">
-                        *
-                      </abbr>
-                    </label>
-                    <input
-                      type="text"
-                      className="input-text"
-                      placeholder=""
-                      defaultValue=""
-                      name="lastname"
-                      value={registerData.lastname}
-                      onChange={handleRegisterInputChange}
-                    />
-                  </p>
-                  <p className="form-row form-row-wide">
-                    <label>
-                      email
-                      <abbr className="required" title="required">
-                        *
-                      </abbr>
-                    </label>
-                    <input
-                      type="text"
-                      className="input-text"
-                      placeholder=""
-                      defaultValue=""
-                      name="email"
-                      value={registerData.email}
-                      onChange={handleRegisterInputChange}
-                    />
-                  </p>
-                  <p className="form-row form-row-wide">
-                    <label>
-                    birthdate
-                      <abbr className="required" title="required">
-                        *
-                      </abbr>
-                    </label>
-                    <input
-                      type="date"
-                      className="input-text"
-                      placeholder=""
-                      defaultValue=""
-                      name="birthdate"
-                      value={registerData.birthdate}
-                      onChange={handleRegisterInputChange}
-                    />
-                  </p>
-                  <p className="form-row form-row-wide">
-                    <label>
-                      password
-                      <abbr className="required" title="required">
-                        *
-                      </abbr>
-                    </label>
-                    <input
-                      type="password"
-                      className="input-text"
-                      placeholder=""
-                      defaultValue=""
-                      name="password"
-                      value={registerData.password}
-                      onChange={handleRegisterInputChange}
-                    />
-                  </p>
-              
-                  <input type="submit" defaultValue="Register" className="btn" />
                   </form>
                 </div>
               </div>
@@ -258,7 +262,7 @@ const Login = () => {
         {/* end login */}
       </main>
       <Footer />
-      <ScriptTags />
+      {/* <ScriptTags /> */}
     </>
   );
 };

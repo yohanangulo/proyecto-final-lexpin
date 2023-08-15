@@ -1,16 +1,21 @@
 "use client";
 
-import ScriptTags from "@/components/ScriptTags";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ProductItem from "@/components/ProductItem";
+import Scripts from "@/components/Scripts";
+
 
 export default function Home() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  useEffect(() => {
+  }, []);
+
   return (
     <>
+      <Scripts />
       <Header isLoggedIn={isLoggedIn} />
       {/* Hero Slider */}
       <main className="content-wrapper oh">
@@ -28,7 +33,7 @@ export default function Home() {
                           2023 Collection
                         </h1>
                         <h4 className="hero-subheading text-black uppercase">
-                          GET IN THE TREND 
+                          GET IN THE TREND
                         </h4>
                       </div>
                       <a href="#" className="btn btn-lg btn-white">
@@ -38,7 +43,7 @@ export default function Home() {
                   </li>
                   <li>
                     <img
-                      src="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/slider/2.jpg"
+                      src="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/slider/slider-1.jpg"
                       alt=""
                     />
                     <div className="img-holder" />
@@ -259,7 +264,7 @@ export default function Home() {
         {/* end partners */}
       </main>
       <Footer />
-      <ScriptTags />
+      {/* <ScriptTags /> */}
     </>
   );
 }

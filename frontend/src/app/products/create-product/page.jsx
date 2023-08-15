@@ -1,6 +1,7 @@
 "use client";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import Scripts from "@/components/Scripts";
 import { useState } from "react";
 
 const productInitialState = {
@@ -28,6 +29,7 @@ const CreateProduct = () => {
 
   return (
     <>
+      <Scripts />
       <Header />
       <main className="content-wrapper oh">
         <section className="section-wrap">

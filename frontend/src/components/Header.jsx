@@ -229,7 +229,7 @@ const Header = ({isLoggedIn }) => {
                       <i className="fa fa-angle-down dropdown-trigger" />
                       <ul
                         className="dropdown-menu megamenu"
-                        style={{ width: 1140, left: "-463.6px" }}
+                        // style={{ width: 1140, left: "-463.6px" }}
                       >
                         <li>
                           <div className="megamenu-wrap">

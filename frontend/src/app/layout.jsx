@@ -1,9 +1,9 @@
-import '@/assets/css/bootstrap.min.css';
-import "@/assets/css/magnific-popup.css"
-import "@/assets/css/font-icons.css"
-import "@/assets/css/sliders.css"
-import "@/assets/css/style.css"
-import "@/assets/css/animate.min.css"
+import "@/assets/css/bootstrap.min.css";
+import "@/assets/css/magnific-popup.css";
+import "@/assets/css/font-icons.css";
+import "@/assets/css/sliders.css";
+import "@/assets/css/style.css";
+import "@/assets/css/animate.min.css";
 
 export const metadata = {
   title: "Cool Store",
@@ -39,10 +39,7 @@ export default function RootLayout({ children }) {
           href="img/apple-touch-icon-114x114.png"
         />
       </head>
-      <body className="relative">
-        {/* <Loader /> */}
-        {children}
-        </body>
+      <body className="relative">{children}</body>
     </html>
   );
 }
