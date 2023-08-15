@@ -36,4 +36,6 @@ next-env.d.ts
 
 src/assets/fonts
 src/assets/img
-src/assets/js
+
+src/assets/js/gmap3.js
+src/assets/js/twitterFetcher_min.js
