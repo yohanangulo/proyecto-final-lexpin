@@ -6,6 +6,9 @@ import Header from "@/components/Header";
 import axios from "axios";
 
 const Login = () => {
+   const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
   // Estado para almacenar los valores del formulario de registro
   const [registerData, setRegisterData] = useState({
     name: "",
@@ -34,13 +37,27 @@ const Login = () => {
   // Función para manejar el envío del formulario de inicio de sesión
   const handleLoginSubmit = async (event) => {
     event.preventDefault();
+
     try {
-      const response = await axios.post("http://localhost:3003/users", formData);
-      console.log(response.data); 
+      const response = await axios.post('http://localhost:3003/login', { email, password });
+
+      if (response.status === 200) {
+        alert('Iniciaste sesión exitosamente');
+        // Almacenar el token en localStorage o en el estado global (por ejemplo, Redux)
+        const token = response.data.token;
+        // Redireccionar al usuario a la página principal
+        window.location.href = '/';
+      } else {
+        setError(response.data.message || 'Error en el inicio de sesión');
+        alert('Ha ocurrido un error');
+      }
     } catch (error) {
-      console.error("Error de inicio de sesión:", error);
+      setError('Error en el inicio de sesión');
+      console.log(error);
     }
   };
+  
+  
 
   // Manejador para actualizar el estado cuando cambian los campos del formulario de registro
   const handleRegisterInputChange = (event) => {
@@ -98,17 +115,17 @@ const Login = () => {
                  <form  onSubmit={handleLoginSubmit}>
                  <p className="form-row form-row-wide">
                     <label>
-                      username or email
+                       email
                       <abbr className="required" title="required">
                         *
                       </abbr>
                     </label>
                     <input
-                      type="text"
+                      type="email"
                       className="input-text"
                       placeholder=""
                       defaultValue=""
-                      name="username"
+                      name="email"
                       value={formData.username}
                       onChange={handleInputChange}
                     />
@@ -121,7 +138,7 @@ const Login = () => {
                       </abbr>
                     </label>
                     <input
-                      type="text"
+                      type="password"
                       className="input-text"
                       placeholder=""
                       defaultValue=""

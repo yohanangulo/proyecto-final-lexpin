@@ -38,39 +38,17 @@ main();
 
 
 
-// Registro de usuario
-app.post('/signup', async (req, res) => {
-    try {
-        const { name, lastname, email, birthdate, password,confirmPassword } = req.body;
-        const hashedPassword = await bcrypt.hash(contraseña, 10);
-
-        const user = new User({
-            name,
-            lastname,
-            email,
-            birthdate,
-            password,
-            confirmPassword
-        });
-
-        await user.save();
-        res.status(201).send('Usuario registrado correctamente');
-    } catch (error) {
-        res.status(500).send('Error al registrar el usuario');
-    }
-});
-
 // Inicio de sesión
 app.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
-        const user = await User.findOne({ correo });
+        const user = await User.findOne({ email });
 
         if (!user) {
             return res.status(404).send('Usuario no encontrado');
         }
 
-        const match = await bcrypt.compare(contraseña, user.contraseña);
+        const match = await bcrypt.compare(password, user.password);
         if (!match) {
             return res.status(401).send('Credenciales incorrectas');
         }
@@ -95,7 +73,6 @@ const userSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true, minlength: 3, maxlength: 50 },
     birthdate: { type: Date, required: true, validate: [isValidAge] },
     password: { type: String, required: true, minlength: 8, maxlength: 50, validate: [isValidPassword] },
-    confirmPassword: { type: String, required: true, minlength: 8, maxlength: 50, validate: [isValidPassword] },
     fechaCreacion: { type: Date, default: Date.now },
     fechaActualizacion: { type: Date, default: Date.now },
 });
@@ -164,7 +141,6 @@ app.post('/users', async (req, res) => {
         //     correo: "dorian@ddfs.com",
         //     fechaNacimiento: 123,
         //     contraseña: "Programador19.",
-        //     rol: "user",
         //     fechaCreacion: 1234, 
         //     fechaActualizacion: 1234
         // })
