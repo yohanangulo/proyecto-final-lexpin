@@ -1,10 +1,11 @@
 "use client";
 
-import ScrollReveal from '@/assets/js/plugins/scrollReveal'
 import { useEffect } from "react";
 
 export const useScripts = () => {
   useEffect(() => {
+    // scrollreveal
+    const ScrollReveal  = require('@/assets/js/plugins/scrollReveal');
     // jQuery
     window.jQuery = require("jquery");
     // bootstrap js
