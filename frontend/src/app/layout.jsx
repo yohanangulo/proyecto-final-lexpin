@@ -1,42 +1,19 @@
+import "@/assets/css/bootstrap.min.css";
+import "@/assets/css/magnific-popup.css";
+import "@/assets/css/font-icons.css";
+import "@/assets/css/sliders.css";
+import "@/assets/css/style.css";
+import "@/assets/css/animate.min.css";
+
 export const metadata = {
   title: "Cool Store",
-  description: "Tiendo en linea para la venta de ropa deportiva",
+  description: "Tienda en linea para la venta de ropa deportiva",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/gh/yohanangulo/cdn/css/style.css"
-        />
-
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/gh/yohanangulo/cdn/css/bootstrap.min.css"
-        />
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/gh/yohanangulo/cdn/css/magnific-popup.css"
-        />
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/gh/yohanangulo/cdn/css/font-icons.css"
-        />
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/gh/yohanangulo/cdn/css/sliders.css"
-        />
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/gh/yohanangulo/cdn/css/style.css"
-        />
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/gh/yohanangulo/cdn/css/animate.min.css"
-        />
-
         {/* Google fonts */}
         <link
           href="http://fonts.googleapis.com/css?family=Maven+Pro:400,700%7CRaleway:300,400,700%7CPlayfair+Display:700"

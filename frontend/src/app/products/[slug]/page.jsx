@@ -2,30 +2,31 @@
 
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import ScriptTags from "@/components/ScriptTags";
+import ProductItem from "@/components/ProductItem";
+import useScripts from "@/hooks/useScripts";
 import { useState } from "react";
 
 const Product = ({ params }) => {
+  useScripts()
   const { slug } = params;
 
   const [qty, setQty] = useState(1);
 
   const handleQtyPress = (e) => {
     console.log(e.target.name);
-    let { name } = e.target
+    let { name } = e.target;
 
-    if (name == 'qty') {
-      if (e.target.value.includes('-')) return
+    if (name == "qty") {
+      if (e.target.value.includes("-")) return;
     }
 
-    if (name == 'add') {
-      setQty(prev => prev + 1)
-    } else if (name == 'subtract') {
-      setQty(prev => prev - 1)
+    if (name == "add") {
+      setQty((prev) => prev + 1);
+    } else if (name == "subtract") {
+      setQty((prev) => prev - 1);
     } else {
-      setQty(+e.target.value)
+      setQty(+e.target.value);
     }
-
   };
 
   console.log(slug);
@@ -205,7 +206,10 @@ const Product = ({ params }) => {
                 </ul>
                 <div className="product_meta">
                   <span className="posted_in">
-                    Category: <a href="#">Accessories</a>
+                    Categoría: <a href="#">Accesorios</a>
+                  </span>
+                  <span className="posted_in">
+                    Publicado por: <a href="#">Username</a>
                   </span>
                 </div>
                 <div className="socials-share clearfix">
@@ -284,448 +288,15 @@ const Product = ({ params }) => {
                 id="owl-related-products"
                 className="owl-carousel owl-theme nopadding"
               >
-                <div className="product-item">
-                  <div className="product-img">
-                    <a href="#">
-                      <img
-                        src="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/shop_item_1.jpg"
-                        alt=""
-                      />
-                      <img
-                        src="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/shop_item_1_back.jpg"
-                        alt=""
-                        className="back-img"
-                      />
-                    </a>
-                    <div className="product-label">
-                      <span className="sale">sale</span>
-                    </div>
-                    <div className="product-actions">
-                      <a
-                        href="#"
-                        className="product-add-to-compare"
-                        data-toggle="tooltip"
-                        data-placement="bottom"
-                        title="Add to compare"
-                      >
-                        <i className="fa fa-exchange" />
-                      </a>
-                      <a
-                        href="#"
-                        className="product-add-to-wishlist"
-                        data-toggle="tooltip"
-                        data-placement="bottom"
-                        title="Add to wishlist"
-                      >
-                        <i className="fa fa-heart" />
-                      </a>
-                    </div>
-                    <a href="#" className="product-quickview">
-                      Quick View
-                    </a>
-                  </div>
-                  <div className="product-details">
-                    <h3>
-                      <a
-                        className="product-title"
-                        href="shop-single-product.html"
-                      >
-                        Night Party Dress
-                      </a>
-                    </h3>
-                    <span className="price">
-                      <del>
-                        <span>$388.00</span>
-                      </del>
-                      <ins>
-                        <span className="ammount">$159.99</span>
-                      </ins>
-                    </span>
-                  </div>
-                </div>
-                <div className="product-item">
-                  <div className="product-img">
-                    <a href="#">
-                      <img
-                        src="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/shop_item_2.jpg"
-                        alt=""
-                      />
-                      <img
-                        src="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/shop_item_2_back.jpg"
-                        alt=""
-                        className="back-img"
-                      />
-                    </a>
-                    <div className="product-actions">
-                      <a
-                        href="#"
-                        className="product-add-to-compare"
-                        data-toggle="tooltip"
-                        data-placement="bottom"
-                        title="Add to compare"
-                      >
-                        <i className="fa fa-exchange" />
-                      </a>
-                      <a
-                        href="#"
-                        className="product-add-to-wishlist"
-                        data-toggle="tooltip"
-                        data-placement="bottom"
-                        title="Add to wishlist"
-                      >
-                        <i className="fa fa-heart" />
-                      </a>
-                    </div>
-                    <a href="#" className="product-quickview">
-                      Quick View
-                    </a>
-                  </div>
-                  <div className="product-details">
-                    <h3>
-                      <a
-                        className="product-title"
-                        href="shop-single-product.html"
-                      >
-                        Elegant White Dress
-                      </a>
-                    </h3>
-                    <span className="price">
-                      <ins>
-                        <span className="ammount">$219.00</span>
-                      </ins>
-                    </span>
-                  </div>
-                </div>
-                <div className="product-item">
-                  <div className="product-img">
-                    <a href="#">
-                      <img
-                        src="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/shop_item_3.jpg"
-                        alt=""
-                      />
-                      <img
-                        src="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/shop_item_3_back.jpg"
-                        alt=""
-                        className="back-img"
-                      />
-                    </a>
-                    <span className="sold-out valign">out of stock</span>
-                    <div className="product-actions">
-                      <a
-                        href="#"
-                        className="product-add-to-compare"
-                        data-toggle="tooltip"
-                        data-placement="bottom"
-                        title="Add to compare"
-                      >
-                        <i className="fa fa-exchange" />
-                      </a>
-                      <a
-                        href="#"
-                        className="product-add-to-wishlist"
-                        data-toggle="tooltip"
-                        data-placement="bottom"
-                        title="Add to wishlist"
-                      >
-                        <i className="fa fa-heart" />
-                      </a>
-                    </div>
-                    <a href="#" className="product-quickview">
-                      Quick View
-                    </a>
-                  </div>
-                  <div className="product-details">
-                    <h3>
-                      <a
-                        className="product-title"
-                        href="shop-single-product.html"
-                      >
-                        Long Black Dress
-                      </a>
-                    </h3>
-                    <span className="price">
-                      <ins>
-                        <span className="ammount">$99.00</span>
-                      </ins>
-                    </span>
-                  </div>
-                </div>
-                <div className="product-item">
-                  <div className="product-img">
-                    <a href="#">
-                      <img
-                        src="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/shop_item_4.jpg"
-                        alt=""
-                      />
-                      <img
-                        src="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/shop_item_4_back.jpg"
-                        alt=""
-                        className="back-img"
-                      />
-                    </a>
-                    <div className="product-actions">
-                      <a
-                        href="#"
-                        className="product-add-to-compare"
-                        data-toggle="tooltip"
-                        data-placement="bottom"
-                        title="Add to compare"
-                      >
-                        <i className="fa fa-exchange" />
-                      </a>
-                      <a
-                        href="#"
-                        className="product-add-to-wishlist"
-                        data-toggle="tooltip"
-                        data-placement="bottom"
-                        title="Add to wishlist"
-                      >
-                        <i className="fa fa-heart" />
-                      </a>
-                    </div>
-                    <a href="#" className="product-quickview">
-                      Quick View
-                    </a>
-                  </div>
-                  <div className="product-details">
-                    <h3>
-                      <a
-                        className="product-title"
-                        href="shop-single-product.html"
-                      >
-                        Sexy Pink Dress
-                      </a>
-                    </h3>
-                    <span className="price">
-                      <ins>
-                        <span className="ammount">$120.00</span>
-                      </ins>
-                    </span>
-                  </div>
-                </div>
-                <div className="product-item">
-                  <div className="product-img">
-                    <a href="#">
-                      <img
-                        src="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/shop_item_5.jpg"
-                        alt=""
-                      />
-                      <img
-                        src="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/shop_item_5_back.jpg"
-                        alt=""
-                        className="back-img"
-                      />
-                    </a>
-                    <div className="product-actions">
-                      <a
-                        href="#"
-                        className="product-add-to-compare"
-                        data-toggle="tooltip"
-                        data-placement="bottom"
-                        title="Add to compare"
-                      >
-                        <i className="fa fa-exchange" />
-                      </a>
-                      <a
-                        href="#"
-                        className="product-add-to-wishlist"
-                        data-toggle="tooltip"
-                        data-placement="bottom"
-                        title="Add to wishlist"
-                      >
-                        <i className="fa fa-heart" />
-                      </a>
-                    </div>
-                    <a href="#" className="product-quickview">
-                      Quick View
-                    </a>
-                  </div>
-                  <div className="product-details">
-                    <h3>
-                      <a
-                        className="product-title"
-                        href="shop-single-product.html"
-                      >
-                        Minty Dress
-                      </a>
-                    </h3>
-                    <span className="price">
-                      <ins>
-                        <span className="ammount">$399.00</span>
-                      </ins>
-                    </span>
-                  </div>
-                </div>
-                <div className="product-item">
-                  <div className="product-img">
-                    <a href="#">
-                      <img
-                        src="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/shop_item_6.jpg"
-                        alt=""
-                      />
-                      <img
-                        src="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/shop_item_6_back.jpg"
-                        alt=""
-                        className="back-img"
-                      />
-                    </a>
-                    <div className="product-label">
-                      <span className="sale">sale</span>
-                    </div>
-                    <div className="product-actions">
-                      <a
-                        href="#"
-                        className="product-add-to-compare"
-                        data-toggle="tooltip"
-                        data-placement="bottom"
-                        title="Add to compare"
-                      >
-                        <i className="fa fa-exchange" />
-                      </a>
-                      <a
-                        href="#"
-                        className="product-add-to-wishlist"
-                        data-toggle="tooltip"
-                        data-placement="bottom"
-                        title="Add to wishlist"
-                      >
-                        <i className="fa fa-heart" />
-                      </a>
-                    </div>
-                    <a href="#" className="product-quickview">
-                      Quick View
-                    </a>
-                  </div>
-                  <div className="product-details">
-                    <h3>
-                      <a
-                        className="product-title"
-                        href="shop-single-product.html"
-                      >
-                        Sexy White Dress
-                      </a>
-                    </h3>
-                    <span className="price">
-                      <ins>
-                        <span className="ammount">$119.00</span>
-                      </ins>
-                    </span>
-                  </div>
-                </div>
-                <div className="product-item">
-                  <div className="product-img">
-                    <a href="#">
-                      <img
-                        src="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/shop_item_7.jpg"
-                        alt=""
-                      />
-                      <img
-                        src="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/shop_item_7_back.jpg"
-                        alt=""
-                        className="back-img"
-                      />
-                    </a>
-                    <div className="product-actions">
-                      <a
-                        href="#"
-                        className="product-add-to-compare"
-                        data-toggle="tooltip"
-                        data-placement="bottom"
-                        title="Add to compare"
-                      >
-                        <i className="fa fa-exchange" />
-                      </a>
-                      <a
-                        href="#"
-                        className="product-add-to-wishlist"
-                        data-toggle="tooltip"
-                        data-placement="bottom"
-                        title="Add to wishlist"
-                      >
-                        <i className="fa fa-heart" />
-                      </a>
-                    </div>
-                    <a href="#" className="product-quickview">
-                      Quick View
-                    </a>
-                  </div>
-                  <div className="product-details">
-                    <h3>
-                      <a
-                        className="product-title"
-                        href="shop-single-product.html"
-                      >
-                        Elegant Pink Dress
-                      </a>
-                    </h3>
-                    <span className="price">
-                      <ins>
-                        <span className="ammount">$1379.00</span>
-                      </ins>
-                    </span>
-                  </div>
-                </div>
-                <div className="product-item">
-                  <div className="product-img">
-                    <a href="#">
-                      <img
-                        src="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/shop_item_8.jpg"
-                        alt=""
-                      />
-                      <img
-                        src="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/shop_item_8_back.jpg"
-                        alt=""
-                        className="back-img"
-                      />
-                    </a>
-                    <div className="product-label">
-                      <span className="sale">sale</span>
-                    </div>
-                    <div className="product-actions">
-                      <a
-                        href="#"
-                        className="product-add-to-compare"
-                        data-toggle="tooltip"
-                        data-placement="bottom"
-                        title="Add to compare"
-                      >
-                        <i className="fa fa-exchange" />
-                      </a>
-                      <a
-                        href="#"
-                        className="product-add-to-wishlist"
-                        data-toggle="tooltip"
-                        data-placement="bottom"
-                        title="Add to wishlist"
-                      >
-                        <i className="fa fa-heart" />
-                      </a>
-                    </div>
-                    <a href="#" className="product-quickview">
-                      Quick View
-                    </a>
-                  </div>
-                  <div className="product-details">
-                    <h3>
-                      <a
-                        className="product-title"
-                        href="shop-single-product.html"
-                      >
-                        Gray California Dress
-                      </a>
-                    </h3>
-                    <span className="price">
-                      <del>
-                        <span>$350.00</span>
-                      </del>
-                      <ins>
-                        <span className="ammount">$150.00</span>
-                      </ins>
-                    </span>
-                  </div>
-                </div>
-              </div>{" "}
-              {/* end owl */}
+                <ProductItem />
+                <ProductItem />
+                <ProductItem />
+                <ProductItem />
+                <ProductItem />
+                <ProductItem />
+                <ProductItem />
+                <ProductItem />
+              </div>
             </div>{" "}
             {/* end row */}
           </div>{" "}
@@ -734,7 +305,6 @@ const Product = ({ params }) => {
         {/* end related products */}
       </main>
       <Footer />
-      <ScriptTags />
     </>
   );
 };

@@ -1,60 +1,40 @@
-'use client'
-import React,{useEffect, useState} from "react";
-import ScriptTags from "@/components/ScriptTags";
+"use client";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useState } from "react";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import axios from "axios";
+import { useScripts } from "@/hooks/useScripts";
 
 const Login = () => {
-   const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
+
+
   // Estado para almacenar los valores del formulario de registro
+
   const [registerData, setRegisterData] = useState({
     name: "",
     lastname: "",
     email: "",
     birthdate: "",
     password: "",
-    confirmPassword: ""
   });
 
   // Estado para almacenar los valores del formulario
-  const[formData, setFormData] = useState({
+  const [formData, setFormData] = useState({
     email: "",
-    password:""
+    password: "",
   });
 
   // Manejador para actualizar el estado cuando cambian los campos del formulario
-  const handleInputChange = (event) =>{
-    const { name, value } = event.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value
-    }));
-  }
+  const handleInputChange = (event) => {
+  
+  };
 
   // Función para manejar el envío del formulario de inicio de sesión
   const handleLoginSubmit = async (event) => {
     event.preventDefault();
 
-    try {
-      const response = await axios.post('http://localhost:3003/login', { email, password });
-
-      if (response.status === 200) {
-        alert('Iniciaste sesión exitosamente');
-        // Almacenar el token en localStorage o en el estado global (por ejemplo, Redux)
-        const token = response.data.token;
-        // Redireccionar al usuario a la página principal
-        window.location.href = '/';
-      } else {
-        setError(response.data.message || 'Error en el inicio de sesión');
-        alert('Ha ocurrido un error');
-      }
-    } catch (error) {
-      setError('Error en el inicio de sesión');
-      console.log(error);
-    }
+  
   };
   
   
@@ -64,7 +44,7 @@ const Login = () => {
     const { name, value } = event.target;
     setRegisterData((prevData) => ({
       ...prevData,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -77,15 +57,19 @@ const Login = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:3003/users", registerData);
-      console.log(response.data); 
+      const response = await axios.post(
+        "http://localhost:3003/users",
+        registerData
+      );
+      console.log(response.data);
       alert("Registro exitoso");
       setTimeout(() => {
         window.location.reload(); // Recarga la página después de un tiempo
       }, 3000);
     } catch (error) {
       console.error("Error de registro:", error);
-      alert("Error de registro")
+      console.log("Error de registro:", error);
+      alert("Error de registro");
     }
   };
   return (
@@ -112,6 +96,7 @@ const Login = () => {
               <div className="col-sm-5 col-sm-offset-1 mb-40">
                 <div className="login">
                   <h4 className="uppercase">login</h4>
+
                  <form  onSubmit={handleLoginSubmit}>
                  <p className="form-row form-row-wide">
                     <label>
@@ -128,15 +113,12 @@ const Login = () => {
                       name="email"
                       value={formData.username}
                       onChange={handleInputChange}
+
                     />
-                  </p>
-                  <p className="form-row form-row-wide">
-                    <label>
-                      password
-                      <abbr className="required" title="required">
-                        *
-                      </abbr>
+                    <label htmlFor="remember" className="checkbox">
+                      Remember me
                     </label>
+
                     <input
                       type="password"
                       className="input-text"
@@ -160,6 +142,7 @@ const Login = () => {
                   </label>
                   <a href="#">Lost Password?</a>
                  </form>
+
                 </div>
               </div>
               {/* --------------------- */}
@@ -169,109 +152,92 @@ const Login = () => {
                 <div className="register">
                   <h4 className="uppercase">Register</h4>
                   <form onSubmit={handleRegisterSubmit}>
-                  <p className="form-row form-row-wide">
-                    <label>
-                      name
-                      <abbr className="required" title="required">
-                        *
-                      </abbr>
-                    </label>
+                    <p className="form-row form-row-wide">
+                      <label>
+                        name
+                        <abbr className="required" title="required">
+                          *
+                        </abbr>
+                      </label>
+                      <input
+                        type="text"
+                        className="input-text"
+                        placeholder=""
+                        name="name"
+                        value={registerData.name}
+                        onChange={handleRegisterInputChange}
+                      />
+                    </p>
+                    <p className="form-row form-row-wide">
+                      <label>
+                        Lastname
+                        <abbr className="required" title="required">
+                          *
+                        </abbr>
+                      </label>
+                      <input
+                        type="text"
+                        className="input-text"
+                        placeholder=""
+                        name="lastname"
+                        value={registerData.lastname}
+                        onChange={handleRegisterInputChange}
+                      />
+                    </p>
+                    <p className="form-row form-row-wide">
+                      <label>
+                        email
+                        <abbr className="required" title="required">
+                          *
+                        </abbr>
+                      </label>
+                      <input
+                        type="text"
+                        className="input-text"
+                        placeholder=""
+                        name="email"
+                        value={registerData.email}
+                        onChange={handleRegisterInputChange}
+                      />
+                    </p>
+                    <p className="form-row form-row-wide">
+                      <label>
+                        birthdate
+                        <abbr className="required" title="required">
+                          *
+                        </abbr>
+                      </label>
+                      <input
+                        type="date"
+                        className="input-text"
+                        placeholder=""
+                        name="birthdate"
+                        value={registerData.birthdate}
+                        onChange={handleRegisterInputChange}
+                      />
+                    </p>
+                    <p className="form-row form-row-wide">
+                      <label>
+                        password
+                        <abbr className="required" title="required">
+                          *
+                        </abbr>
+                      </label>
+                      <input
+                        type="password"
+                        className="input-text"
+                        placeholder=""
+                        name="password"
+                        value={registerData.password}
+                        onChange={handleRegisterInputChange}
+                      />
+                    </p>
+
                     <input
-                      type="text"
-                      className="input-text"
-                      placeholder=""
-                      defaultValue=""
-                      name="name"
-                      value={registerData.name}
-                      onChange={handleRegisterInputChange}
+                      type="submit"
+                      defaultValue="Register"
+                      className="btn"
                     />
-                  </p>
-                  <p className="form-row form-row-wide">
-                    <label>
-                      Lastname
-                      <abbr className="required" title="required">
-                        *
-                      </abbr>
-                    </label>
-                    <input
-                      type="text"
-                      className="input-text"
-                      placeholder=""
-                      defaultValue=""
-                      name="lastname"
-                      value={registerData.lastname}
-                      onChange={handleRegisterInputChange}
-                    />
-                  </p>
-                  <p className="form-row form-row-wide">
-                    <label>
-                      email
-                      <abbr className="required" title="required">
-                        *
-                      </abbr>
-                    </label>
-                    <input
-                      type="text"
-                      className="input-text"
-                      placeholder=""
-                      defaultValue=""
-                      name="email"
-                      value={registerData.email}
-                      onChange={handleRegisterInputChange}
-                    />
-                  </p>
-                  <p className="form-row form-row-wide">
-                    <label>
-                    birthdate
-                      <abbr className="required" title="required">
-                        *
-                      </abbr>
-                    </label>
-                    <input
-                      type="date"
-                      className="input-text"
-                      placeholder=""
-                      defaultValue=""
-                      name="birthdate"
-                      value={registerData.birthdate}
-                      onChange={handleRegisterInputChange}
-                    />
-                  </p>
-                  <p className="form-row form-row-wide">
-                    <label>
-                      password
-                      <abbr className="required" title="required">
-                        *
-                      </abbr>
-                    </label>
-                    <input
-                      type="text"
-                      className="input-text"
-                      placeholder=""
-                      defaultValue=""
-                      name="password"
-                      value={registerData.password}
-                      onChange={handleRegisterInputChange}
-                    />
-                  </p>
-                  <p className="form-row form-row-wide">
-                    <label>
-                      Confirme password
-                      <abbr className="required" title="required">
-                        *
-                      </abbr>
-                    </label>
-                    <input
-                      type="text"
-                      className="input-text"
-                      placeholder=""
-                      defaultValue=""
-                      name="confirmPassword"
-                      value={registerData.confirmPassword}
-                      onChange={handleRegisterInputChange}
-                    />
-                  </p>
-                  <input type="submit" defaultValue="Register" className="btn" />
                   </form>
                 </div>
               </div>
@@ -281,7 +247,6 @@ const Login = () => {
         {/* end login */}
       </main>
       <Footer />
-      <ScriptTags />
     </>
   );
 };

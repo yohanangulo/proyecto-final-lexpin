@@ -34,4 +34,8 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-assets/
+src/assets/fonts
+src/assets/img
+
+src/assets/js/gmap3.js
+src/assets/js/twitterFetcher_min.js
