@@ -3,7 +3,7 @@
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import ProductItem from "@/components/ProductItem";
-import useScripts from "@/hooks/useScripts";
+import { useScripts } from "@/hooks/useScripts";
 import { useState } from "react";
 
 const Product = ({ params }) => {
