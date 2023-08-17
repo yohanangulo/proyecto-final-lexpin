@@ -6,7 +6,9 @@ import { useEffect } from "react";
 export const useScripts = () => {
   useEffect(() => {
     // jQuery
-    window.jQuery = require("jquery");
+    if (window !== 'undefined') {
+      window.jQuery = require("jquery");
+    }
     // bootstrap js
     require("@/assets/js/bootstrap.min");
     // plugins
