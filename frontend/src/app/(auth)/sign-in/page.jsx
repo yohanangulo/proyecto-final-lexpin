@@ -27,13 +27,15 @@ const Login = () => {
 
   // Manejador para actualizar el estado cuando cambian los campos del formulario
   const handleInputChange = (event) => {
-  
+     setFormData({
+      ...formData,[event.target.name]: event.target.value
+     })       
   };
 
   // Función para manejar el envío del formulario de inicio de sesión
   const handleLoginSubmit = async (event) => {
     event.preventDefault();
-
+      console.log(formData)
   
   };
   
