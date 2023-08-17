@@ -8,16 +8,16 @@ const MyAccountLayout = ({ children, handlePanelNavigation, activePanel }) => {
           <nav className="woocommerce-MyAccount-navigation">
             <ul>
               <li
-                className={`woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--dashboard ${
-                  activePanel == "dashboard" && "is-active"
+                className={`woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--dashboard${
+                  activePanel == "dashboard" ? " is-active" : ""
                 }`}
                 onClick={() => handlePanelNavigation("dashboard")}
               >
                 <a href="#my-account">Dashboard</a>
               </li>
               <li
-                className={`woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--orders ${
-                  activePanel == "orders" && "is-active"
+                className={`woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--orders${
+                  activePanel == "orders" ? " is-active" : ""
                 }`}
                 onClick={() => handlePanelNavigation("orders")}
               >
@@ -25,8 +25,8 @@ const MyAccountLayout = ({ children, handlePanelNavigation, activePanel }) => {
               </li>
               <li
                 onClick={() => handlePanelNavigation("accountDetails")}
-                className={`woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--edit-account ${
-                  activePanel == "accountDetails" && "is-active"
+                className={`woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--edit-account${
+                  activePanel == "accountDetails" ? " is-active" : ""
                 }`}
               >
                 <a href="#my-account">Account details</a>

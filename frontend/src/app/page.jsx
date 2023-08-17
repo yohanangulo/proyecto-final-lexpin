@@ -25,8 +25,8 @@ export default function Home() {
               <div className="flexslider" id="flexslider-hero">
                 <ul className="slides clearfix">
                   <li>
-                    <img src="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/slider/slider-1.jpg" />
-                    <div className="img-holder " />
+                    <img src="/slider/1.jpg" />
+                    <div className="img-holder img-1" />
                     <div className="hero-holder text-center right-align">
                       <div className="hero-lines">
                         <h1 className="hero-heading text-black">
@@ -43,10 +43,10 @@ export default function Home() {
                   </li>
                   <li>
                     <img
-                      src="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/slider/slider-1.jpg"
+                      src="/slider/2.jpg"
                       alt=""
                     />
-                    <div className="img-holder" />
+                    <div className="img-holder img-2" />
                     <div className="hero-holder text-center">
                       <div className="hero-lines">
                         <h1 className="hero-heading white large">
@@ -60,10 +60,10 @@ export default function Home() {
                   </li>
                   <li>
                     <img
-                      src="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/slider/slider-3.jpg"
+                      src="/slider/3.jpg"
                       alt=""
                     />
-                    <div className="img-holder" />
+                    <div className="img-holder img-3" />
                     <div className="hero-holder left-align">
                       <div className="hero-lines">
                         <h1 className="hero-heading white">Autumn 2017</h1>
@@ -81,10 +81,10 @@ export default function Home() {
                   </li>
                   <li>
                     <img
-                      src="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/slider/slider-3.jpg"
+                      src="/slider/4.jpg"
                       alt=""
                     />
-                    <div className="img-holder" />
+                    <div className="img-holder img-4" />
                     <div className="hero-holder text-center right-align">
                       <div className="hero-lines">
                         <h1 className="hero-heading text-black">Summer 2017</h1>
