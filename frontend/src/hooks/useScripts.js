@@ -6,9 +6,6 @@ import { useEffect } from "react";
 export const useScripts = () => {
   useEffect(() => {
     // jQuery
-    if (typeof window === 'undefined') {
-
-    
     window.jQuery = require("jquery");
     // bootstrap js
     require("@/assets/js/bootstrap.min");
@@ -598,7 +595,7 @@ jQuery(window).scroll(function(event){
 jQuery('a[href="#top"]').on('click',function(){
   jQuery('html, body').animate({scrollTop: 0}, 1350, "easeInOutQuint");
   return false;
-});}
+});
   }, []);
 
 };
