@@ -85,7 +85,7 @@ const Header = ({isLoggedIn }) => {
                       <Link href="/">
                         <img
                           className="logo"
-                          src="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/logo_dark.png"
+                          src="/logo.png"
                           alt="logo"
                         />
                       </Link>
