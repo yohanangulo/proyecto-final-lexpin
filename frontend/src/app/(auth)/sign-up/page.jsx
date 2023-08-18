@@ -6,8 +6,8 @@ import Header from "@/components/Header";
 import axios from "axios";
 import { useScripts } from "@/hooks/useScripts";
 
-const Login = () => {
-  useScripts()
+const SignUp = () => {
+  useScripts();
   // Estado para almacenar los valores del formulario de registro
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [registerData, setRegisterData] = useState({
@@ -97,25 +97,28 @@ const Login = () => {
           <div className="container relative clearfix">
             <div className="title-holder">
               <div className="title-text">
-                <h1 className="uppercase">My account</h1>
+                <h1 className="uppercase">My Account</h1>
               </div>
             </div>
           </div>
         </section>{" "}
         {/* end page title */}
         {/* ----------------- */}
-        {/* login */}
+        {/* register */}
         {/* ------------------- */}
         <section className="section-wrap login-register pt-0 pb-40">
           <div className="container">
             <div className="row">
+              {/* --------------------- */}
+              {/* Register */}
+              {/* ------------------- */}
               <div className="col-sm-6 col-sm-offset-3 mb-40">
-                <div className="login">
-                  <h4 className="uppercase">login</h4>
-                  <form onSubmit={handleLoginSubmit}>
+                <div>
+                  <h4 className="uppercase">Sign Up</h4>
+                  <form onSubmit={handleRegisterSubmit}>
                     <p className="form-row form-row-wide">
                       <label>
-                        username or email
+                        name
                         <abbr className="required" title="required">
                           *
                         </abbr>
@@ -124,9 +127,57 @@ const Login = () => {
                         type="text"
                         className="input-text"
                         placeholder=""
-                        name="username"
-                        value={formData.username}
-                        onChange={handleInputChange}
+                        name="name"
+                        value={registerData.name}
+                        onChange={handleRegisterInputChange}
+                      />
+                    </p>
+                    <p className="form-row form-row-wide">
+                      <label>
+                        Lastname
+                        <abbr className="required" title="required">
+                          *
+                        </abbr>
+                      </label>
+                      <input
+                        type="text"
+                        className="input-text"
+                        placeholder=""
+                        name="lastname"
+                        value={registerData.lastname}
+                        onChange={handleRegisterInputChange}
+                      />
+                    </p>
+                    <p className="form-row form-row-wide">
+                      <label>
+                        email
+                        <abbr className="required" title="required">
+                          *
+                        </abbr>
+                      </label>
+                      <input
+                        type="text"
+                        className="input-text"
+                        placeholder=""
+                        name="email"
+                        value={registerData.email}
+                        onChange={handleRegisterInputChange}
+                      />
+                    </p>
+                    <p className="form-row form-row-wide">
+                      <label>
+                        birthdate
+                        <abbr className="required" title="required">
+                          *
+                        </abbr>
+                      </label>
+                      <input
+                        type="date"
+                        className="input-text"
+                        placeholder=""
+                        name="birthdate"
+                        value={registerData.birthdate}
+                        onChange={handleRegisterInputChange}
                       />
                     </p>
                     <p className="form-row form-row-wide">
@@ -137,26 +188,20 @@ const Login = () => {
                         </abbr>
                       </label>
                       <input
-                        type="text"
+                        type="password"
                         className="input-text"
                         placeholder=""
                         name="password"
-                        value={formData.password}
-                        onChange={handleInputChange}
+                        value={registerData.password}
+                        onChange={handleRegisterInputChange}
                       />
                     </p>
-                    <input type="submit" value="Login" className="btn" />
+
                     <input
-                      type="checkbox"
-                      className="input-checkbox"
-                      id="remember"
-                      name="remember"
-                      value={1}
+                      type="submit"
+                      defaultValue="Register"
+                      className="btn"
                     />
-                    <label htmlFor="remember" className="checkbox">
-                      Remember me
-                    </label>
-                    <a href="#">Lost Password?</a>
                   </form>
                 </div>
               </div>
@@ -169,4 +214,4 @@ const Login = () => {
     </>
   );
 };
-export default Login;
+export default SignUp;
