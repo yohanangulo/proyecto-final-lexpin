@@ -29,10 +29,10 @@ export default function Home() {
                     <div className="img-holder img-1" />
                     <div className="hero-holder text-center right-align">
                       <div className="hero-lines">
-                        <h1 className="hero-heading text-black">
+                        <h1 className="hero-heading color-primary">
                           2023 Collection
                         </h1>
-                        <h4 className="hero-subheading text-black uppercase">
+                        <h4 className="hero-subheading uppercase color-primary">
                           GET IN THE TREND
                         </h4>
                       </div>
@@ -49,7 +49,7 @@ export default function Home() {
                     <div className="img-holder img-2" />
                     <div className="hero-holder text-center">
                       <div className="hero-lines">
-                        <h1 className="hero-heading white large">
+                        <h1 className="hero-heading color-primary large">
                           Winter Sales
                         </h1>
                       </div>
@@ -65,13 +65,13 @@ export default function Home() {
                     />
                     <div className="img-holder img-3" />
                     <div className="hero-holder left-align">
-                      <div className="hero-lines">
-                        <h1 className="hero-heading white">Autumn 2017</h1>
+                      <div className="hero-lines white">
+                        <h1 className="hero-heading white">Autumn 2023</h1>
                         <p className="white">
-                          A-ha Theme is the Best E-Commerce solution
+                          Make Everyday a Runaway
                         </p>
                         <p className="white">
-                          Packed with tons of features and unique styles
+                          Clothes You Will Love
                         </p>
                       </div>
                       <a href="#" className="btn btn-lg btn-white">
@@ -82,17 +82,17 @@ export default function Home() {
                   <li>
                     <img
                       src="/slider/4.jpg"
-                      alt=""
+                      alt="slider img 4"
                     />
                     <div className="img-holder img-4" />
                     <div className="hero-holder text-center right-align">
-                      <div className="hero-lines">
-                        <h1 className="hero-heading text-black">Summer 2017</h1>
-                        <p className="text-black">
-                          A-ha Theme is the Best E-Commerce solution
+                      <div className="hero-lines white">
+                        <h1 className="hero-heading white">Summer 2023</h1>
+                        <p className="white">
+                          Lorem ipsum dolor, sit amet consectetur adipisicing.
                         </p>
-                        <p className="text-black">
-                          Packed with tons of features and unique styles
+                        <p className="white">
+                          aliquid voluptatum labore corrupti.
                         </p>
                       </div>
                       <a href="#" className="btn btn-lg btn-white">
@@ -113,7 +113,7 @@ export default function Home() {
             <div className="row heading-row">
               <div className="col-md-12 text-center">
                 <h2 className="heading uppercase">
-                  <small>lo mas nuevo</small>
+                  <small>new arrivals</small>
                 </h2>
               </div>
             </div>
@@ -140,7 +140,7 @@ export default function Home() {
           <div className="row">
             <div className="col-sm-12">
               <div className="newsletter-box">
-                <h5 className="uppercase">suscribete para estar al tanto!</h5>
+                <h5 className="uppercase">SUBSCRIBE TO RECEIVE OUR UPDATES</h5>
                 <form>
                   <input
                     type="email"
@@ -165,7 +165,7 @@ export default function Home() {
             <div className="row heading-row">
               <div className="col-md-12 text-center">
                 <h2 className="heading uppercase">
-                  <small>Lo más vendido</small>
+                  <small>best sellers</small>
                 </h2>
               </div>
             </div>
