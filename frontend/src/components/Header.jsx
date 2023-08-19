@@ -19,6 +19,9 @@ const Header = ({isLoggedIn }) => {
                     <a href="#">Newsletter</a>
                   </li> */}
                   <li className="top-bar-link">
+                    <Link href="sign-up">Sign Up</Link>
+                  </li>
+                  <li className="top-bar-link">
                     <Link href="sign-in">Login</Link>
                   </li>
                   {isLoggedIn && (

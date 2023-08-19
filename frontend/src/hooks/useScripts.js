@@ -1,14 +1,13 @@
 "use client";
 
-import ScrollReveal from '@/assets/js/plugins/scrollReveal'
 import { useEffect } from "react";
 
 export const useScripts = () => {
   useEffect(() => {
+    // scrollreveal
+    const ScrollReveal  = require('@/assets/js/plugins/scrollReveal');
     // jQuery
-    if (window !== 'undefined') {
-      window.jQuery = require("jquery");
-    }
+    window.jQuery = require("jquery");
     // bootstrap js
     require("@/assets/js/bootstrap.min");
     // plugins
@@ -17,7 +16,7 @@ export const useScripts = () => {
     require("@/assets/js/plugins/jQueryAppear");
     require("@/assets/js/plugins/fitVids");
     require("@/assets/js/plugins/owlCarousel");
-    require("@/assets/js/plugins/smoothScroll");
+    // require("@/assets/js/plugins/smoothScroll");
     require("@/assets/js/plugins/magnificPopup");
     require("@/assets/js/plugins/flickity");
 
@@ -33,7 +32,7 @@ export const useScripts = () => {
     $('.loader-mask').delay(350).fadeOut('slow');
     
   });
-  
+
   $(window).trigger("resize");
   initOwlCarousel();
   initFlexSlider();  
@@ -595,9 +594,13 @@ jQuery(window).scroll(function(event){
 });
 
 jQuery('a[href="#top"]').on('click',function(){
-  jQuery('html, body').animate({scrollTop: 0}, 1350, "easeInOutQuint");
+  jQuery('html, body').scrollTop(0)
+  // jQuery('html, body').animate({scrollTop: 0}, 1350, "easeInOutQuint");
   return false;
 });
+
+  return () =>  jQuery(window).unbind()
+
   }, []);
 
 };

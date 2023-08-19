@@ -97,7 +97,7 @@ const Login = () => {
           <div className="container relative clearfix">
             <div className="title-holder">
               <div className="title-text">
-                <h1 className="uppercase">My Account</h1>
+                <h1 className="uppercase">My account</h1>
               </div>
             </div>
           </div>
@@ -109,7 +109,7 @@ const Login = () => {
         <section className="section-wrap login-register pt-0 pb-40">
           <div className="container">
             <div className="row">
-              <div className="col-sm-5 col-sm-offset-1 mb-40">
+              <div className="col-sm-6 col-sm-offset-3 mb-40">
                 <div className="login">
                   <h4 className="uppercase">login</h4>
 
@@ -158,102 +158,6 @@ const Login = () => {
                   <a href="#">Lost Password?</a>
                  </form>
 
-                </div>
-              </div>
-              {/* --------------------- */}
-              {/* Register */}
-              {/* ------------------- */}
-              <div className="col-sm-5">
-                <div className="register">
-                  <h4 className="uppercase">Register</h4>
-                  <form onSubmit={handleRegisterSubmit}>
-                    <p className="form-row form-row-wide">
-                      <label>
-                        name
-                        <abbr className="required" title="required">
-                          *
-                        </abbr>
-                      </label>
-                      <input
-                        type="text"
-                        className="input-text"
-                        placeholder=""
-                        name="name"
-                        value={registerData.name}
-                        onChange={handleRegisterInputChange}
-                      />
-                    </p>
-                    <p className="form-row form-row-wide">
-                      <label>
-                        Lastname
-                        <abbr className="required" title="required">
-                          *
-                        </abbr>
-                      </label>
-                      <input
-                        type="text"
-                        className="input-text"
-                        placeholder=""
-                        name="lastname"
-                        value={registerData.lastname}
-                        onChange={handleRegisterInputChange}
-                      />
-                    </p>
-                    <p className="form-row form-row-wide">
-                      <label>
-                        email
-                        <abbr className="required" title="required">
-                          *
-                        </abbr>
-                      </label>
-                      <input
-                        type="text"
-                        className="input-text"
-                        placeholder=""
-                        name="email"
-                        value={registerData.email}
-                        onChange={handleRegisterInputChange}
-                      />
-                    </p>
-                    <p className="form-row form-row-wide">
-                      <label>
-                        birthdate
-                        <abbr className="required" title="required">
-                          *
-                        </abbr>
-                      </label>
-                      <input
-                        type="date"
-                        className="input-text"
-                        placeholder=""
-                        name="birthdate"
-                        value={registerData.birthdate}
-                        onChange={handleRegisterInputChange}
-                      />
-                    </p>
-                    <p className="form-row form-row-wide">
-                      <label>
-                        password
-                        <abbr className="required" title="required">
-                          *
-                        </abbr>
-                      </label>
-                      <input
-                        type="password"
-                        className="input-text"
-                        placeholder=""
-                        name="password"
-                        value={registerData.password}
-                        onChange={handleRegisterInputChange}
-                      />
-                    </p>
-
-                    <input
-                      type="submit"
-                      defaultValue="Register"
-                      className="btn"
-                    />
-                  </form>
                 </div>
               </div>
             </div>

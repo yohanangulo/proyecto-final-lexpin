@@ -229,7 +229,7 @@
   width: 12px;
   opacity: 0.5;
   margin: 0 5px;
-  border: 2px solid #fff;
+  border: 2px solid $main-color;
   @include transition ($all);
   @include border-radius (50%);
   background: transparent;

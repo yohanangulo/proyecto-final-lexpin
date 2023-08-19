@@ -11,6 +11,7 @@ const ProgressBarLayout = ({ children }) => {
         color="#1c1c1c"
         options={{ showSpinner: false }}
         shallowRouting
+        delay={300}
       />
     </>
   );
