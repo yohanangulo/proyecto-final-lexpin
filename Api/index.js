@@ -6,6 +6,8 @@ const app = express();
 const port = 3003;
 const multer = require("multer");
 const upload = multer({ storage: multer.memoryStorage() });
+const jwt = require('jsonwebtoken');
+const  {serialize}  = require('cookie');
 app.use(express.json());
 app.use(cors());
 
@@ -40,23 +42,35 @@ main();
 
 // Inicio de sesión
 app.post('/login', async (req, res) => {
+    const { email, password } = req.body;
+
     try {
-        const { email, password } = req.body;
-        const user = await User.findOne({ email });
+        // Busca el usuario en la base de datos
+        const user = await User.findOne({ email, password });
 
-        if (!user) {
-            return res.status(404).send('Usuario no encontrado');
+        if (user && password) {
+            // Generar un token
+            const token = jwt.sign({
+                exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 30,
+                email: user.email
+            }, 'secret');
+
+            const serialized = serialize('myTokenName', token, {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: 'Lax',
+                maxAge: 1000 * 60 * 60 * 24 * 30,
+                path: '/'
+            });
+
+            res.setHeader('Set-Cookie', serialized);
+            return res.json("Login successful");
         }
 
-        const match = await bcrypt.compare(password, user.password);
-        if (!match) {
-            return res.status(401).send('Credenciales incorrectas');
-        }
-
-        // Aquí puedes generar un token de autenticación y enviarlo en la respuesta
-        res.send('Inicio de sesión exitoso');
+        return res.status(401).json({ error: 'Invalid email or password' });
     } catch (error) {
-        res.status(500).send('Error en el inicio de sesión');
+        console.error(error);
+        return res.status(500).json({ error: 'An error occurred' });
     }
 });
 

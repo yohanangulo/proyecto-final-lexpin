@@ -1,13 +1,14 @@
 "use client";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState } from "react";
+import { useHistory } from 'react-router-dom';
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import axios from "axios";
 import { useScripts } from "@/hooks/useScripts";
 
 const Login = () => {
-
+  // const history = useHistory();
 
   // Estado para almacenar los valores del formulario de registro
 
@@ -36,6 +37,22 @@ const Login = () => {
   const handleLoginSubmit = async (event) => {
     event.preventDefault();
       console.log(formData)
+
+      try {
+        const response = await axios.post("http://localhost:3003/login", formData)
+        console.log(response)
+
+        if(response.data.success ){
+          // history.push("/");
+        }else{
+          alert("Error de inicio de sesión: Datos incorrectos");
+        }
+        
+      } catch (error) {
+        console.error("Error al intentar iniciar sesión:", error);
+      }
+      
+      
   
   };
   
@@ -53,10 +70,7 @@ const Login = () => {
   // Función para manejar el envío del formulario de registro
   const handleRegisterSubmit = async (event) => {
     event.preventDefault();
-    if (registerData.password !== registerData.confirmPassword) {
-      console.error("Las contraseñas no coinciden");
-      return;
-    }
+    
 
     try {
       const response = await axios.post(
@@ -66,7 +80,7 @@ const Login = () => {
       console.log(response.data);
       alert("Registro exitoso");
       setTimeout(() => {
-        window.location.reload(); // Recarga la página después de un tiempo
+        history.push("/"); // Recarga la página después de un tiempo
       }, 3000);
     } catch (error) {
       console.error("Error de registro:", error);
@@ -125,7 +139,6 @@ const Login = () => {
                       type="password"
                       className="input-text"
                       placeholder=""
-                      defaultValue=""
                       name="password"
                       value={formData.password}
                       onChange={handleInputChange}
