@@ -6,9 +6,10 @@ import ProductItem from "@/components/ProductItem";
 import { useScripts } from "@/hooks/useScripts";
 import { useState } from "react";
 
-const Product = ({ params }) => {
+const Product = ({ params : { slug } }) => {
   useScripts()
-  const { slug } = params;
+
+  console.log(slug)
 
   const [qty, setQty] = useState(1);
 

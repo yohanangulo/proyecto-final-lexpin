@@ -1,15 +1,13 @@
 "use client";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import React, { useState } from "react";
-import { useHistory } from 'react-router-dom';
+import { useState } from "react";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import axios from "axios";
 import { useScripts } from "@/hooks/useScripts";
 
 const Login = () => {
-  // const history = useHistory();
 
+  useScripts()
 
   // Estado para almacenar los valores del formulario
   const [formData, setFormData] = useState({
