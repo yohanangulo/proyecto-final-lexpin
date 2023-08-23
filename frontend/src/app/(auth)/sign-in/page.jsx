@@ -6,8 +6,7 @@ import axios from "axios";
 import { useScripts } from "@/hooks/useScripts";
 
 const Login = () => {
-
-  useScripts()
+  useScripts();
 
   // Estado para almacenar los valores del formulario
   const [formData, setFormData] = useState({
@@ -17,9 +16,10 @@ const Login = () => {
 
   // Manejador para actualizar el estado cuando cambian los campos del formulario
   const handleInputChange = (event) => {
-     setFormData({
-      ...formData,[event.target.name]: event.target.value
-     })       
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
+    });
   };
 
   // Función para manejar el envío del formulario de inicio de sesión
@@ -27,11 +27,14 @@ const Login = () => {
     event.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:3003/login", formData);
+      const response = await axios.post(
+        "http://localhost:3003/login",
+        formData
+      );
 
       if (response.status === 200) {
         history.push("/");
-        alert("inicio de sesion exitoso")
+        alert("inicio de sesion exitoso");
       } else {
         alert("Error de inicio de sesión: Datos incorrectos");
       }
@@ -43,9 +46,6 @@ const Login = () => {
       }
     }
   };
-  
-  
-
 
   return (
     <>
@@ -72,51 +72,53 @@ const Login = () => {
                 <div className="login">
                   <h4 className="uppercase">login</h4>
 
-                 <form  onSubmit={handleLoginSubmit}>
-                 <p className="form-row form-row-wide">
-                    <label>
-                       email
-                      <abbr className="required" title="required">
-                        *
-                      </abbr>
-                    </label>
+                  <form onSubmit={handleLoginSubmit}>
+                    <p className="form-row form-row-wide">
+                      <label>
+                        email
+                        <abbr className="required" title="required">
+                          *
+                        </abbr>
+                      </label>
+                      <input
+                        type="email"
+                        className="input-text"
+                        placeholder=""
+                        defaultValue=""
+                        name="email"
+                        value={formData.username}
+                        onChange={handleInputChange}
+                      />
+                    </p>
+                    <div className="form-row form-row-wide">
+                      <label>
+                        password
+                        <abbr className="required" title="required">
+                          *
+                        </abbr>
+                      </label>
+                      <input
+                        type="password"
+                        className="input-text"
+                        placeholder=""
+                        name="password"
+                        value={formData.password}
+                        onChange={handleInputChange}
+                      />
+                    </div>
+                    <input type="submit" defaultValue="Login" className="btn" />
                     <input
-                      type="email"
-                      className="input-text"
-                      placeholder=""
-                      defaultValue=""
-                      name="email"
-                      value={formData.username}
-                      onChange={handleInputChange}
-
+                      type="checkbox"
+                      className="input-checkbox"
+                      id="remember"
+                      name="remember"
+                      defaultValue={1}
                     />
                     <label htmlFor="remember" className="checkbox">
                       Remember me
                     </label>
-
-                    <input
-                      type="password"
-                      className="input-text"
-                      placeholder=""
-                      name="password"
-                      value={formData.password}
-                      onChange={handleInputChange}
-                    />
-                  </p>
-                  <input type="submit" defaultValue="Login" className="btn" />
-                  <input
-                    type="checkbox"
-                    className="input-checkbox"
-                    id="remember"
-                    name="remember"
-                    defaultValue={1}
-                  />
-                  <label htmlFor="remember" className="checkbox">
-                    Remember me
-                  </label>
-                  <a href="#">Lost Password?</a>
-                 </form>
-
+                    <a href="#">Lost Password?</a>
+                  </form>
                 </div>
               </div>
             </div>
