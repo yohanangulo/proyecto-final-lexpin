@@ -4,9 +4,12 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import axios from "axios";
 import { useScripts } from "@/hooks/useScripts";
+import { useRouter } from "next/navigation";
 
 const Login = () => {
   useScripts();
+
+  const router = useRouter()
 
   // Estado para almacenar los valores del formulario
   const [formData, setFormData] = useState({
@@ -33,7 +36,7 @@ const Login = () => {
       );
 
       if (response.status === 200) {
-        history.push("/");
+        router.push('/')
         alert("inicio de sesion exitoso");
       } else {
         alert("Error de inicio de sesión: Datos incorrectos");
