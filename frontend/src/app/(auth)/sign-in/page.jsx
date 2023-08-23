@@ -10,15 +10,6 @@ import { useScripts } from "@/hooks/useScripts";
 const Login = () => {
   // const history = useHistory();
 
-  // Estado para almacenar los valores del formulario de registro
-
-  const [registerData, setRegisterData] = useState({
-    name: "",
-    lastname: "",
-    email: "",
-    birthdate: "",
-    password: "",
-  });
 
   // Estado para almacenar los valores del formulario
   const [formData, setFormData] = useState({
@@ -36,58 +27,28 @@ const Login = () => {
   // Función para manejar el envío del formulario de inicio de sesión
   const handleLoginSubmit = async (event) => {
     event.preventDefault();
-      console.log(formData)
-
-      try {
-        const response = await axios.post("http://localhost:3003/login", formData)
-        console.log(response)
-
-        if(response.data.success ){
-          // history.push("/");
-        }else{
-          alert("Error de inicio de sesión: Datos incorrectos");
-        }
-        
-      } catch (error) {
-        console.error("Error al intentar iniciar sesión:", error);
-      }
-      
-      
-  
-  };
-  
-  
-
-  // Manejador para actualizar el estado cuando cambian los campos del formulario de registro
-  const handleRegisterInputChange = (event) => {
-    const { name, value } = event.target;
-    setRegisterData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  // Función para manejar el envío del formulario de registro
-  const handleRegisterSubmit = async (event) => {
-    event.preventDefault();
-    
 
     try {
-      const response = await axios.post(
-        "http://localhost:3003/users",
-        registerData
-      );
-      console.log(response.data);
-      alert("Registro exitoso");
-      setTimeout(() => {
-        history.push("/"); // Recarga la página después de un tiempo
-      }, 3000);
+      const response = await axios.post("http://localhost:3003/login", formData);
+
+      if (response.status === 200) {
+        history.push("/");
+        alert("inicio de sesion exitoso")
+      } else {
+        alert("Error de inicio de sesión: Datos incorrectos");
+      }
     } catch (error) {
-      console.error("Error de registro:", error);
-      console.log("Error de registro:", error);
-      alert("Error de registro");
+      console.error("Error al intentar iniciar sesión:", error);
+
+      if (error.response && error.response.status === 401) {
+        alert("Error de inicio de sesión: Usuario no encontrado");
+      }
     }
   };
+  
+  
+
+
   return (
     <>
       <Header />

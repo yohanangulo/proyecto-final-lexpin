@@ -4,10 +4,9 @@ const bcrypt = require('bcrypt');
 const cors = require("cors");
 const app = express();
 const port = 3003;
-const multer = require("multer");
-const upload = multer({ storage: multer.memoryStorage() });
 const jwt = require('jsonwebtoken');
 const  {serialize}  = require('cookie');
+const { userSchema, ProductsSchema,  saleSchema } = require('./schemas'); 
 app.use(express.json());
 app.use(cors());
 
@@ -38,7 +37,9 @@ async function main() {
 
 main();
 
-
+const Sale = mongoose.model('Sale', saleSchema);
+const User = mongoose.model('User', userSchema);
+const Product = mongoose.model('Product',ProductsSchema)
 
 // Inicio de sesión
 app.post('/login', async (req, res) => {
@@ -74,74 +75,6 @@ app.post('/login', async (req, res) => {
     }
 });
 
-const productSchema = new mongoose.Schema({
-    // productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: true },
-    cantidad: { type: Number, required: true, min: 1 },
-});
-
-
-//Esquemas
-const userSchema = new mongoose.Schema(
-  {
-    name: { type: String, required: true, minlength: 3, maxlength: 50 },
-    lastname: { type: String, required: true, minlength: 3, maxlength: 50 },
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-      minlength: 3,
-      maxlength: 50,
-    },
-    birthdate: { type: Date, required: true, validate: [isValidAge] },
-
-    password: { type: String, required: true, minlength: 8, maxlength: 50, validate: [isValidPassword] },
-
-    fechaCreacion: { type: Date, default: Date.now },
-    fechaActualizacion: { type: Date, default: Date.now },
-  },
-  { versionKey: false }
-);
-
-const ProductsSchema = new mongoose.Schema({
-    nombre: { type: String, required: true, minlength: 3, maxlength: 100 },
-    descripcion: { type: String, required: true, minlength: 3, maxlength: 500 },
-    precio: { type: Number, required: true, min: 0, max: 1000000 },
-    cantidadEnInventario: { type: Number, required: true, min: 0 },
-    categoria: { type: String, required: true, minlength: 3, maxlength: 50 },
-    tipo: { type: String, required: true, enum: ['fisico', 'digital'] },
-    // idUsuario: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-    fechaCreacion: { type: Date, default: Date.now },
-    fechaActualizacion: { type: Date, default: Date.now },
-    image:{type:String, require:true}
-});
-
-const saleSchema = new mongoose.Schema({
-    // userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },z
-    productos: { type: [productSchema], required: true },
-    precioSinIva: { type: Number, required: true, min: 0 },
-    precioConIva: { type: Number, required: true, min: 0 },
-    fechaCreacion: { type: Date, default: Date.now },
-    fechaActualizacion: { type: Date, default: Date.now },
-});
-
-
-function isValidAge(value) {
-    const currentDate = new Date();
-    const userDate = new Date(value);
-    return (currentDate.getFullYear() - userDate.getFullYear() >= 18);
-}
-
-function isValidPassword(value) {
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
-    return passwordRegex.test(value);
-}
-
-
-// modules
-const User = mongoose.model('User', userSchema);
-const Product = mongoose.model('Product', ProductsSchema);
-const Sale = mongoose.model('Sale', saleSchema);
-
 //--------------------------
 // usuarios
 //---------------------------
@@ -162,13 +95,12 @@ app.post('/users', async (req, res) => {
 
         const user = new User(req.body);
         // const user = new User({
-        //     nombre: "Dorian",
-        //     apellido: "Matos",
-        //     correo: "dorian@ddfs.com",
-        //     fechaNacimiento: 123,
-        //     contraseña: "Programador19.",
-        //     fechaCreacion: 1234, 
-        //     fechaActualizacion: 1234
+        //     name: "dorian",
+        //     lastname: "matos",
+        //     email: "dorianmatos75@gmail.com",
+        //     birthdate: "1997-06-25T00:00:00.000Z",
+        //     password: "Programador19.",
+            
         // })
 
         await user.save();
@@ -211,50 +143,43 @@ app.delete("/users/:id", async (req,res)=>{
     }
 });
 
+
+
 //----------------------------
 //productos
 //---------------------------
-app.get("/products",upload.fields([{name: 'image', maxCount: 1}]), async(req,res)=>{
-    try{
-            const body = req.body;
-            const image = req.file.image;
-
-            if(image && image.length > 0){
-                const{} = await uploadFile(image[0])
-              
-            }
-        const productsAwait = await Product.find();
-        res.send(productsAwait);
-    }catch{
-        console.log(error);
-        res.status(500).send('Error al crear el usuario')
-    }
-});
-
-app.post("/products", async (req, res) => {
+app.get("/products", async (req, res) => {
     try {
-        // const producto = new Product({
-        //     nombre: "Dorian Matos",
-        //     descripcion: "Hola",
-        //     precio: 1234,
-        //     cantidadEnInventario: 4,
-        //     categoria: "camisa",
-        //     tipo: 'fisico',
-        //     // idUsuario:  mongoose.Types.ObjectId(),
-        //     fechaCreacion: 123,
-        //     fechaActualizacion: 123
-        // });
-
-        const producto = new Product(req.body);
-
-        await producto.save();
-        res.send("Producto creado");
+      const products = await Product.find();
+      res.send(products);
     } catch (error) {
-        console.log(error);
-        res.status(500).send('Error al crear el producto');
+      res.status(500).send('Error al obtener Producto');
+      console.log(error);
     }
-});
-
+  });
+  
+  app.post("/products",  async (req, res) => {
+    try {
+   
+      const producto = new Product(req.body);
+    //   const producto = new Product({
+    //     name: "Dorian Mos",
+    //     description: "Hol",
+    //     price: 134,
+    //     stock: 4,
+    //     category: "Accesories for Woman",  // Note that the category should match one of the valid categories in your schema
+    //     idUsuario: new mongoose.Types.ObjectId(),  // Replace this with an actual user ObjectId
+    //     fechaCreacion: new Date(),
+    //     fechaActualizacion: new Date(),
+    //   });
+  
+      await producto.save();
+      res.status(201).json(producto);
+    } catch (error) {
+      console.log(error);
+      res.status(500).send('Error al crear el producto');
+    }
+  });
 app.put("/products/:id", async (req,res)=>{
     try{
         const id = req.params.id;
@@ -286,7 +211,6 @@ app.delete("/products/:id", async (req,res)=>{
         res.status(500).send("Error al eliminar el producto")
     }
 });
-
 
 //-----------------------------
 //Ventas
@@ -352,6 +276,7 @@ app.delete("/sales/:id", async (req,res)=>{
         res.status(500).send("Error al eliminar la venta")
     }
 });
+
 //--------------------------------------------------------------------
 app.get('/', (req, res) => {
     res.send('Hola Mundo');

@@ -1,31 +1,86 @@
 "use client";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import { useScripts } from "@/hooks/useScripts";
 import { useState } from "react";
+import { appFirebase } from '../../../config/firebase.jsx';
+import { getFirestore, collection, addDoc } from 'firebase/firestore';
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
-const productInitialState = {
-  name: "",
-  description: "",
-  price: "",
-  stock: "",
-  category: "",
-};
-
-const categories = ["Hombres", "Mujeres",];
+const db = getFirestore(appFirebase);
+const storage = getStorage(appFirebase);
 
 const CreateProduct = () => {
-  useScripts()
+  const categories = [
+    "Shirts for Man",
+    "Jens for Man",
+    "Accesories for Man",
+    "Shoes for Man",
+    "Dresses for Woman",
+    "Coats for Woman",
+    "Accesories for Woman",
+    "Sandals for Woman",
+    "Wallets of Accesories",
+    "Watches of Accesories",
+    "Belts of Accesories",
+    "Scarfs of Accesories",
+    "Leather of Bags",
+    "Sports of Bags",
+    "Street Style of Bags",
+    "Creative of Bags"
+  ];
+
+  const productInitialState = {
+    name: "",
+    description: "",
+    price: "",
+    stock: "",
+    category: categories[0].toLowerCase(),
+  };
+
   const [productData, setProductData] = useState(productInitialState);
+  const [urlImDesc, setUrlImDesc] = useState("");
 
   const handleInputChange = (e) => {
     setProductData({ ...productData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(productData);
+  const fileHandler = async (e) => {
+    const archivoI = e.target.files[0];
+    const refArchivo = ref(storage, `documentos/${archivoI.name}`);
+    await uploadBytes(refArchivo, archivoI);
+    const urlImDesc = await getDownloadURL(refArchivo);
+    setUrlImDesc(urlImDesc);
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!productData.name || !productData.price || !productData.description || !urlImDesc) {
+      alert("Por favor, complete la información del producto y suba una imagen.");
+    } else {
+      try {
+        const newProduct = {
+          name: productData.name,
+          description: productData.description,
+          price: productData.price,
+          stock: productData.stock,
+          category: productData.category,
+          imagen: urlImDesc
+        };
+        await addDoc(collection(db, 'products'), newProduct);
+        console.log('Producto creado correctamente');
+        // Limpiar el formulario después de crear el producto
+        setProductData(productInitialState);
+        setUrlImDesc("");
+      } catch (error) {
+        console.error("Error al crear producto:", error);
+        alert('Error al crear el producto');
+      }
+    }
+  };
+ 
+
+ 
 
 
   return (
@@ -109,7 +164,7 @@ const CreateProduct = () => {
                     <label htmlFor="images">
                       Selecciona imagenes para tu producto
                     </label>
-                    <input name="images" id="images" type="file" />
+                    <input name="images" id="images" type="file" onChange={fileHandler}/>
                   </div>
                 </div>
               </div>
