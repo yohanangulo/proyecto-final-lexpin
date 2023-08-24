@@ -5,8 +5,10 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import axios from "axios";
 import { useScripts } from "@/hooks/useScripts";
+import { useRouter } from "next/navigation";
 
 const SignUp = () => {
+  const router = useRouter()
   useScripts();
   // Estado para almacenar los valores del formulario de registro
   const [registerData, setRegisterData] = useState({
@@ -41,7 +43,7 @@ const SignUp = () => {
       console.log(response.data);
       alert("Registro exitoso");
       setTimeout(() => {
-        window.location.reload(); // Recarga la página después de un tiempo
+        router.push('/sign-in')
       }, 3000);
     } catch (error) {
       console.log("Error de registro:", error);
