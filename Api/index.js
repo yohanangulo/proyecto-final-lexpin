@@ -50,18 +50,26 @@ app.post('/login', async (req, res) => {
     try {
         // Busca el usuario en la base de datos
         const user = await User.findOne({ email, password });
-        
-        if (user && user.password === password) {
-            const claveSecreta = 'miClaveSecreta';
-            // Generar un token
-            const token = jwt.sign({
-                email: user.email,
-                name: user.name,
-            }, claveSecreta, { expiresIn: '1h' });
 
-            res.cookie('token', token);
-            res.cookie('user', user.email);
-            return res.json({ token });
+        if (user && user.password === password) {
+            const { name, lastname, email, birthdate, fechaCreacion } = user
+            // const claveSecreta = 'miClaveSecreta';
+            // Generar un token
+            // const token = jwt.sign({
+            //     email: user.email,
+            //     name: user.name,
+            // }, claveSecreta, { expiresIn: '1h' });
+
+            // res.cookie('token', token);
+            // res.cookie('user', user.email);
+
+            return res.json({
+              name,
+              lastname,
+              email,
+              birthdate,
+              fechaCreacion,
+            });
         }
 
         return res.status(401).json({ error: 'Invalid email or password' });

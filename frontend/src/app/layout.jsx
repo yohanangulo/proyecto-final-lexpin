@@ -11,7 +11,7 @@ export const metadata = {
   description: "Tienda en linea para la venta de ropa deportiva",
 };
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children, ...props }) {
   return (
     <html style={{ scrollBehavior: "smooth" }} lang="en">
       <head>

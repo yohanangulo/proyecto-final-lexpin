@@ -1,18 +1,23 @@
-import React, { useState, useEffect } from "react"; 
-import Link from "next/link";
+import React, { useState, useEffect } from 'react'
+import Link from 'next/link'
+import { signOut, useSession } from 'next-auth/react'
 
 const Header = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Estado para controlar el inicio de sesión
-  
+  const session = useSession()
+
+  console.log('dsede header' ,session)
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false) // Estado para controlar el inicio de sesión
+
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    setIsLoggedIn(!!token); // Si el token existe, el usuario está autenticado
-  }, []);
+    const token = localStorage.getItem('token')
+    setIsLoggedIn(!!token) // Si el token existe, el usuario está autenticado
+  }, [])
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    setIsLoggedIn(false); // Actualiza el estado para indicar que el usuario ya no está autenticado
-  };
+    signOut({ callbackUrl: '/sign-in' })
+  }
+
   return (
     <header className="nav-type-1">
       <div className="top-bar hidden-sm hidden-xs">
@@ -24,42 +29,42 @@ const Header = () => {
                   <li className="top-bar-link">
                     <Link href="/my-account">My account</Link>
                   </li>
-                  {/* <li className="top-bar-link">
-                    <a href="#">My Wishlist</a>
-                  </li> */}
-                  {/* <li className="top-bar-link">
-                    <a href="#">Newsletter</a>
-                  </li> */}
-                    {isLoggedIn ? (
-              <>
-                <li className="top-bar-link">
-                  <span>Welcome </span>
-                </li>
-                <li className="top-bar-link">
-                  <a className="ml-2" onClick={handleLogout}> log out</a>
-                </li>
-              </>
-            ) : (
-              <>
-                <li className="top-bar-link">
-                  <Link href="sign-up">sign up</Link>
-                </li>
-                <li className="top-bar-link">
-                  <Link href="sign-in">sign in</Link>
-                </li>
-              </>
-            )}
-                 
-                 
-                  {/* <li className="top-bar-link">
-                    <a href="contact.html">Contact</a>
-                  </li> */}
+
+                  {session.status === 'authenticated' && (
+                    <>
+                      <li className="top-bar-link">
+                        <a>welcome {session.data.user.email} </a>
+                      </li>
+                      <li className="top-bar-link">
+                        <a style={{cursor: 'pointer'}} onClick={handleLogout}>
+                          log out
+                        </a>
+                      </li>
+                    </>
+                  ) }
+                  
+                  {session.status === 'loading' && (
+                    <li>
+                      <a>Loading...</a>
+                    </li>
+                  )}
+
+                  {session.status === 'unauthenticated' && (
+                    <>
+                      <li className="top-bar-link">
+                        <Link href="sign-up">sign up</Link>
+                      </li>
+                      <li className="top-bar-link">
+                        <Link href="sign-in">sign in</Link>
+                      </li>
+                    </>
+                  )}
                 </ul>
               </div>
             </div>
           </div>
         </div>
-      </div>{" "}
+      </div>{' '}
       {/* end top bar */}
       <nav className="navbar navbar-static-top">
         <div className="navigation" id="sticky-nav">
@@ -87,7 +92,7 @@ const Header = () => {
                     </div>
                   </div>
                 </div>
-              </div>{" "}
+              </div>{' '}
               {/* end navbar-header */}
               <div className="header-wrap">
                 <div className="header-wrap-holder">
@@ -108,11 +113,7 @@ const Header = () => {
                   <div className="logo-container">
                     <div className="logo-wrap text-center">
                       <Link href="/">
-                        <img
-                          className="logo"
-                          src="/logo.png"
-                          alt="logo"
-                        />
+                        <img className="logo" src="/logo.png" alt="logo" />
                       </Link>
                     </div>
                   </div>
@@ -172,7 +173,7 @@ const Header = () => {
                               </a>
                             </div>
                           </div>
-                        </div>{" "}
+                        </div>{' '}
                         {/* end cart items */}
                         <div className="nav-cart-summary">
                           <span>Cart Subtotal</span>
@@ -199,10 +200,10 @@ const Header = () => {
                         Carrito /<a href="#"> $1299.50</a>
                       </span>
                     </div>
-                  </div>{" "}
+                  </div>{' '}
                   {/* end cart */}
                 </div>
-              </div>{" "}
+              </div>{' '}
               {/* end header wrap */}
               <div className="nav-wrap">
                 <div className="collapse navbar-collapse" id="navbar-collapse">
@@ -394,22 +395,22 @@ const Header = () => {
                         </li>
                       </ul>
                     </li>
-                  </ul>{" "}
+                  </ul>{' '}
                   {/* end menu */}
-                </div>{" "}
+                </div>{' '}
                 {/* end collapse */}
-              </div>{" "}
+              </div>{' '}
               {/* end col */}
-            </div>{" "}
+            </div>{' '}
             {/* end row */}
-          </div>{" "}
+          </div>{' '}
           {/* end container */}
-        </div>{" "}
+        </div>{' '}
         {/* end navigation */}
-      </nav>{" "}
+      </nav>{' '}
       {/* end navbar */}
     </header>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

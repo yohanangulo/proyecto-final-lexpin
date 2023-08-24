@@ -2,7 +2,7 @@
 
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ProductItem from "@/components/ProductItem";
 import { useScripts } from "@/hooks/useScripts";
 import SlideOne from "@/components/HomeSlider/SlideOne";
@@ -10,13 +10,14 @@ import SlideTwo from "@/components/HomeSlider/SlideTwo";
 import SlideThree from "@/components/HomeSlider/SlideThree";
 import SlideFour from "@/components/HomeSlider/SlideFour";
 import PartnerItems from "@/components/PartnerItems";
+import { useSession } from "next-auth/react";
 
 export default function Home() {
   useScripts();
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  useEffect(() => {}, []);
+  const session = useSession();
 
   return (
     <>
