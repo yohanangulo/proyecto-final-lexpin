@@ -27,43 +27,34 @@ const Login = () => {
   };
 
   // Función para manejar el envío del formulario de inicio de sesión
-  const handleLoginSubmit = async (event) => {
-    event.preventDefault();
-  
-    try {
-      const response = await axios.post(
-        "http://localhost:3003/login",
-        formData
-      );
-  
-      if (response.status === 200) {
-        const token = response.data.token; // Obtener el token de la respuesta
-        localStorage.setItem('token', token); // Guardar el token en el localStorage
-        
-        // Obtener los datos del usuario
-        const userResponse = await axios.get('http://localhost:3003/user', {
-          headers: {
-            Authorization: token,
-          },
-        });
-        
-        // Guardar los datos del usuario en el localStorage
-        localStorage.setItem('user', JSON.stringify(userResponse.data));
-        
-        setLoggedIn(true);
-        router.push('/');
-        alert("Inicio de sesión exitoso");
-      } else {
-        alert("Error de inicio de sesión: Datos incorrectos");
-      }
-    } catch (error) {
-      console.error("Error al intentar iniciar sesión:", error);
-  
-      if (error.response && error.response.status === 401) {
-        alert("Error de inicio de sesión: Usuario no encontrado");
-      }
+const handleLoginSubmit = async (event) => {
+  event.preventDefault();
+
+  try {
+    const response = await axios.post(
+      "http://localhost:3003/login",
+      formData
+    );
+
+    if (response.status === 200) {
+      const token = response.data.token; // Obtener el token de la respuesta
+      localStorage.setItem('token', token); // Guardar el token en el localStorage
+      
+      setLoggedIn(true);
+      router.push('/');
+      alert("Inicio de sesión exitoso");
+       localStorage.setItem('user', JSON.stringify(userResponse.data));
+    } else {
+      alert("Error de inicio de sesión: Datos incorrectos");
     }
-  };
+  } catch (error) {
+    console.error("Error al intentar iniciar sesión:", error);
+
+    if (error.response && error.response.status === 401) {
+      alert("Error de inicio de sesión: Usuario no encontrado");
+    }
+  }
+};
 
   const handleLogout = () => {
     // Eliminar el token almacenado
