@@ -5,12 +5,14 @@ const cors = require("cors");
 const app = express();
 const port = 3003;
 const jwt = require('jsonwebtoken');
+const cookieParser = require('cookie-parser');
 const  {serialize}  = require('cookie');
 const { userSchema, ProductsSchema,  saleSchema } = require('./schemas'); 
 app.use(express.json());
 app.use(cors());
 
-
+app.use(express.json());
+app.use(cookieParser());
 
 //CORS
 const whitelist = ["http://localhost:3000", "http://localhost:3001"];
@@ -48,24 +50,18 @@ app.post('/login', async (req, res) => {
     try {
         // Busca el usuario en la base de datos
         const user = await User.findOne({ email, password });
-
-        if (user && password) {
+        
+        if (user && user.password === password) {
+            const claveSecreta = 'miClaveSecreta';
             // Generar un token
             const token = jwt.sign({
-                exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 30,
-                email: user.email
-            }, 'secret');
+                email: user.email,
+                name: user.name,
+            }, claveSecreta, { expiresIn: '1h' });
 
-            const serialized = serialize('myTokenName', token, {
-                httpOnly: true,
-                secure: process.env.NODE_ENV === 'production',
-                sameSite: 'Lax',
-                maxAge: 1000 * 60 * 60 * 24 * 30,
-                path: '/'
-            });
-
-            res.setHeader('Set-Cookie', serialized);
-            return res.json("Login successful");
+            res.cookie('token', token);
+            res.cookie('user', user.email);
+            return res.json({ token });
         }
 
         return res.status(401).json({ error: 'Invalid email or password' });
@@ -74,6 +70,28 @@ app.post('/login', async (req, res) => {
         return res.status(500).json({ error: 'An error occurred' });
     }
 });
+
+// Ruta protegida
+app.get('/protected', (req, res) => {
+    // Verifica si el usuario tiene una cookie válida
+    const token = req.cookies.myTokenName;
+  
+    if (!token) {
+      return res.status(401).json({ error: 'Unauthorized' });
+    }
+  
+    try {
+      // Decodifica el token y verifica la autenticidad
+      const decoded = jwt.verify(token, 'secret');
+      const userEmail = decoded.email;
+  
+ 
+      return res.json({ message: 'Access granted' });
+    } catch (error) {
+      console.error(error);
+      return res.status(401).json({ error: 'Unauthorized' });
+    }
+  });
 
 //--------------------------
 // usuarios

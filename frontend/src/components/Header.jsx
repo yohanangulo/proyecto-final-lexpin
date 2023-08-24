@@ -1,6 +1,18 @@
+import React, { useState, useEffect } from "react"; 
 import Link from "next/link";
 
-const Header = ({isLoggedIn }) => {
+const Header = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Estado para controlar el inicio de sesión
+  
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setIsLoggedIn(!!token); // Si el token existe, el usuario está autenticado
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setIsLoggedIn(false); // Actualiza el estado para indicar que el usuario ya no está autenticado
+  };
   return (
     <header className="nav-type-1">
       <div className="top-bar hidden-sm hidden-xs">
@@ -18,17 +30,27 @@ const Header = ({isLoggedIn }) => {
                   {/* <li className="top-bar-link">
                     <a href="#">Newsletter</a>
                   </li> */}
-                  <li className="top-bar-link">
-                    <Link href="sign-up">Sign Up</Link>
-                  </li>
-                  <li className="top-bar-link">
-                    <Link href="sign-in">Login</Link>
-                  </li>
-                  {isLoggedIn && (
-                    <li className="top-bar-link">
-                      <h1>{"Bienvenido" + greeting}</h1>
-                    </li>
-                  )}
+                    {isLoggedIn ? (
+              <>
+                <li className="top-bar-link">
+                  <span>Welcome </span>
+                </li>
+                <li className="top-bar-link">
+                  <a className="ml-2" onClick={handleLogout}> log out</a>
+                </li>
+              </>
+            ) : (
+              <>
+                <li className="top-bar-link">
+                  <Link href="sign-up">sign up</Link>
+                </li>
+                <li className="top-bar-link">
+                  <Link href="sign-in">sign in</Link>
+                </li>
+              </>
+            )}
+                 
+                 
                   {/* <li className="top-bar-link">
                     <a href="contact.html">Contact</a>
                   </li> */}
@@ -389,4 +411,5 @@ const Header = ({isLoggedIn }) => {
     </header>
   );
 };
+
 export default Header;
