@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { useSession, signOut } from 'next-auth/react';
+
 
 const MyAccountLayout = ({ children, handlePanelNavigation, activePanel }) => {
   return (
@@ -32,7 +34,8 @@ const MyAccountLayout = ({ children, handlePanelNavigation, activePanel }) => {
                 <a href="#my-account">Account details</a>
               </li>
               <li className="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--customer-logout">
-                <Link href="/">Logout</Link>
+                <Link href="#"  onClick={async (e) => { e.preventDefault(); await signOut(); }}>
+                  Logout</Link>
               </li>
             </ul>
           </nav>

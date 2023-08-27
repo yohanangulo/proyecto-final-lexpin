@@ -1,12 +1,10 @@
 'use client'
-
-import { useState } from 'react'
-import Footer from '@/components/Footer'
-import Header from '@/components/Header'
-import axios from 'axios'
-import { useScripts } from '@/hooks/useScripts'
+import React, { useState } from 'react';
+import Footer from '@/components/Footer';
+import Header from '@/components/Header';
+import { useScripts } from '@/hooks/useScripts';
 import { useRouter } from 'next/navigation'
-import { signIn } from 'next-auth/react'
+import { useSession, signIn } from 'next-auth/react'; 
 
 const Login = () => {
   useScripts()
@@ -82,6 +80,7 @@ const Login = () => {
   }
 
   return (
+
     <>
       <Header />
       {/* Page Title */}

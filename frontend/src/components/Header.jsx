@@ -3,17 +3,12 @@ import Link from 'next/link'
 import { signOut, useSession } from 'next-auth/react'
 
 const Header = () => {
-  const session = useSession()
+  const {data:session, status} = useSession()
+  
 
   console.log('dsede header' ,session)
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false) // Estado para controlar el inicio de sesión
-
-  useEffect(() => {
-    const token = localStorage.getItem('token')
-    setIsLoggedIn(!!token) // Si el token existe, el usuario está autenticado
-  }, [])
-
+  
   const handleLogout = () => {
     signOut({ callbackUrl: '/sign-in' })
   }
@@ -26,30 +21,29 @@ const Header = () => {
             <div className="row">
               <div className="top-bar-links">
                 <ul className="col-sm-6 top-bar-acc">
-                  <li className="top-bar-link">
-                    <Link href="/my-account">My account</Link>
-                  </li>
+                  
 
-                  {session.status === 'authenticated' && (
+                  {status  === 'authenticated' && (
                     <>
                       <li className="top-bar-link">
-                        <a>welcome {session.data.user.email} </a>
+                    <Link href="/my-account">My account</Link>
+                  </li>
+                    </>
+                  )}
+                  {status  === 'authenticated' && (
+                    <>
+                      <li className="top-bar-link">
+                        <a>welcome {session.user.name} </a>
                       </li>
                       <li className="top-bar-link">
-                        <a style={{cursor: 'pointer'}} onClick={handleLogout}>
-                          log out
-                        </a>
+                        <Link href="#" onClick= {handleLogout}>
+                          Logout
+                        </Link>
                       </li>
                     </>
-                  ) }
-                  
-                  {session.status === 'loading' && (
-                    <li>
-                      <a>Loading...</a>
-                    </li>
                   )}
 
-                  {session.status === 'unauthenticated' && (
+                  {status  === 'unauthenticated' && (
                     <>
                       <li className="top-bar-link">
                         <Link href="sign-up">sign up</Link>
