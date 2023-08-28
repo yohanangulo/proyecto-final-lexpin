@@ -3,14 +3,11 @@
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import { useScripts } from '@/hooks/useScripts'
-import SlideOne from '@/components/HomeSlider/SlideOne'
-import SlideTwo from '@/components/HomeSlider/SlideTwo'
-import SlideThree from '@/components/HomeSlider/SlideThree'
-import SlideFour from '@/components/HomeSlider/SlideFour'
 import PartnerItems from '@/components/PartnerItems'
 import BestSellers from '@/components/BestSellers'
 import NewArrivals from '@/components/NewArrivals'
 import SubscribeLetter from '@/components/SubscribeLetter'
+import Slider from '@/components/HomeSlider/Slider'
 
 export default function Home() {
   useScripts()
@@ -33,16 +30,7 @@ export default function Home() {
       <main className="content-wrapper oh">
         <section className="section-wrap nopadding">
           <div className="container">
-            <div className="entry-slider">
-              <div className="flexslider" id="flexslider-hero">
-                <ul className="slides clearfix">
-                  <SlideOne />
-                  <SlideTwo />
-                  <SlideThree />
-                  <SlideFour />
-                </ul>
-              </div>
-            </div>
+            <Slider />
             {/* end slider */}
           </div>
         </section>
