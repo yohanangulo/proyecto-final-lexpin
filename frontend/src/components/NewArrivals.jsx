@@ -5,7 +5,7 @@ export default function NewArrivals() {
   return (
     <>
       {newArrivals.map((newArr, i) => (
-        <div key={i} className="col-md-3 col-xs-6">
+        <div key={newArr + i} className="col-md-3 col-xs-6">
           <ProductItem />
         </div>
       ))}

@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const SlideTwo = () => {
   return (
     <li>
@@ -7,9 +9,9 @@ const SlideTwo = () => {
         <div className="hero-lines">
           <h1 className="hero-heading color-primary large">Winter Sales</h1>
         </div>
-        <a href="#" className="btn btn-lg btn-white">
+        <Link href="/products" className="btn btn-lg btn-white">
           <span>Shop Now</span>
-        </a>
+        </Link>
       </div>
     </li>
   );

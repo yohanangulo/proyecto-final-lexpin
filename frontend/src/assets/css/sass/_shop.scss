@@ -284,6 +284,11 @@
 -------------------------------------------------------*/
 .banner-wrap {
   margin-bottom: 47px;
+  background: #000;
+
+  & img {
+    opacity: .85;
+  }
 
   .hero-holder {
     right: 9%;
