@@ -125,14 +125,14 @@ export default function Home() {
           <div className="container">
             <div className="row">
               <div id="owl-partners" className="owl-carousel owl-theme">
-                <PartnerItems imgSource="https://cdn.jsdelivr.net/gh/yohanangulo/cdn/img/partners/partner_logo_dark_1.png" />
-                <PartnerItems imgSource="https://cdn.jsdelivr.net/gh/yohanangulo/cdn/img/partners/partner_logo_dark_2.png" />
-                <PartnerItems imgSource="https://cdn.jsdelivr.net/gh/yohanangulo/cdn/img/partners/partner_logo_dark_3.png" />
-                <PartnerItems imgSource="https://cdn.jsdelivr.net/gh/yohanangulo/cdn/img/partners/partner_logo_dark_4.png" />
-                <PartnerItems imgSource="https://cdn.jsdelivr.net/gh/yohanangulo/cdn/img/partners/partner_logo_dark_5.png" />
-                <PartnerItems imgSource="https://cdn.jsdelivr.net/gh/yohanangulo/cdn/img/partners/partner_logo_dark_6.png" />
-                <PartnerItems imgSource="https://cdn.jsdelivr.net/gh/yohanangulo/cdn/img/partners/partner_logo_dark_1.png" />
-                <PartnerItems imgSource="https://cdn.jsdelivr.net/gh/yohanangulo/cdn/img/partners/partner_logo_dark_2.png" />
+                <PartnerItems imgSource="/partners/nike.png" />
+                <PartnerItems imgSource="/partners/gymshark.png" />
+                <PartnerItems imgSource="/partners/air-jordan.png" />
+                <PartnerItems imgSource="/partners/adidas.png" />
+                <PartnerItems imgSource="/partners/puma.png" />
+                <PartnerItems imgSource="/partners/zara.png" />
+                <PartnerItems imgSource="/partners/nike.png" />
+                <PartnerItems imgSource="/partners/gymshark.png" />
               </div>
               {/* end carousel */}
             </div>
