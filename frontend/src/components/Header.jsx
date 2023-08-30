@@ -2,14 +2,30 @@
 
 import Link from 'next/link'
 import { signOut, useSession } from 'next-auth/react'
+// import React, { useState } from 'react';
 
-const Header = () => {
+const Header = ({ cartItems }) => {
   const {data:session, status} = useSession()
-  const [selectedCategory, setSelectedCategory] = useState('');
-  
-  const handleCategoryChange = (category) => {
-    setSelectedCategory(category);
+  // const [selectedCategory, setSelectedCategory] = useState('');
+
+  const handleAddToCart = (product) =>{
+    const existingItem = cartItems.find(item => item.id === product.id);
+
+    if (existingItem) {
+      
+      const updatedItems = cartItems.map(item =>
+        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+      );
+      setCartItems(updatedItems);
+    } else {
+      
+      setCartItems([...cartItems, { ...product, quantity: 1 }]);
+    }
   };
+  
+  // const handleCategoryChange = (category) => {
+  //   setSelectedCategory(category);
+  // };
 
   console.log('dsede header' ,session)
 
@@ -122,65 +138,19 @@ const Header = () => {
                       <div className="nav-cart-outer">
                         <div className="nav-cart-inner">
                           <a href="#" className="nav-cart-icon">
-                            2
+                          {cartItems.length > 0 ? cartItems.length : 0}
                           </a>
                         </div>
                       </div>
                       <div className="nav-cart-container">
                         <div className="nav-cart-items">
-                          <div className="nav-cart-item clearfix">
-                            <div className="nav-cart-img">
-                              <a href="#">
-                                <img
-                                  src="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/cart_small_1.jpg"
-                                  alt=""
-                                />
-                              </a>
-                            </div>
-                            <div className="nav-cart-title">
-                              <a href="#">Ladies Bag</a>
-                              <div className="nav-cart-price">
-                                <span>1 x</span>
-                                <span>1250.00</span>
-                              </div>
-                            </div>
-                            <div className="nav-cart-remove">
-                              <a href="#">
-                                <i className="icon icon_close" />
-                              </a>
-                            </div>
-                          </div>
-                          <div className="nav-cart-item clearfix">
-                            <div className="nav-cart-img">
-                              <a href="#">
-                                <img
-                                  src="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/cart_small_2.jpg"
-                                  alt=""
-                                />
-                              </a>
-                            </div>
-                            <div className="nav-cart-title">
-                              <a href="#">Sequin Suit longer title</a>
-                              <div className="nav-cart-price">
-                                <span>1 x</span>
-                                <span>1250.00</span>
-                              </div>
-                            </div>
-                            <div className="nav-cart-remove">
-                              <a href="#">
-                                <i className="icon icon_close" />
-                              </a>
-                            </div>
-                          </div>
+                          
+                      
                         </div>{' '}
-                        {/* end cart items */}
-                        <div className="nav-cart-summary">
-                          <span>Cart Subtotal</span>
-                          <span className="total-price">$1799.00</span>
-                        </div>
+                       
                         <div className="nav-cart-actions mt-20">
                           <a
-                            href="shop-cart.html"
+                            href="/cart"
                             className="btn btn-md btn-dark"
                           >
                             <span>View Cart</span>
@@ -196,7 +166,7 @@ const Header = () => {
                     </div>
                     <div className="menu-cart-amount right">
                       <span>
-                        Carrito /<a href="#"> $1299.50</a>
+                        Carrito 
                       </span>
                     </div>
                   </div>{' '}

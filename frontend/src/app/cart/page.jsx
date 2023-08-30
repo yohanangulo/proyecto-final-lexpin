@@ -3,13 +3,54 @@
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import { useScripts } from '@/hooks/useScripts'
+import React, { useState } from 'react';
 
 export default function Cart() {
   useScripts()
+  const [cartItems, setCartItems] = useState([
+    {
+      name: 'Product 1',
+      image: 'url_to_image_1',
+      price: 10.99,
+      quantity: 2,
+      // ... otras propiedades
+    },
+    {
+      name: 'Product 1',
+      image: 'url_to_image_1',
+      price: 10.99,
+      quantity: 2,
+      // ... otras propiedades
+    },
+    {
+      name: 'Product 1',
+      image: 'url_to_image_1',
+      price: 10.99,
+      quantity: 2,
+      // ... otras propiedades
+    },
+  ]);
+
+  function handleQuantityChange(index, newQuantity) {
+    const updatedCartItems = [...cartItems];
+    updatedCartItems[index].quantity = parseInt(newQuantity);
+    setCartItems(updatedCartItems);
+  }
+
+  const cartTotal = cartItems.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0
+  );
+
+  function handleRemoveItem(index) {
+    const updatedCartItems = [...cartItems];
+    updatedCartItems.splice(index, 1); // Eliminar el producto en la posición index
+    setCartItems(updatedCartItems);
+  }
 
   return (
     <>
-      <Header />
+      <Header  cartItems={cartItems}  />
       <main className="content-wrapper oh">
         <section className="section-wrap shopping-cart pt-0">
           <div className="container relative">
@@ -28,108 +69,44 @@ export default function Cart() {
                       </tr>
                     </thead>
                     <tbody>
-                      <tr className="cart_item">
+                    {cartItems.map((item, index) => (
+                      <tr className="cart_item" key={index}>
                         <td className="product-thumbnail">
                           <a href="#">
-                            <img src="img/shop/shop_item_3.jpg" alt="" />
+                            <img src={item.image} alt={item.name} />
                           </a>
                         </td>
                         <td className="product-name">
-                          <a href="#">Fashion Shorts</a>
+                          <a href="#">{item.name}</a>
                           <ul>
-                            <li>Size: XL</li>
-                            <li>Color: White</li>
+                            <li>Size: {item.size}</li>
+                            <li>Color: {item.color}</li>
                           </ul>
                         </td>
                         <td className="product-price">
-                          <span className="amount">$1250.00</span>
+                          <span className="amount">${item.price}</span>
                         </td>
                         <td className="product-quantity">
-                          <div className="quantity buttons_added">
-                            <input
-                              type="button"
-                              defaultValue="-"
-                              className="minus"
-                            />
-                            <input
-                              type="number"
-                              step={1}
-                              min={0}
-                              defaultValue={1}
-                              title="Qty"
-                              className="input-text qty text"
-                            />
-                            <input
-                              type="button"
-                              defaultValue="+"
-                              className="plus"
-                            />
-                          </div>
+                        <input
+                          type="number"
+                          value={item.quantity}
+                          onChange={(e) => handleQuantityChange(index, e.target.value)}
+                          min="1"
+                          step="1"
+                          className="quantity"
+                        />
                         </td>
                         <td className="product-subtotal">
-                          <span className="amount">$1250.00</span>
+                          <span className="amount">${item.price * item.quantity}</span>
                         </td>
                         <td className="product-remove">
-                          <a
-                            href="#"
-                            className="remove"
-                            title="Remove this item"
-                          >
+                          <a href="#" className="remove" title="Remove this item" onClick={() => handleRemoveItem(index)}>
                             <i className="icon icon_close" />
                           </a>
                         </td>
                       </tr>
-                      <tr className="cart_item">
-                        <td className="product-thumbnail">
-                          <a href="#">
-                            <img src="img/shop/shop_item_7.jpg" alt="" />
-                          </a>
-                        </td>
-                        <td className="product-name">
-                          <a href="#">Business Suit</a>
-                          <ul>
-                            <li>Size: L</li>
-                            <li>Color: Black</li>
-                          </ul>
-                        </td>
-                        <td className="product-price">
-                          <span className="amount">$240.00</span>
-                        </td>
-                        <td className="product-quantity">
-                          <div className="quantity buttons_added">
-                            <input
-                              type="button"
-                              defaultValue="-"
-                              className="minus"
-                            />
-                            <input
-                              type="number"
-                              step={1}
-                              min={0}
-                              defaultValue={1}
-                              title="Qty"
-                              className="input-text qty text"
-                            />
-                            <input
-                              type="button"
-                              defaultValue="+"
-                              className="plus"
-                            />
-                          </div>
-                        </td>
-                        <td className="product-subtotal">
-                          <span className="amount">$240.00</span>
-                        </td>
-                        <td className="product-remove">
-                          <a
-                            href="#"
-                            className="remove"
-                            title="Remove this item"
-                          >
-                            <i className="icon icon_close" />
-                          </a>
-                        </td>
-                      </tr>
+                    ))}
+
                     </tbody>
                   </table>
                 </div>
@@ -181,7 +158,7 @@ export default function Cart() {
                   Calculate Shipping
                 </h2>
                 <p className="form-row form-row-wide">
-                  <select
+                  {/* <select
                     name="calc_shipping_country"
                     id="calc_shipping_country"
                     className="country_to_state"
@@ -455,32 +432,12 @@ export default function Cart() {
                     <option value="YE">Yemen</option>
                     <option value="ZM">Zambia</option>
                     <option value="ZW">Zimbabwe</option>
-                  </select>
+                  </select> */}
                 </p>
                 <div className="row row-20">
                   <div className="col-sm-6">
-                    <p className="form-row form-row-wide">
-                      <input
-                        type="text"
-                        className="input-text"
-                        defaultValue=""
-                        placeholder="State / county"
-                        name="calc_shipping_state"
-                        id="calc_shipping_state"
-                      />
-                    </p>
-                  </div>
-                  <div className="col-sm-6">
-                    <p className="form-row form-row-wide">
-                      <input
-                        type="text"
-                        className="input-text"
-                        defaultValue=""
-                        placeholder="Postcode"
-                        name="calc_shipping_postcode"
-                        id="calc_shipping_postcode"
-                      />
-                    </p>
+                
+                
                   </div>
                 </div>
                 <p>
@@ -520,7 +477,7 @@ export default function Cart() {
                         </th>
                         <td>
                           <strong>
-                            <span className="amount">$1490.00</span>
+                            <span className="amount">${cartTotal.toFixed(2)}</span>
                           </strong>
                         </td>
                       </tr>
