@@ -4,7 +4,11 @@ import { signOut, useSession } from 'next-auth/react'
 
 const Header = () => {
   const {data:session, status} = useSession()
+  const [selectedCategory, setSelectedCategory] = useState('');
   
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
+  };
 
   console.log('dsede header' ,session)
 

@@ -27,7 +27,6 @@ const Login = () => {
   }
 
   // Función para manejar el envío del formulario de inicio de sesión
-<<<<<<< HEAD
   const handleLoginSubmit = async (event) => {
     event.preventDefault()
 
@@ -69,36 +68,6 @@ const Login = () => {
       }
     }
   }
-=======
-const handleLoginSubmit = async (event) => {
-  event.preventDefault();
-
-  try {
-    const response = await axios.post(
-      "http://localhost:3003/login",
-      formData
-    );
-
-    if (response.status === 200) {
-      const token = response.data.token; // Obtener el token de la respuesta
-      localStorage.setItem('token', token); // Guardar el token en el localStorage
-      
-      setLoggedIn(true);
-      router.push('/');
-      alert("Inicio de sesión exitoso");
-       localStorage.setItem('user', JSON.stringify(userResponse.data));
-    } else {
-      alert("Error de inicio de sesión: Datos incorrectos");
-    }
-  } catch (error) {
-    console.error("Error al intentar iniciar sesión:", error);
-
-    if (error.response && error.response.status === 401) {
-      alert("Error de inicio de sesión: Usuario no encontrado");
-    }
-  }
-};
->>>>>>> 88160748af7156de91c729beb4e3899b5ea63858
 
   const handleLogout = () => {
     // Eliminar el token almacenado

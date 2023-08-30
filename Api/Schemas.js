@@ -26,32 +26,7 @@ const userSchema = new mongoose.Schema(
   { versionKey: false }
 );
 
-const ProductsSchema = new mongoose.Schema({
-  name: { type: String, required: false, minlength: 3, maxlength: 100 },
-  description: { type: String, required: false, minlength: 3, maxlength: 500 },
-  price: { type: Number, required: false, min: 0, max: 1000000 },
-  stock: { type: Number, required: false, min: 0 },
-  category: { type: String, required: false, enum: [
-    "shirts for man",
-    "jens for man",
-    "accesories for man",
-    "shoes for man",
-    "dresses for woman",
-    "coats for woman",
-    "accesories for woman",
-    "sandals for woman",
-    "wallets of accesories",
-    "watches of accesories",
-    "belts of accesories",
-    "scarfs of accesories",
-    "leather of bags",
-    "sports of bags",
-    "street style of bags",
-    "creative of bags"
-  ] },
-  fechaCreacion: { type: Date, default: Date.now },
-  fechaActualizacion: { type: Date, default: Date.now },
-});
+
 
 const productSchema = new mongoose.Schema({
   productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: true },
@@ -59,7 +34,7 @@ const productSchema = new mongoose.Schema({
 });
 
 const saleSchema = new mongoose.Schema({
-    // userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },z
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     productos: { type: [productSchema], required: true },
     precioSinIva: { type: Number, required: true, min: 0 },
     precioConIva: { type: Number, required: true, min: 0 },
@@ -70,7 +45,6 @@ const saleSchema = new mongoose.Schema({
 
 module.exports = {
   userSchema,
-  ProductsSchema,
   saleSchema
 };
 

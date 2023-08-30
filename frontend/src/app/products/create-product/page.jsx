@@ -10,6 +10,7 @@ const db = getFirestore(appFirebase);
 const storage = getStorage(appFirebase);
 
 const CreateProduct = () => {
+
   const categories = [
     "Shirts for Man",
     "Jens for Man",
@@ -39,6 +40,14 @@ const CreateProduct = () => {
 
   const [productData, setProductData] = useState(productInitialState);
   const [urlImDesc, setUrlImDesc] = useState("");
+  const [editingProduct, setEditingProduct] = useState(null);
+
+
+  useEffect(()=>{
+    if(editingProduct){
+      loadEditProductData();
+    }
+  },[editingProduct]);
 
   const handleInputChange = (e) => {
     setProductData({ ...productData, [e.target.name]: e.target.value });
@@ -79,7 +88,51 @@ const CreateProduct = () => {
     }
   };
  
+  const handleEdit = (product) => {
+    setEditingProduct(product); // Establece el producto en edición
+  };
 
+  const handleUpdateProduct = async (e) => {
+    e.preventDefault();
+
+    if (!productData.name || !productData.price || !productData.description) {
+      alert("Por favor, complete la información del producto.");
+    } else {
+      try {
+        const productRef = doc(db, 'products', editingProduct.id); // Referencia al documento del producto
+        const updatedProduct = {
+          name: productData.name,
+          description: productData.description,
+          price: productData.price,
+          stock: productData.stock,
+          category: productData.category,
+          imagen: urlImDesc
+        };
+        await updateDoc(productRef, updatedProduct); // Actualiza el documento
+        console.log('Producto actualizado correctamente');
+        setProductData(productInitialState);
+        setUrlImDesc("");
+        setEditingProduct(null); // Finaliza la edición
+      } catch (error) {
+        console.error("Error al actualizar producto:", error);
+        alert('Error al actualizar el producto');
+      }
+    }
+  };
+
+  // Carga los datos del producto en edición
+  const loadEditingProductData = async () => {
+    try {
+      const productRef = doc(db, 'products', editingProduct.id);
+      const productDoc = await getDoc(productRef);
+      if (productDoc.exists()) {
+        const product = productDoc.data();
+        setProductData(product);
+      }
+    } catch (error) {
+      console.error("Error al cargar datos de edición:", error);
+    }
+  };
  
 
 
@@ -168,7 +221,9 @@ const CreateProduct = () => {
                   </div>
                 </div>
               </div>
-              <button className="btn btn-md btn-dark">Crear</button>
+              <button className="btn btn-md btn-dark">
+              {editingProduct ? "Actualizar" : "Crear"}
+                </button>
             </form>
           </div>
         </section>
