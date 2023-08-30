@@ -8,8 +8,7 @@ import { useScripts } from '@/hooks/useScripts'
 import { useSession } from 'next-auth/react'
 import SignInForm from '@/components/SignInForm'
 import Orders from './Orders'
-import { useState } from 'react'
-import { useFetch } from '@/hooks/useFetch'
+import { useEffect, useState } from 'react'
 import UserService from '@/services/user'
 
 const initialUserData = {
@@ -30,9 +29,25 @@ const MyAccount = () => {
   const [userData, setUserData] = useState(initialUserData)
   const [tabIndex, setTabIndex] = useState(0)
 
-  const { data } = useFetch(UserService.getUserAllUsers())
+  useEffect(() => {
+    if (status === 'authenticated') {
+      UserService.getUserByEmail(session.user.email)
+        .then(res => {
+          const { name, lastname, email, birthdate } = res.data
 
-  console.log(data)
+          setUserData({
+            name,
+            lastname,
+            email,
+            birthdate: birthdate.slice(0, 10),
+            currentPassword: '',
+            newPassword: '',
+            confirmNewPassword: '',
+          })
+        })
+        .catch(error => console.error(error))
+    }
+  }, [status])
 
   const handlePanelNavigation = index => {
     if (index == 'accountDetails') setTabIndex(0)

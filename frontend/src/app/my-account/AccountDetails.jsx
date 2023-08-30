@@ -1,10 +1,23 @@
-import { useState } from 'react'
+import UserService from '@/services/user'
 
 const AccountDetails = ({handleUserData, ...userData}) => {
   const handleSubmit = e => {
     e.preventDefault()
 
-    console.log(userData)
+    const {currentPassword, newPassword, confirmNewPassword} = userData
+
+    if(currentPassword || newPassword || confirmNewPassword) {
+      if (!currentPassword) return alert('make sure filling current password input')
+      if (!newPassword) return alert('make sure filling new password input')
+      if (!confirmNewPassword) return alert('make sure filling confirm new password input')
+
+      if (newPassword !== confirmNewPassword) return alert('make sure confirm password matches with new password')
+
+      console.log('changing password')
+    }
+
+    UserService.updateUser()   
+
   }
 
   return (
@@ -94,7 +107,6 @@ const AccountDetails = ({handleUserData, ...userData}) => {
                 className="woocommerce-Input woocommerce-Input--password input-text"
                 name="currentPassword"
                 id="currentPassword"
-            required
                 autoComplete="off"
                 value={userData.currentPassword}
                 onChange={handleUserData}
@@ -111,7 +123,6 @@ const AccountDetails = ({handleUserData, ...userData}) => {
                 className="woocommerce-Input woocommerce-Input--password input-text"
                 name="newPassword"
                 id="newPassword"
-            required
                 autoComplete="off"
                 value={userData.newPassword}
                 onChange={handleUserData}
@@ -126,7 +137,6 @@ const AccountDetails = ({handleUserData, ...userData}) => {
                 className="woocommerce-Input woocommerce-Input--password input-text"
                 name="confirmNewPassword"
                 id="confirmNewPassword"
-            required
                 autoComplete="off"
                 value={userData.confirmNewPassword}
                 onChange={handleUserData}

@@ -7,16 +7,16 @@ class UserService {
     return await axios.get(`${API}/users`)
   }
 
-  async getUser(userId) {
-    return await axios.get(`${API}/users/${userId}`)
+  async getUserByEmail(email) {
+    return await axios.get(`${API}/users/${email}`)
   }
 
   async createUser(userData) {
     return await axios.post(`${API}/users`, userData)
   }
 
-  async updateUser({ userId, userData }) {
-    return await axios.put(`${API}/users/${userId}`, userData)
+  async updateUser({ email, userData }) {
+    return await axios.put(`${API}/users/${email}`, userData)
   }
 
   async deleteUser(userID) {

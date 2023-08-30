@@ -11,7 +11,7 @@ const Header = () => {
     setSelectedCategory(category);
   };
 
-  console.log('dsede header' ,session)
+  // console.log('dsede header' ,session)
 
   
   const handleLogout = () => {
