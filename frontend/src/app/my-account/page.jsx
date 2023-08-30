@@ -1,52 +1,99 @@
 'use client'
 
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
-import MyAccountLayout from "./MyAccountLayout";
-import AccountDetails from "./AccountDetails";
-import { useState } from "react";
-import Dashboard from "./Dashboard";
-import Orders from "./Orders";
-import { useScripts } from "@/hooks/useScripts";
+import Footer from '@/components/Footer'
+import Header from '@/components/Header'
+import MyAccountLayout from './MyAccountLayout'
+import AccountDetails from './AccountDetails'
+import { useScripts } from '@/hooks/useScripts'
+import { useSession } from 'next-auth/react'
+import SignInForm from '@/components/SignInForm'
+import Orders from './Orders'
+import { useState } from 'react'
+import { useFetch } from '@/hooks/useFetch'
+import UserService from '@/services/user'
+
+const initialUserData = {
+  name: '',
+  lastname: '',
+  email: '',
+  birthdate: '',
+  currentPassword: '',
+  newPassword: '',
+  confirmNewPassword: '',
+}
 
 const MyAccount = () => {
   useScripts()
 
-  const [panel, setPanel] = useState(AccountDetails)
-  const [activePanel, setActivePanel] = useState('accountDetails')
+  const { data: session, status } = useSession()
 
-  const handlePanelNavigation = (panelName) => {
-    setActivePanel(panelName)
-    if (panelName == 'dashboard') setPanel(Dashboard)
-    if (panelName == 'orders') setPanel(Orders)
-    if (panelName == 'accountDetails') setPanel(AccountDetails)
+  const [userData, setUserData] = useState(initialUserData)
+  const [tabIndex, setTabIndex] = useState(0)
+
+  const { data } = useFetch(UserService.getUserAllUsers())
+
+  console.log(data)
+
+  const handlePanelNavigation = index => {
+    if (index == 'accountDetails') setTabIndex(0)
+    if (index == 'orders') setTabIndex(1)
   }
+
+  const handleUserData = e => {
+    const { name, value } = e.target
+    setUserData({ ...userData, [name]: value })
+  }
+
+  const myAccountPanels = [
+    <AccountDetails handleUserData={handleUserData} {...userData} />,
+    <Orders />,
+  ]
 
   return (
     <>
-    <Header />
-    <main className="content-wrapper oh">
-      {/* page title */}
-      <section className="page-title text-center">
-        <div className="container relative clearfix">
-          <div className="title-holder">
-            <div className="title-text">
-              <h1 className="uppercase">My Account</h1>
+      <Header />
+      <main className="content-wrapper oh">
+        {/* page title */}
+        <section className="page-title text-center">
+          <div className="container relative clearfix">
+            <div className="title-holder">
+              <div className="title-text">
+                <h1 className="uppercase">My Account</h1>
+              </div>
             </div>
           </div>
-        </div>
-        {/* end page title */}
-      </section>
-      {/* my account */}
-      
-      <MyAccountLayout activePanel={activePanel} handlePanelNavigation={handlePanelNavigation}>
-        {panel}
-      </MyAccountLayout>
+          {/* end page title */}
+        </section>
+        {/* my account */}
 
-      {/* end my account */}
-    </main>
-    <Footer />
+        {status === 'loading' && <h1>loading...</h1>}
+        {status === 'authenticated' && (
+          <MyAccountLayout
+            session={session}
+            handlePanelNavigation={handlePanelNavigation}
+          >
+            {myAccountPanels[tabIndex]}
+          </MyAccountLayout>
+        )}
+        {status === 'unauthenticated' && (
+          <section className="section-wrap login-register pt-0 pb-40">
+            <div className="container">
+              <div className="row">
+                <div className="col-sm-6 col-sm-offset-3 mb-40">
+                  <div className="login">
+                    <h4 className="uppercase">login to enter this area</h4>
+                    <SignInForm />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* end my account */}
+      </main>
+      <Footer />
     </>
-  );
-};
-export default MyAccount;
+  )
+}
+export default MyAccount
