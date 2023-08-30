@@ -41,7 +41,6 @@ main();
 
 const Sale = mongoose.model('Sale', saleSchema);
 const User = mongoose.model('User', userSchema);
-const Product = mongoose.model('Product',ProductsSchema)
 
 // Inicio de sesión
 app.post('/login', async (req, res) => {
@@ -116,6 +115,12 @@ app.get('/users', async (req, res) => {
     }
 });
 
+app.get("/users/:id", async(req , res) =>{
+    const id = req.params.id;
+    const user = await User.findById(id);
+    res.send(user);
+})
+
 app.post('/users', async (req, res) => {
     try {
 
@@ -171,73 +176,6 @@ app.delete("/users/:id", async (req,res)=>{
 
 
 
-//----------------------------
-//productos
-//---------------------------
-app.get("/products", async (req, res) => {
-    try {
-      const products = await Product.find();
-      res.send(products);
-    } catch (error) {
-      res.status(500).send('Error al obtener Producto');
-      console.log(error);
-    }
-  });
-  
-  app.post("/products",  async (req, res) => {
-    try {
-   
-      const producto = new Product(req.body);
-    //   const producto = new Product({
-    //     name: "Dorian Mos",
-    //     description: "Hol",
-    //     price: 134,
-    //     stock: 4,
-    //     category: "Accesories for Woman",  // Note that the category should match one of the valid categories in your schema
-    //     idUsuario: new mongoose.Types.ObjectId(),  // Replace this with an actual user ObjectId
-    //     fechaCreacion: new Date(),
-    //     fechaActualizacion: new Date(),
-    //   });
-  
-      await producto.save();
-      res.status(201).json(producto);
-    } catch (error) {
-      console.log(error);
-      res.status(500).send('Error al crear el producto');
-    }
-  });
-app.put("/products/:id", async (req,res)=>{
-    try{
-        const id = req.params.id;
-    
-
-        const updatedProduct = await Product.updateOne({ _id: id }, req.body);
-        if (!updatedProduct) {
-            return res.status(404).send("Producto no encontrado");
-        }
-        res.send(updatedProduct);
-    }catch(error){
-        console.log(error);
-        res.status(500).send("Error al actualizar el producto");
-    }
-});
-
-app.delete("/products/:id", async (req,res)=>{
-    try{
-        const id = req.params.id;
-
-        const deleteProduct = await Product.deleteOne({_id : id });
-        if (!deleteProduct) {
-            return res.status(404).send("Producto no encontrado");
-        }
-        res.send("Producto eliminado correctamente");
-
-    }catch(error){
-        console.log(error);
-        res.status(500).send("Error al eliminar el producto")
-    }
-});
-
 //-----------------------------
 //Ventas
 //-----------------------------
@@ -246,11 +184,9 @@ app.delete("/products/:id", async (req,res)=>{
 app.post("/sales", async (req, res) => {
     try {
         const sales = new Sale({
-            // userId: mongoose.Types.ObjectId(),
+            userId: mongoose.Types.ObjectId(),
             productos: [
-                {   cantidad: 2 }, 
-                {   cantidad: 3 },
-               
+                {   cantidad: 3 },              
             ],
             precioSinIva: 500,
             precioConIva: 600, 
