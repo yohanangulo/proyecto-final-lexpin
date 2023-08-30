@@ -4,11 +4,7 @@ import Link from 'next/link'
 import { signOut, useSession } from 'next-auth/react'
 
 const Header = () => {
-  const {data:session, status} = useSession()
-  
-
-  console.log('dsede header' ,session)
-
+  const { data: session, status } = useSession()
   
   const handleLogout = () => {
     signOut({ callbackUrl: '/sign-in' })
