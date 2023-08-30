@@ -115,9 +115,13 @@ app.get('/users', async (req, res) => {
     }
 });
 
-app.get("/users/:id", async(req , res) =>{
+app.get("/users/:email", async(req , res) =>{
     const id = req.params.id;
-    const user = await User.findById(id);
+    const user = await User.findById({ email: email });
+
+    if (!user) {
+        return res.status(404).send("Usuario no encontrado");
+    }
     res.send(user);
 })
 
