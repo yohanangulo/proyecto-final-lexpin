@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const SlideOne = () => {
   return (
     <li>
@@ -10,9 +12,9 @@ const SlideOne = () => {
             GET IN THE TREND
           </h4>
         </div>
-        <a href="#" className="btn btn-lg btn-white">
+        <Link href="/products" className="btn btn-lg btn-white">
           <span>Shop Now</span>
-        </a>
+        </Link>
       </div>
     </li>
   );

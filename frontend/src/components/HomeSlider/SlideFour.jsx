@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const SlideFour = () => {
   return (
     <li>
@@ -11,9 +13,9 @@ const SlideFour = () => {
           </p>
           <p className="white">aliquid voluptatum labore corrupti.</p>
         </div>
-        <a href="#" className="btn btn-lg btn-white">
+        <Link href="/products" className="btn btn-lg btn-white">
           <span>Shop Now</span>
-        </a>
+        </Link>
       </div>
     </li>
   );
