@@ -116,18 +116,13 @@ app.get('/users', async (req, res) => {
 });
 
 app.get("/users/:email", async(req , res) =>{
-    try {
-        const email = req.params.email;
-        const user = await User.findOne({email});
+    const id = req.params.id;
+    const user = await User.findById({ email: email });
 
-        if(!user) {
-            return res.status(404).send('user not found')
-        }
-
-        res.send(user);
-    } catch (error) {
-        
+    if (!user) {
+        return res.status(404).send("Usuario no encontrado");
     }
+    res.send(user);
 })
 
 app.post('/users', async (req, res) => {
