@@ -1,11 +1,17 @@
-import { CreditCard, DollarSign, Package } from 'lucide-react/dist/esm/lucide-react'
+import {
+  CreditCard,
+  DollarSign,
+  Package,
+} from 'lucide-react/dist/esm/lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '../components/Card'
 import { Heading } from '../components/Heading'
 import '@/app/globals.css'
+import { formatter } from '@/lib/utils'
+import Overview from '../components/Overview'
 
 export default function page() {
   return (
-    <main>
+    <main className="px-16 pt-3">
       <div className="flex-col">
         <div className="flex-1 space-y-4 p-8 pt-6">
           <Heading title="Dashboard" description="Overview of your Store" />
@@ -18,7 +24,9 @@ export default function page() {
                 <DollarSign className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">299</div>
+                <div className="text-2xl font-bold">
+                  {formatter.format(299)}
+                </div>
               </CardContent>
             </Card>
             <Card>
@@ -41,7 +49,26 @@ export default function page() {
                 <div className="text-2xl font-bold">24</div>
               </CardContent>
             </Card>
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">Profit</CardTitle>
+                <DollarSign className="h-4 w-4 text-muted-foreground" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">
+                  {formatter.format(145)}
+                </div>
+              </CardContent>
+            </Card>
           </div>
+          <Card className="col-span-4">
+            <CardHeader>
+              <CardTitle>Overview</CardTitle>
+            </CardHeader>
+            <CardContent className="pl-2">
+              <Overview data={[]} />
+            </CardContent>
+          </Card>
         </div>
       </div>
     </main>
