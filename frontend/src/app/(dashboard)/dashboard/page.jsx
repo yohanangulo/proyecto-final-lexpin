@@ -8,8 +8,12 @@ import { Heading } from '../components/Heading'
 import '@/app/globals.css'
 import { formatter } from '@/lib/utils'
 import Overview from '../components/Overview'
+import SalesService from '@/services/sales'
 
-export default function page() {
+export default async function page() {
+
+  const graphData = await SalesService.getSalesChart()
+
   return (
     <main className="px-16 pt-3">
       <div className="flex-col">
@@ -66,7 +70,9 @@ export default function page() {
               <CardTitle>Overview</CardTitle>
             </CardHeader>
             <CardContent className="pl-2">
-              <Overview data={[]} />
+              <Overview
+                data={graphData}
+              />
             </CardContent>
           </Card>
         </div>

@@ -182,24 +182,22 @@ app.delete("/users/:id", async (req,res)=>{
 
 
 app.post("/sales", async (req, res) => {
-    try {
-        const sales = new Sale({
-            userId: mongoose.Types.ObjectId(),
-            productos: [
-                {   cantidad: 3 },              
-            ],
-            precioSinIva: 500,
-            precioConIva: 600, 
-            fechaCreacion: new Date(),
-            fechaActualizacion: new Date()
-        });
-        
-        await sales.save();
-        res.send("venta correcta");
-    } catch (error) {
-        console.log(error);
-        res.status(500).send('Error al crear la venta');
-    }
+  try {
+    const sales = new Sale({
+      userId: '64e6b86ccb5c1d4c1ab7f3ad',
+      productos: [{ productId: "64e6b86ccb5c1d4c1ab7f3ad", cantidad: 3 }],
+      precioSinIva: 150,
+      precioConIva: 200,
+      fechaCreacion: new Date(),
+      fechaActualizacion: new Date(),
+    });
+
+    await sales.save();
+    res.send("venta correcta");
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Error al crear la venta");
+  }
 });
 
 app.get("/sales", async(req,res)=>{
