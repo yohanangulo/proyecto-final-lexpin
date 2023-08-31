@@ -52,15 +52,7 @@ app.post('/login', async (req, res) => {
 
         if (user && user.password === password) {
             const { name, lastname, email, birthdate, fechaCreacion, _id } = user
-            // const claveSecreta = 'miClaveSecreta';
-            // Generar un token
-            // const token = jwt.sign({
-            //     email: user.email,
-            //     name: user.name,
-            // }, claveSecreta, { expiresIn: '1h' });
 
-            // res.cookie('token', token);
-            // res.cookie('user', user.email);
 
             return res.json({
                 _id,

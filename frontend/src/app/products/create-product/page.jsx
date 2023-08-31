@@ -1,7 +1,8 @@
 "use client";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import { useState } from "react";
+import withAuth from '../../../utils/withauth.jsx';
+import {  useState, useEffect } from "react";
 import { appFirebase } from '../../../config/firebase.jsx';
 import { getFirestore, collection, addDoc } from 'firebase/firestore';
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -10,6 +11,7 @@ const db = getFirestore(appFirebase);
 const storage = getStorage(appFirebase);
 
 const CreateProduct = () => {
+  
 
   const categories = [
     "Shirts for Man",
@@ -77,10 +79,10 @@ const CreateProduct = () => {
           imagen: urlImDesc
         };
         await addDoc(collection(db, 'products'), newProduct);
-        console.log('Producto creado correctamente');
         // Limpiar el formulario después de crear el producto
         setProductData(productInitialState);
         setUrlImDesc("");
+        alert('Producto creado correctamente');
       } catch (error) {
         console.error("Error al crear producto:", error);
         alert('Error al crear el producto');
@@ -233,4 +235,4 @@ const CreateProduct = () => {
     </>
   );
 };
-export default CreateProduct;
+export default withAuth(CreateProduct);

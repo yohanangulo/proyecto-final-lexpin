@@ -2,12 +2,12 @@
 
 import Link from 'next/link'
 import { signOut, useSession } from 'next-auth/react'
-// import React, { useState } from 'react';
+import React, { useState } from 'react';
 
-const Header = ({ cartItems }) => {
+const Header = () => {
   const {data:session, status} = useSession()
   // const [selectedCategory, setSelectedCategory] = useState('');
- 
+  const [cartItems, setCartItems] = useState([]);
   
   const handleAddToCart = (product) =>{
     const existingItem = cartItems.find(item => item.id === product.id);
@@ -23,6 +23,8 @@ const Header = ({ cartItems }) => {
       setCartItems([...cartItems, { ...product, quantity: 1 }]);
     }
   };
+
+  const isAdmin = session?.user?.email === 'admin@coolstore.com' 
   
   // const handleCategoryChange = (category) => {
   //   setSelectedCategory(category);
@@ -57,6 +59,11 @@ const Header = ({ cartItems }) => {
                       <li className="top-bar-link">
                         <a>welcome {session.user.name} </a>
                       </li>
+                      { isAdmin &&(
+                        <li className='top-bar-link'>
+                            <a href='/' >Super secret information</a>
+                        </li>
+                      )}
                       <li className="top-bar-link">
                         <Link href="#" onClick= {handleLogout}>
                           Logout
@@ -135,7 +142,7 @@ const Header = ({ cartItems }) => {
                   </div>
                   {/* Cart */}
                   <div className="nav-cart-wrap hidden-sm hidden-xs">
-                  {status  === 'authenticated' && (
+                  {status  === 'authenticated' && !isAdmin &&(
                     <>
             <div className="nav-cart right">
               <div className="nav-cart-outer">
