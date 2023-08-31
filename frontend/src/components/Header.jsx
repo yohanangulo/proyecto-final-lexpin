@@ -7,7 +7,8 @@ import { signOut, useSession } from 'next-auth/react'
 const Header = ({ cartItems }) => {
   const {data:session, status} = useSession()
   // const [selectedCategory, setSelectedCategory] = useState('');
-
+ 
+  
   const handleAddToCart = (product) =>{
     const existingItem = cartItems.find(item => item.id === product.id);
 
@@ -134,41 +135,37 @@ const Header = ({ cartItems }) => {
                   </div>
                   {/* Cart */}
                   <div className="nav-cart-wrap hidden-sm hidden-xs">
-                    <div className="nav-cart right">
-                      <div className="nav-cart-outer">
-                        <div className="nav-cart-inner">
-                          <a href="#" className="nav-cart-icon">
-                          {cartItems && cartItems.length > 0 ? cartItems.length : 0}
-                          </a>
-                        </div>
-                      </div>
-                      <div className="nav-cart-container">
-                        <div className="nav-cart-items">
-                          
-                      
-                        </div>{' '}
-                       
-                        <div className="nav-cart-actions mt-20">
-                          <a
-                            href="/cart"
-                            className="btn btn-md btn-dark"
-                          >
-                            <span>View Cart</span>
-                          </a>
-                          <a
-                            href="shop-checkout.html"
-                            className="btn btn-md btn-color mt-10"
-                          >
-                            <span>Proceed to Checkout</span>
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="menu-cart-amount right">
-                      <span>
-                        Carrito 
-                      </span>
-                    </div>
+                  {status  === 'authenticated' && (
+                    <>
+            <div className="nav-cart right">
+              <div className="nav-cart-outer">
+                <div className="nav-cart-inner">
+                  <a href="/cart" className="nav-cart-icon">
+                    {/* {cartItems.length} */}
+                  </a>
+                </div>
+              </div>
+              <div className="nav-cart-container">
+                <div className="nav-cart-items">
+                  {/* Renderiza los elementos del carrito aquí */}
+
+                </div>
+                <div className="nav-cart-actions mt-20">
+                  <a href="/cart" className="btn btn-md btn-dark">
+                    <span>View Cart</span>
+                  </a>
+                  <a href="shop-checkout.html" className="btn btn-md btn-color mt-10">
+                    <span>Proceed to Checkout</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          <div className="menu-cart-amount right">
+            <span>Carrito</span>
+          </div>
+            </>
+          )}
+                    
                   </div>{' '}
                   {/* end cart */}
                 </div>
