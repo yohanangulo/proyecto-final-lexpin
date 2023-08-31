@@ -1,9 +1,11 @@
+import  Link  from 'next/link';
 const ProductItem = product => {
+  
   return (
     <div className="product-item">
       <div key={product.id} className="product">
         <div className="product-img">
-          <a href="#">
+        <a href={`/products/${product.id}`}>
             <img src={product.imagen} alt={product.name} />
             <img src={product.imagen} alt={product.name} className="back-img" />
           </a>

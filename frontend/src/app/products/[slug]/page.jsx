@@ -4,12 +4,38 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import ProductItem from "@/components/ProductItem";
 import { useScripts } from "@/hooks/useScripts";
-import { useState } from "react";
+import React, { useEffect, useState } from 'react'
+import { appFirebase } from '../../../config/firebase.jsx'
+import { getFirestore, collection, addDoc, getDocs, query, limit, where } from 'firebase/firestore'
 
-const Product = ({ params : { slug } }) => {
+
+const product = ({ params : { id } }) => {
   useScripts()
+  const db = getFirestore(appFirebase)
 
-  console.log(slug)
+  const [products, setProducts] = useState([])
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const q = query(collection(db, 'products'))
+        const querySnapshot = await getDocs(q)
+
+        const productList = []
+        querySnapshot.forEach(doc => {
+          productList.push({ ...doc.data(), id: doc.id })
+        })
+        
+        setProducts(productList)
+      } catch (error) {
+        console.error('Error fetching products:', error)
+      }
+    }
+
+    fetchProducts()
+  }, [db])
+
+
 
   const [qty, setQty] = useState(1);
 
@@ -30,13 +56,14 @@ const Product = ({ params : { slug } }) => {
     }
   };
 
-  console.log(slug);
+
 
   return (
     <>
       <Header />
       <main className="content-wrapper oh">
-        <section className="section-wrap single-product">
+      {products.map((product, i) => (
+        <section className="section-wrap single-product key={i}">
           <div className="container relative">
             <div className="row">
               <div className="col-sm-6 col-xs-12 mb-60">
@@ -44,111 +71,33 @@ const Product = ({ params : { slug } }) => {
                   className="flickity flickity-slider-wrap mfp-hover"
                   id="gallery-main"
                 >
+                  
                   <div className="gallery-cell">
                     <a
-                      href="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/single_img_1.jpg"
+                      href={product.image}
                       className="lightbox-img"
                     >
                       <img
-                        src="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/single_img_1.jpg"
+                        src={product.image}
                         alt=""
                       />
-                      <i className="icon arrow_expand" />
-                    </a>
-                  </div>
-                  <div className="gallery-cell">
-                    <a
-                      href="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/single_img_2.jpg"
-                      className="lightbox-img"
-                    >
-                      <img
-                        src="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/single_img_2.jpg"
-                        alt=""
-                      />
-                      <i className="icon arrow_expand" />
-                    </a>
-                  </div>
-                  <div className="gallery-cell">
-                    <a
-                      href="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/single_img_3.jpg"
-                      className="lightbox-img"
-                    >
-                      <img
-                        src="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/single_img_3.jpg"
-                        alt=""
-                      />
-                      <i className="icon arrow_expand" />
-                    </a>
-                  </div>
-                  <div className="gallery-cell">
-                    <a
-                      href="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/single_img_4.jpg"
-                      className="lightbox-img"
-                    >
-                      <img
-                        src="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/single_img_4.jpg"
-                        alt=""
-                      />
-                      <i className="icon arrow_expand" />
-                    </a>
-                  </div>
-                  <div className="gallery-cell">
-                    <a
-                      href="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/single_img_5.jpg"
-                      className="lightbox-img"
-                    >
-                      <img
-                        src="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/single_img_5.jpg"
-                        alt=""
-                      />
-                      <i className="icon arrow_expand" />
+
                     </a>
                   </div>
                 </div>{" "}
                 {/* end gallery main */}
-                <div className="gallery-thumbs">
-                  <div className="gallery-cell">
-                    <img
-                      src="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/single_img_1.jpg"
-                      alt=""
-                    />
-                  </div>
-                  <div className="gallery-cell">
-                    <img
-                      src="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/single_img_2.jpg"
-                      alt=""
-                    />
-                  </div>
-                  <div className="gallery-cell">
-                    <img
-                      src="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/single_img_3.jpg"
-                      alt=""
-                    />
-                  </div>
-                  <div className="gallery-cell">
-                    <img
-                      src="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/single_img_4.jpg"
-                      alt=""
-                    />
-                  </div>
-                  <div className="gallery-cell">
-                    <img
-                      src="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/single_img_5.jpg"
-                      alt=""
-                    />
-                  </div>
-                </div>{" "}
+
                 {/* end gallery thumbs */}
               </div>{" "}
               {/* end col img slider */}
               <div className="col-sm-6 col-xs-12 product-description-wrap">
-                <h1 className="product-title">Summer Dress</h1>
+                <h1 className="product-title">{product.name}</h1>
                 <span className="rating">
                   <a href="#">3 Reviews</a>
                 </span>
                 <span className="price">
                   <ins>
-                    <span className="ammount">$1250.00</span>
+                    <span className="ammount">{product.price}</span>
                   </ins>
                 </span>
                 <p className="product-description">
@@ -207,7 +156,7 @@ const Product = ({ params : { slug } }) => {
                 </ul>
                 <div className="product_meta">
                   <span className="posted_in">
-                    Categoría: <a href="#">Accesorios</a>
+                    Categoría: <a href="#">{product.category}</a>
                   </span>
                   <span className="posted_in">
                     Publicado por: <a href="#">Username</a>
@@ -237,7 +186,7 @@ const Product = ({ params : { slug } }) => {
                   <ul className="nav nav-tabs">
                     <li className="active">
                       <a href="#tab-description" data-toggle="tab">
-                        Description
+                        {product.description}
                       </a>
                     </li>
                   </ul>{" "}
@@ -271,9 +220,11 @@ const Product = ({ params : { slug } }) => {
             </div>{" "}
             {/* end row */}
           </div>{" "}
-          {/* end container */}
-        </section>{" "}
-        {/* end single product */}
+          {/* end container */},
+        </section>
+        ,{/* end single product */}
+           
+          ))}
         {/* Related Items */}
         <section className="section-wrap related-products pt-0">
           <div className="container">
@@ -304,9 +255,10 @@ const Product = ({ params : { slug } }) => {
           {/* end container */}
         </section>{" "}
         {/* end related products */}
-      </main>
+        </main>
       <Footer />
     </>
+ 
   );
 };
-export default Product;
+export default product;

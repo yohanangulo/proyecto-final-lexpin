@@ -3,11 +3,17 @@
 import Link from 'next/link'
 import { signOut, useSession } from 'next-auth/react'
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const Header = () => {
+  const router = useRouter(); 
   const {data:session, status} = useSession()
   // const [selectedCategory, setSelectedCategory] = useState('');
   const [cartItems, setCartItems] = useState([]);
+
+  const handleCategoryClick = (category) => {
+    router.push(`/categories/${category}`); 
+  };
   
   const handleAddToCart = (product) =>{
     const existingItem = cartItems.find(item => item.id === product.id);
@@ -237,7 +243,7 @@ const Header = () => {
                                 <h6>For Man</h6>
                                 <ul className="menu-list">
                                   <li>
-                                    <a href="#">Shirts</a>
+                                    <a href="#" onClick={() => handleCategoryClick('for-man-shirts')}>Shirts</a>
                                   </li>
                                   <li>
                                     <a href="#">Jeans</a>

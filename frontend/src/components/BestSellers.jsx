@@ -1,14 +1,14 @@
-import ProductItem from "./ProductItem"
-
-export default function BestSellers() {
-  const bestSellers = []
+import ProductItem from './ProductItem'
+export default function NewArrivals() {
+  const newArrivals = [1,2,3,4]
+  const uniqueArrivals = [...new Set(newArrivals)]
   return (
-    <>
-      {bestSellers.map((bestSeller, i) => (
-        <div key={i} className="col-md-3 col-xs-6 animated-from-left">
+    <div className="d-flex flex-wrap">
+      {uniqueArrivals.map((newArr) => (
+        <div key={newArr} className="col-md-3 col-xs-6">
           <ProductItem />
         </div>
       ))}
-    </>
+    </div>
   )
-}
+} 
