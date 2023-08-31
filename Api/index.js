@@ -188,8 +188,8 @@ app.post("/sales", async (req, res) => {
             productos: [
                 {   cantidad: 3 },              
             ],
-            precioSinIva: 500,
-            precioConIva: 600, 
+            precioSinIva: 2000,
+            precioConIva: 3040, 
             fechaCreacion: new Date(),
             fechaActualizacion: new Date()
         });
