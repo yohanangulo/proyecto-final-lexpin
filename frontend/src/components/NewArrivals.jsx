@@ -1,7 +1,7 @@
 import ProductItem from './ProductItem'
 import React, { useEffect, useState } from 'react'
 import { appFirebase } from '../config/firebase.jsx'
-import { getFirestore, collection, addDoc, getDocs, query, limit } from 'firebase/firestore'
+import { getFirestore, collection, addDoc, getDocs, query, limit, where } from 'firebase/firestore'
 
 export default function NewArrivals() {
   const db = getFirestore(appFirebase)
@@ -11,11 +11,14 @@ export default function NewArrivals() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const querySnapshot = await getDocs(collection(db, 'products'), query(limit(3)))
+        const q = query(collection(db, 'products'), limit(4))
+        const querySnapshot = await getDocs(q)
+
         const productList = []
         querySnapshot.forEach(doc => {
           productList.push({ ...doc.data(), id: doc.id })
         })
+        
         setProducts(productList)
       } catch (error) {
         console.error('Error fetching products:', error)
