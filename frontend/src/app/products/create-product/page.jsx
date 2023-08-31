@@ -67,7 +67,7 @@ const CreateProduct = () => {
     e.preventDefault();
 
     if (!productData.name || !productData.price || !productData.description || !urlImDesc) {
-      alert("Por favor, complete la información del producto y suba una imagen.");
+      // alert("Por favor, complete la información del producto y suba una imagen.");
     } else {
       try {
         const newProduct = {
