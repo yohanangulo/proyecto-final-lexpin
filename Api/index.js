@@ -51,7 +51,7 @@ app.post('/login', async (req, res) => {
         const user = await User.findOne({ email, password });
 
         if (user && user.password === password) {
-            const { name, lastname, email, birthdate, fechaCreacion } = user
+            const { name, lastname, email, birthdate, fechaCreacion, _id } = user
             // const claveSecreta = 'miClaveSecreta';
             // Generar un token
             // const token = jwt.sign({
@@ -63,11 +63,12 @@ app.post('/login', async (req, res) => {
             // res.cookie('user', user.email);
 
             return res.json({
-              name,
-              lastname,
-              email,
-              birthdate,
-              fechaCreacion,
+                _id,
+                name,
+                lastname,
+                email,
+                birthdate,
+                fechaCreacion,
             });
         }
 
@@ -116,8 +117,8 @@ app.get('/users', async (req, res) => {
 });
 
 app.get("/users/:email", async(req , res) =>{
-    const id = req.params.id;
-    const user = await User.findById({ email: email });
+    const email = req.params.id;
+    const user = await User.findOne({ email: email });
 
     if (!user) {
         return res.status(404).send("Usuario no encontrado");
@@ -146,20 +147,23 @@ app.post('/users', async (req, res) => {
     }
 });
 
-app.put("/users/:id", async (req,res) =>{
-    try{
+app.put("/users/:id", async (req, res) => {
+  try {
     const id = req.params.id;
-    
 
-    const updatedUser = await User.updateOne({_id : id}, req.body);
-    if(!updatedUser){
-        return res.status(404).send("usuario no encontrado");
+    const updatedUser = await User.updateOne( {_id: id}, req.body);
+    console.log('Este es el usuario actualizado', updatedUser)
+    
+    if (!updatedUser) {
+      return res.status(404).send("usuario no encontrado");
     }
-    res.send(updateOne);
-    }catch(error){
-        console.log(error);
-        res.status(500).send("Error al actualizar usuario");
-    }
+
+    res.send(updatedUser);
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Error al actualizar usuario");
+  }
 });
 
 app.delete("/users/:id", async (req,res)=>{

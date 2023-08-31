@@ -31,21 +31,18 @@ const MyAccount = () => {
 
   useEffect(() => {
     if (status === 'authenticated') {
-      UserService.getUserByEmail(session.user.email)
-        .then(res => {
-          const { name, lastname, email, birthdate } = res.data
 
-          setUserData({
-            name,
-            lastname,
-            email,
-            birthdate: birthdate.slice(0, 10),
-            currentPassword: '',
-            newPassword: '',
-            confirmNewPassword: '',
-          })
-        })
-        .catch(error => console.error(error))
+      const { name, lastname, email, birthdate } = session.user
+
+      setUserData({
+        name,
+        lastname,
+        email,
+        birthdate: birthdate.slice(0, 10),
+        currentPassword: '',
+        newPassword: '',
+        confirmNewPassword: '',
+      })
     }
   }, [status])
 
@@ -60,7 +57,7 @@ const MyAccount = () => {
   }
 
   const myAccountPanels = [
-    <AccountDetails handleUserData={handleUserData} {...userData} />,
+    <AccountDetails handleUserData={handleUserData} {...userData} userId={session?.user._id} />,
     <Orders />,
   ]
 

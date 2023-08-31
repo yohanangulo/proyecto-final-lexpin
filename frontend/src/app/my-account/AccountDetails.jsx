@@ -1,23 +1,44 @@
 import UserService from '@/services/user'
+import { signOut } from 'next-auth/react'
 
-const AccountDetails = ({handleUserData, ...userData}) => {
+const AccountDetails = ({ handleUserData, ...userData }) => {
   const handleSubmit = e => {
     e.preventDefault()
 
-    const {currentPassword, newPassword, confirmNewPassword} = userData
+    const {
+      currentPassword,
+      newPassword,
+      confirmNewPassword,
+      name,
+      lastname,
+      email,
+      birthdate,
+    } = userData
 
-    if(currentPassword || newPassword || confirmNewPassword) {
-      if (!currentPassword) return alert('make sure filling current password input')
-      if (!newPassword) return alert('make sure filling new password input')
-      if (!confirmNewPassword) return alert('make sure filling confirm new password input')
+    let newData = { name, lastname, email, birthdate }
 
-      if (newPassword !== confirmNewPassword) return alert('make sure confirm password matches with new password')
-
-      console.log('changing password')
+    if (currentPassword || newPassword || confirmNewPassword) {
+      if (!currentPassword) {
+        return alert('make sure filling current password input')
+      } else if (!newPassword) {
+        return alert('make sure filling new password input')
+      } else if (!confirmNewPassword) {
+        return alert('make sure filling confirm new password input')
+      } else if (newPassword !== confirmNewPassword) {
+        return alert('make sure confirm password matches with new password')
+      }
+      newData = { ...newData, password: newPassword }
     }
 
-    UserService.updateUser()   
-
+    UserService.updateUser({
+      userId: userData.userId,
+      userData: newData,
+    })
+      .then(() => {
+        alert('information updated successfuly, you have to sign in again')
+        signOut()
+      })
+      .catch(() => alert('Something went wrong, try again'))
   }
 
   return (

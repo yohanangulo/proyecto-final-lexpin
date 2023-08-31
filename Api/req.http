@@ -3,3 +3,12 @@ POST  http://localhost:3003/users
 ###
 
 GET http://localhost:3003/users
+
+###
+
+PUT http://localhost:3003/users/64e5f543b30562f54d3008a8
+Content-Type: application/json
+
+{
+  "name": "Juanito"
+}

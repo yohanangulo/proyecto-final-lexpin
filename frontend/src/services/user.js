@@ -15,8 +15,8 @@ class UserService {
     return await axios.post(`${API}/users`, userData)
   }
 
-  async updateUser({ email, userData }) {
-    return await axios.put(`${API}/users/${email}`, userData)
+  async updateUser({ userId, userData }) {
+    return await axios.put(`${API}/users/${userId}`, userData)
   }
 
   async deleteUser(userID) {

@@ -138,7 +138,7 @@ const Header = ({ cartItems }) => {
                       <div className="nav-cart-outer">
                         <div className="nav-cart-inner">
                           <a href="#" className="nav-cart-icon">
-                          {cartItems.length > 0 ? cartItems.length : 0}
+                          {cartItems && cartItems.length > 0 ? cartItems.length : 0}
                           </a>
                         </div>
                       </div>
