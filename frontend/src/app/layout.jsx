@@ -1,9 +1,9 @@
-import "@/assets/css/bootstrap.min.css";
-import "@/assets/css/magnific-popup.css";
-import "@/assets/css/font-icons.css";
-import "@/assets/css/sliders.css";
-import "@/assets/css/sass/style.scss";
-import "@/assets/css/animate.min.css";
+// import "@/assets/css/bootstrap.min.css";
+// import "@/assets/css/magnific-popup.css";
+// import "@/assets/css/font-icons.css";
+// import "@/assets/css/sliders.css";
+// import "@/assets/css/sass/style.scss";
+// import "@/assets/css/animate.min.css";
 import Providers from "@/components/Providers";
 
 export const metadata = {
@@ -11,7 +11,7 @@ export const metadata = {
   description: "Tienda en linea para la venta de ropa deportiva",
 };
 
-export default function RootLayout({ children, ...props }) {
+export default function RootLayout({ children }) {
   return (
     <html style={{ scrollBehavior: "smooth" }} lang="en">
       <head>
