@@ -1,7 +1,7 @@
 import ProductItem from "./ProductItem"
 
 export default function BestSellers() {
-  const bestSellers = [1, 2, 3, 4]
+  const bestSellers = []
   return (
     <>
       {bestSellers.map((bestSeller, i) => (
