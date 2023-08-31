@@ -1,7 +1,8 @@
 export default function SubscribeLetter() {
   return (
-    <div className="newsletter-box">
-      <h5 className="uppercase">SUBSCRIBE TO RECEIVE OUR UPDATES</h5>
+    <>                                     
+     {/* <div className="newsletter-box"> */}
+    {/* <h5 className="uppercase">SUBSCRIBE TO RECEIVE OUR UPDATES</h5>
       <form>
         <input
           type="email"
@@ -15,7 +16,8 @@ export default function SubscribeLetter() {
         >
           enviar
         </button>
-      </form>
-    </div>
+      </form> */}
+     {/* </div> */}
+    </>
   )
 }
