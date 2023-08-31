@@ -1,7 +1,7 @@
 import ProductItem from './ProductItem'
 import React, { useEffect, useState } from 'react'
 import { appFirebase } from '../config/firebase.jsx'
-import { getFirestore, collection, addDoc, getDocs, query, limit, where } from 'firebase/firestore'
+import { getFirestore, collection, getDocs, query, limit,  } from 'firebase/firestore'
 
 export default function NewArrivals() {
   const db = getFirestore(appFirebase)
@@ -18,7 +18,7 @@ export default function NewArrivals() {
         querySnapshot.forEach(doc => {
           productList.push({ ...doc.data(), id: doc.id })
         })
-        
+
         setProducts(productList)
       } catch (error) {
         console.error('Error fetching products:', error)
@@ -29,7 +29,7 @@ export default function NewArrivals() {
   }, [db])
 
   return products.map((product, i) => (
-    <div className="col-md-3 col-xs-6">
+    <div key={product.id} className="col-md-3 col-xs-6">
       <ProductItem {...product} />
     </div>
   ))

@@ -1,22 +1,39 @@
+import Link from "next/link"
+
 const MyAccountLayout = ({ children, handlePanelNavigation, session }) => {
+  console.log(session)
   return (
     <section className="section-wrap woocommerce-account pt-0 pb-60">
       <div className="container">
         <div className="woocommerce">
           <nav className="woocommerce-MyAccount-navigation">
             <ul>
-              <li
-                className={`woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--dashboard`}
-                onClick={() => handlePanelNavigation('dashboard')}
-              >
-                <a href="#my-account">Dashboard</a>
-              </li>
-              <li
-                className={`woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--orders`}
-                onClick={() => handlePanelNavigation('orders')}
-              >
-                <a href="#my-account">Orders</a>
-              </li>
+              {session?.user.email === 'admin@coolstore.com' && (
+                <li
+                  className={`woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--dashboard`}
+                  onClick={() => handlePanelNavigation('dashboard')}
+                >
+                  <a href="#my-account">Dashboard</a>
+                </li>
+              )}
+
+              {session?.user.email === 'admin@coolstore.com' && (
+                <li
+                  className={`woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--orders`}
+                  onClick={() => handlePanelNavigation('orders')}
+                >
+                  <a href="#my-account">Sales</a>
+                </li>
+              )}
+
+              {session?.user.email === 'admin@coolstore.com' && (
+                <li
+                  className={`woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--orders`}
+                >
+                  <Link href='/products/create-product' >create product</Link>
+                </li>
+              )}
+
               <li
                 onClick={() => handlePanelNavigation('accountDetails')}
                 className={`woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--edit-account`}
