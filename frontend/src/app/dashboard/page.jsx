@@ -1,4 +1,8 @@
-import { CreditCard, DollarSign, Package } from 'lucide-react/dist/esm/lucide-react'
+import {
+  CreditCard,
+  DollarSign,
+  Package,
+} from 'lucide-react/dist/esm/lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card'
 import '@/app/globals.css'
 import { formatter } from '@/lib/utils'
@@ -7,7 +11,6 @@ import { Heading } from '@/components/ui/Heading'
 import Overview from '@/components/Overview'
 
 export default async function page() {
-
   const graphData = await SalesService.getSalesChart()
 
   return (
@@ -66,9 +69,7 @@ export default async function page() {
               <CardTitle>Overview</CardTitle>
             </CardHeader>
             <CardContent className="pl-2">
-              <Overview
-                data={graphData}
-              />
+              <Overview data={graphData} />
             </CardContent>
           </Card>
         </div>
@@ -76,3 +77,5 @@ export default async function page() {
     </main>
   )
 }
+
+export const dynamic = 'force-dynamic'
