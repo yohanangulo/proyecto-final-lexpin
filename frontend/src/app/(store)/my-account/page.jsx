@@ -57,8 +57,8 @@ const MyAccount = () => {
   }
 
   const myAccountPanels = [
-    <AccountDetails handleUserData={handleUserData} {...userData} userId={session?.user._id} />,
-    <Orders />,
+    <AccountDetails key='details' handleUserData={handleUserData} {...userData} userId={session?.user._id} />,
+    <Orders key='orders' />,
   ]
 
   return (

@@ -9,7 +9,7 @@ import { appFirebase } from '@/config/firebase'
 import { getFirestore, collection, addDoc, getDocs, query, limit, where, doc, getDoc } from 'firebase/firestore'
 
 
-const product = ({ params : { slug } }) => {
+const Product = ({ params : { slug } }) => {
   useScripts()
   const db = getFirestore(appFirebase)
 
@@ -341,4 +341,4 @@ const product = ({ params : { slug } }) => {
     </>
   );
 };
-export default product;
+export default Product;

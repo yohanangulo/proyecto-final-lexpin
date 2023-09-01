@@ -184,9 +184,9 @@ export default function Bolg() {
                       </ul>
                       <p>
                         <a href="blog-single.html">
-                          "Incredible change happens in your life when you
+                          &quot;Incredible change happens in your life when you
                           decide to take control of what you do have power over
-                          instead of craving control over what you don't."
+                          instead of craving control over what you don&apos;t.&quot;
                         </a>
                       </p>
                       <span>– Steve Maraboli</span>
