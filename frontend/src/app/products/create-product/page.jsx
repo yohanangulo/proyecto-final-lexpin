@@ -65,17 +65,11 @@ const CreateProduct = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-<<<<<<< HEAD
-
-    if (!productData.name || !productData.price || !productData.description || !urlImDesc) {
-      // alert("Por favor, complete la información del producto y suba una imagen.");
-=======
     
     
     if (!productData.name || !productData.price || !productData.description) {
       
       alert("Por favor, complete la información del producto y suba una imagen.");
->>>>>>> 3de8392fcaf48f06bd57c4873602280ea85176f3
     } else {
       if (!urlImDesc)
         return alert('Espera un momento mientras cargamos la imagen')
