@@ -13,7 +13,7 @@ const MyAccountLayout = ({ children, handlePanelNavigation, session }) => {
                   className={`woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--dashboard`}
                   onClick={() => handlePanelNavigation('dashboard')}
                 >
-                  <a href="#my-account">Dashboard</a>
+                  <a href="/dashboard">Dashboard</a>
                 </li>
               )}
 

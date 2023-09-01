@@ -6,33 +6,37 @@ import ProductItem from "@/components/ProductItem";
 import { useScripts } from "@/hooks/useScripts";
 import React, { useEffect, useState } from 'react'
 import { appFirebase } from '../../../config/firebase.jsx'
-import { getFirestore, collection, addDoc, getDocs, query, limit, where } from 'firebase/firestore'
+import { getFirestore, collection, addDoc, getDocs, query, limit, where, doc, getDoc } from 'firebase/firestore'
 
 
-const product = ({ params : { id } }) => {
+const product = ({ params : { slug } }) => {
   useScripts()
   const db = getFirestore(appFirebase)
 
-  const [products, setProducts] = useState([])
+  const [product, setProduct] = useState({})
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchProduct = async () => {
       try {
-        const q = query(collection(db, 'products'))
-        const querySnapshot = await getDocs(q)
+        const productRef = doc(db, 'products', slug)
+        const res = await getDoc(productRef)
+        const productDb = res.data()
 
-        const productList = []
-        querySnapshot.forEach(doc => {
-          productList.push({ ...doc.data(), id: doc.id })
-        })
+        console.log(productDb)
+
+        setProduct(productDb)
+        // const productList = []
+        // querySnapshot.forEach(doc => {
+        //   productList.push({ ...doc.data(), id: doc.id })
+        // })
+
         
-        setProducts(productList)
       } catch (error) {
         console.error('Error fetching products:', error)
       }
     }
 
-    fetchProducts()
+    fetchProduct()
   }, [db])
 
 
@@ -62,7 +66,7 @@ const product = ({ params : { id } }) => {
     <>
       <Header />
       <main className="content-wrapper oh">
-      {products.map((product, i) => (
+      
         <section className="section-wrap single-product key={i}">
           <div className="container relative">
             <div className="row">
@@ -74,11 +78,11 @@ const product = ({ params : { id } }) => {
                   
                   <div className="gallery-cell">
                     <a
-                      href={product.image}
+                      href={product?.imagen}
                       className="lightbox-img"
                     >
                       <img
-                        src={product.image}
+                        src={!product.imagen ? 'https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/product-item.jpg' : product.imagen }
                         alt=""
                       />
 
@@ -91,13 +95,13 @@ const product = ({ params : { id } }) => {
               </div>{" "}
               {/* end col img slider */}
               <div className="col-sm-6 col-xs-12 product-description-wrap">
-                <h1 className="product-title">{product.name}</h1>
+                <h1 className="product-title">{product?.name}</h1>
                 <span className="rating">
                   <a href="#">3 Reviews</a>
                 </span>
                 <span className="price">
                   <ins>
-                    <span className="ammount">{product.price}</span>
+                    <span className="ammount">{product?.price}</span>
                   </ins>
                 </span>
                 <p className="product-description">
@@ -156,7 +160,7 @@ const product = ({ params : { id } }) => {
                 </ul>
                 <div className="product_meta">
                   <span className="posted_in">
-                    Categoría: <a href="#">{product.category}</a>
+                    Categoría: <a href="#">{product?.category}</a>
                   </span>
                   <span className="posted_in">
                     Publicado por: <a href="#">Username</a>
@@ -186,7 +190,7 @@ const product = ({ params : { id } }) => {
                   <ul className="nav nav-tabs">
                     <li className="active">
                       <a href="#tab-description" data-toggle="tab">
-                        {product.description}
+                        {product?.description}
                       </a>
                     </li>
                   </ul>{" "}
@@ -223,8 +227,6 @@ const product = ({ params : { id } }) => {
           {/* end container */},
         </section>
         ,{/* end single product */}
-           
-          ))}
         {/* Related Items */}
         <section className="section-wrap related-products pt-0">
           <div className="container">
