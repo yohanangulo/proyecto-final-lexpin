@@ -1,9 +1,9 @@
 "use client";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import withAuth from '../../../utils/withauth.jsx';
+import withAuth from '../../../../utils/withauth.jsx';
 import {  useState, useEffect } from "react";
-import { appFirebase } from '../../../config/firebase.jsx';
+import { appFirebase } from '@/config/firebase.jsx';
 import { getFirestore, collection, addDoc } from 'firebase/firestore';
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 

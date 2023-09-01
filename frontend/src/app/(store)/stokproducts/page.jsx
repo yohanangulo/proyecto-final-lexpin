@@ -10,7 +10,7 @@ import Header from "@/components/Header";
 import ProductItem from "@/components/ProductItem";
 import { useScripts } from "@/hooks/useScripts";
 import React, { useEffect, useState } from 'react'
-import { appFirebase } from '../../config/firebase.jsx'
+import { appFirebase } from '@/config/firebase'
 import { getFirestore, doc, getDoc, query, collection, getDocs, deleteDoc } from 'firebase/firestore'
 
 const Stokproducts = () => {

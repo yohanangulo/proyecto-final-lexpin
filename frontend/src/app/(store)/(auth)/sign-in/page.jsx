@@ -3,8 +3,6 @@
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import { useScripts } from '@/hooks/useScripts';
-import { useRouter } from 'next/navigation'
-import { signIn } from 'next-auth/react'; 
 import SignInForm from '@/components/SignInForm';
 
 const Login = () => {

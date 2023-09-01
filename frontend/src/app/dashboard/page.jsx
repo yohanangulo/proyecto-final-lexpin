@@ -1,14 +1,10 @@
-import {
-  CreditCard,
-  DollarSign,
-  Package,
-} from 'lucide-react/dist/esm/lucide-react'
-import { Card, CardContent, CardHeader, CardTitle } from '../components/Card'
-import { Heading } from '../components/Heading'
+import { CreditCard, DollarSign, Package } from 'lucide-react/dist/esm/lucide-react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card'
 import '@/app/globals.css'
 import { formatter } from '@/lib/utils'
-import Overview from '../components/Overview'
 import SalesService from '@/services/sales'
+import { Heading } from '@/components/ui/Heading'
+import Overview from '@/components/Overview'
 
 export default async function page() {
 
