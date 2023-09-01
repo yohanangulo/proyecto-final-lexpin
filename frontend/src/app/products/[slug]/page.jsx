@@ -4,10 +4,41 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import ProductItem from "@/components/ProductItem";
 import { useScripts } from "@/hooks/useScripts";
-import { useState } from "react";
+import React, { useEffect, useState } from 'react'
+import { appFirebase } from '../../../config/firebase.jsx'
+import { getFirestore, collection, addDoc, getDocs, query, limit, where, doc, getDoc } from 'firebase/firestore'
 
-const Product = ({ params : { slug } }) => {
+
+const product = ({ params : { slug } }) => {
   useScripts()
+  const db = getFirestore(appFirebase)
+
+  const [product, setProduct] = useState({})
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const productRef = doc(db, 'products', slug)
+        const res = await getDoc(productRef)
+        const productDb = res.data()
+
+        console.log(productDb)
+
+        setProduct(productDb)
+        // const productList = []
+        // querySnapshot.forEach(doc => {
+        //   productList.push({ ...doc.data(), id: doc.id })
+        // })
+
+        
+      } catch (error) {
+        console.error('Error fetching products:', error)
+      }
+    }
+
+    fetchProduct()
+  }, [db])
+
 
   console.log(slug)
 
@@ -36,7 +67,8 @@ const Product = ({ params : { slug } }) => {
     <>
       <Header />
       <main className="content-wrapper oh">
-        <section className="section-wrap single-product">
+      
+        <section className="section-wrap single-product key={i}">
           <div className="container relative">
             <div className="row">
               <div className="col-sm-6 col-xs-12 mb-60">
@@ -46,11 +78,11 @@ const Product = ({ params : { slug } }) => {
                 >
                   <div className="gallery-cell">
                     <a
-                      href="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/single_img_1.jpg"
+                      href={product?.imagen}
                       className="lightbox-img"
                     >
                       <img
-                        src="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/single_img_1.jpg"
+                        src={!product.imagen ? 'https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/product-item.jpg' : product.imagen }
                         alt=""
                       />
                       <i className="icon arrow_expand" />
@@ -142,13 +174,13 @@ const Product = ({ params : { slug } }) => {
               </div>{" "}
               {/* end col img slider */}
               <div className="col-sm-6 col-xs-12 product-description-wrap">
-                <h1 className="product-title">Summer Dress</h1>
+                <h1 className="product-title">{product?.name}</h1>
                 <span className="rating">
                   <a href="#">3 Reviews</a>
                 </span>
                 <span className="price">
                   <ins>
-                    <span className="ammount">$1250.00</span>
+                    <span className="ammount">{product?.price}</span>
                   </ins>
                 </span>
                 <p className="product-description">
@@ -207,7 +239,7 @@ const Product = ({ params : { slug } }) => {
                 </ul>
                 <div className="product_meta">
                   <span className="posted_in">
-                    Categoría: <a href="#">Accesorios</a>
+                    Categoría: <a href="#">{product?.category}</a>
                   </span>
                   <span className="posted_in">
                     Publicado por: <a href="#">Username</a>
@@ -237,7 +269,7 @@ const Product = ({ params : { slug } }) => {
                   <ul className="nav nav-tabs">
                     <li className="active">
                       <a href="#tab-description" data-toggle="tab">
-                        Description
+                        {product?.description}
                       </a>
                     </li>
                   </ul>{" "}
@@ -271,9 +303,9 @@ const Product = ({ params : { slug } }) => {
             </div>{" "}
             {/* end row */}
           </div>{" "}
-          {/* end container */}
-        </section>{" "}
-        {/* end single product */}
+          {/* end container */},
+        </section>
+        ,{/* end single product */}
         {/* Related Items */}
         <section className="section-wrap related-products pt-0">
           <div className="container">
@@ -309,4 +341,4 @@ const Product = ({ params : { slug } }) => {
     </>
   );
 };
-export default Product;
+export default product;

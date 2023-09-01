@@ -203,34 +203,25 @@ const Header = () => {
                       <Link href="/">Inicio</Link>
                     </li>
                     <li className="dropdown">
-                      <a href="#">Pages</a>
+                      <a href="#">More</a>
                       <i className="fa fa-angle-down dropdown-trigger" />
                       <ul className="dropdown-menu">
-                        <li className="dropdown">
-                          <a href="about-us.html">About Us</a>
-                          <i className="fa fa-angle-down dropdown-trigger" />
-                          <ul className="dropdown-menu">
-                            <li>
-                              <a href="#">Example of submenu</a>
-                            </li>
-                          </ul>
+                        <li >
+                          <Link href="/about-us">About Us</Link>
                         </li>
                         <li>
-                          <a href="contact.html">Contact</a>
+                          <Link href="contact">Contact</Link>
                         </li>
-                        <li>
+                        {/* <li>
                           <Link href="login.html">Login</Link>
-                        </li>
+                        </li> */}
                         <li>
-                          <a href="faq.html">F.A.Q</a>
-                        </li>
-                        <li>
-                          <a href="404.html">404</a>
+                          <Link href="/faq">F.A.Q</Link>
                         </li>
                       </ul>
                     </li>
                     <li className="dropdown">
-                      <a href="#">Categorías</a>
+                      <a href="#">Categories</a>
                       <i className="fa fa-angle-down dropdown-trigger" />
                       <ul
                         className="dropdown-menu megamenu"
@@ -313,43 +304,13 @@ const Header = () => {
                       </ul>
                     </li>
                     {/* end categories */}
-                    <li className="dropdown">
-                      <a href="#">Blog</a>
-                      <i className="fa fa-angle-down dropdown-trigger" />
-                      <ul className="dropdown-menu">
-                        <li>
-                          <a href="blog-standard.html">Standard</a>
-                        </li>
-                        <li>
-                          <a href="blog-single.html">Single Post</a>
-                        </li>
-                      </ul>
+                    <li>
+                      <Link href="/blog">Blog</Link>
                     </li>
-                    <li className="dropdown">
-                      <a href="#">Shop</a>
-                      <i className="fa fa-angle-down dropdown-trigger" />
-                      <ul className="dropdown-menu">
-                        <li>
-                          <a href="shop-catalog.html">Catalog</a>
-                        </li>
-                        <li>
-                          <a href="shop-collections.html">Collections</a>
-                        </li>
-                        <li>
-                          <a href="shop-single-product.html">Single Product</a>
-                        </li>
-                        <li>
-                          <a href="shop-cart.html">Cart</a>
-                        </li>
-                        <li>
-                          <a href="shop-checkout.html">Checkout</a>
-                        </li>
-                        <li>
-                          <a href="my-account.html">My Account</a>
-                        </li>
-                      </ul>
+                    <li >
+                      <Link href="/products">Shop</Link>
                     </li>
-                    <li className="dropdown">
+                    {/* <li className="dropdown">
                       <a href="#">Elements</a>
                       <i className="fa fa-angle-down dropdown-trigger" />
                       <ul className="dropdown-menu">
@@ -360,7 +321,7 @@ const Header = () => {
                           <a href="typography.html">Typography</a>
                         </li>
                       </ul>
-                    </li>
+                    </li> */}
                     <li className="mobile-links">
                       <ul>
                         <li>

@@ -12,3 +12,10 @@ Content-Type: application/json
 {
   "name": "Juanito"
 }
+
+###
+POST http://localhost:3003/sales
+Content-Type: application/json
+
+###
+GET http://localhost:3003/sales

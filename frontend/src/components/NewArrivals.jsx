@@ -1,7 +1,7 @@
 import ProductItem from './ProductItem'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { appFirebase } from '../config/firebase.jsx'
-import { getFirestore, collection, getDocs, query, limit,  } from 'firebase/firestore'
+import { getFirestore, collection, getDocs, query, limit  } from 'firebase/firestore'
 
 export default function NewArrivals() {
   const db = getFirestore(appFirebase)

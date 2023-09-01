@@ -2,6 +2,7 @@ import  Link  from 'next/link';
 const ProductItem = product => {
   
   return (
+    
     <div className="product-item">
       <div key={product.id} className="product">
         <div className="product-img">
@@ -45,7 +46,7 @@ const ProductItem = product => {
           <h3>
             <a className="product-title" href="shop-single-product.html">
               {product.name}{' '}
-              {/* Replace with the actual product name from your data */}
+              
             </a>
           </h3>
           <span className="price">
