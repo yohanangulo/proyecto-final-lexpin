@@ -7,7 +7,7 @@ const port = 3003;
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 const  {serialize}  = require('cookie');
-const { userSchema, ProductsSchema,  saleSchema } = require('./schemas'); 
+const { userSchema, ProductsSchema,  saleSchema, cartSchema } = require('./schemas'); 
 app.use(express.json());
 app.use(cors());
 
@@ -41,6 +41,7 @@ main();
 
 const Sale = mongoose.model('Sale', saleSchema);
 const User = mongoose.model('User', userSchema);
+const Cart = mongoose.model('Cart', cartSchema);
 
 // Inicio de sesión
 app.post('/login', async (req, res) => {
@@ -238,6 +239,101 @@ app.delete("/sales/:id", async (req,res)=>{
         res.status(500).send("Error al eliminar la venta")
     }
 });
+
+
+
+/**
+ * shopping cart
+ */
+
+// GET all route
+// 
+// 
+app.get("/cart", async (req, res) => {
+  try {
+
+    const cartItems = await Cart.find()
+    res.send(cartItems)
+
+  } catch (error) {
+    res.status(500).send("ha ocurrido un error al consultar datos del carrito");
+  }
+});
+
+// GET route
+// 
+// 
+app.get("/cart/:userId", async (req, res) => {
+  try {
+    const { userId } = req.body;
+
+    const cartItems = Cart.findOne({userId})
+
+  } catch (error) {
+    res.status(500).send("ha ocurrido un error al consultar datos del carrito");
+  }
+});
+
+// POST route
+// 
+// 
+app.post('/cart', async (req, res) => {
+  try {
+    const { productId, quantity, userId } = req.body;
+
+    const userItems = await Cart.findOne({ userId });
+
+    // si no encuentra usuario
+    if (!userItems) {
+      // crea una nueva entrada
+      const addNewItem = new Cart({
+        userId,
+        items: [],
+      });
+
+      addNewItem.items.push( { productId, quantity, },)
+
+      await addNewItem.save();
+      return res.status(200).send("agregado al carrito");
+    }
+
+    // si si lo encuentra
+    userItems.items.push({ productId, quantity})
+    await userItems.save()
+
+    res.status(200).send("agregado al carrito");
+  } catch (error) {
+    res.status(500).send("ha ocurrido un error agregando al carrito");
+  }
+} )
+
+// PUT rout
+// 
+// 
+app.put('/cart/:userId', async (req, res) => {
+  try {
+
+    const productId = req.body.productId
+    const userId = req.params.userId
+
+    const userItems = await Cart.findOne({userId})
+    console.log('antes de f', userItems)
+
+    userItems.items = userItems.items.filter(item => item.productId != productId)
+
+    const saveRes = await userItems.save()
+
+    res.status(200).send(saveRes)
+  } catch (error) {
+    res.status(500).send('ha ocurrido un error eliminando del carrito')
+  }
+})
+
+// DELETE rout
+// 
+// 
+app.delete('/cart/:userId', async (req, res) => {
+})
 
 //--------------------------------------------------------------------
 app.get('/', (req, res) => {

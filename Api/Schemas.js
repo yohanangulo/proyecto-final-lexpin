@@ -42,10 +42,26 @@ const saleSchema = new mongoose.Schema({
     fechaActualizacion: { type: Date, default: Date.now },
 });
 
+const cartSchema = new mongoose.Schema(
+  {
+    userId: {
+      type: String,
+    },
+    items: [
+      {
+        productId: String,
+        quantity: Number,
+      },
+    ],
+  },
+  { versionKey: false }
+);
+
 
 module.exports = {
   userSchema,
-  saleSchema
+  saleSchema,
+  cartSchema,
 };
 
 

@@ -18,4 +18,24 @@ POST http://localhost:3003/sales
 Content-Type: application/json
 
 ###
-GET http://localhost:3003/sales
+GET http://localhost:3003/cart
+
+###
+
+POST http://localhost:3003/cart
+Content-Type: application/json
+
+{
+  "userId": "64e5f543b30562f5d3i0ea08a8",
+  "productId": "otroIddproducto",
+  "quantity": 1050
+}
+
+###
+
+PUT http://localhost:3003/cart/64e5f543b30562f5d3i008a8
+Content-Type: application/json
+
+{
+  "productId": "otroIddproducto"
+}
