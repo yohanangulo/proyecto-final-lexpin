@@ -1,4 +1,5 @@
 "use client";
+
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { getFirestore, doc, getDoc, updateDoc } from 'firebase/firestore';
@@ -6,11 +7,13 @@ import { appFirebase } from '@/config/firebase.jsx';
 import Header from '@/components/Header'; 
 import Footer from '@/components/Footer';
 
-const EditProduct = () => {
-  const router = useRouter();
-  const { productId } = router.query;
+const EditProduct = ({ params }) => {
+
+  console.log(params)
+
+  const productId = params.editid
   const db = getFirestore(appFirebase);
-  const [product, setProduct] = useState({
+  const [product, setProduct] = useState({  
     name: '',
     price: '',
     description: '',
@@ -54,6 +57,8 @@ const EditProduct = () => {
       console.error('Error al actualizar el producto:', error);
     }
   };
+
+  const fileHandler = () => {}
 
   return (
     <>
