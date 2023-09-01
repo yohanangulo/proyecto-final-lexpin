@@ -13,6 +13,7 @@ const storage = getStorage(appFirebase);
 const CreateProduct = () => {
   
 
+
   const categories = [
     "Shirts for Man",
     "Jens for Man",
@@ -151,8 +152,7 @@ const CreateProduct = () => {
             <div className="row heading-row mt-50">
               <div className="col-md-12 text-center">
                 <h2 className="heading uppercase">
-                  <small>crea un nuevo producto</small>
-                </h2>
+                <small>{editingProduct ? "Editar producto" : "Crea un nuevo producto"}</small>                </h2>
               </div>
             </div>
             {/* Forms */}

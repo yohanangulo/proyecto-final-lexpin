@@ -37,7 +37,7 @@ const MyAccountLayout = ({ children, handlePanelNavigation, session }) => {
                 <li
                   className={`woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--orders`}
                 >
-                  <Link href='/stock-products' >products</Link>
+                  <Link href='stock-products' >products</Link>
                 </li>
               )}
 
