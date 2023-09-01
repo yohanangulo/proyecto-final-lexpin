@@ -7,9 +7,12 @@ import { useScripts } from "@/hooks/useScripts";
 import React, { useEffect, useState } from 'react'
 import { appFirebase } from '@/config/firebase'
 import { getFirestore, doc, getDoc, query, collection, getDocs, deleteDoc } from 'firebase/firestore'
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const Stokproducts = () => {
   useScripts();
+  const router = useRouter();
   const db = getFirestore(appFirebase)
 
   const [products, setProducts] = useState([])
@@ -44,6 +47,11 @@ const Stokproducts = () => {
       console.error('Error al borrar el producto:', error);
     }
   };
+
+  const handleEditProduct = (productId) => {
+    const editProductUrl = `/products/edit-product/${productId}`;
+    router.push(editProductUrl);
+  }
 
   return (
     <>
@@ -87,12 +95,17 @@ const Stokproducts = () => {
                     </div>
                   </div>
                 </div>
-                <a
+                <Link
                       href="#"
-                      className="btn btn-color btn-lg add-to-cart left" onClick={() => handleDeleteProduct(product.id)}
+                      className="btn btn-color btn-lg add-to-cart left " onClick={() => handleDeleteProduct(product.id)}
                     >
                       <span>Borrar Producto</span>
-                    </a>
+                    </Link>
+                    {/* <Link href={`/products/edit-product/${product.id}`}>
+                      <div className="btn btn-color btn-lg add-to-cart left">
+                        <span>Editar Producto</span>
+                      </div>
+                    </Link> */}
                 <div className="row">
                   <div className="col-md-12">
                     <div className="tabs tabs-bb">

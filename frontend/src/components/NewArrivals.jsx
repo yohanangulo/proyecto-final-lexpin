@@ -11,7 +11,7 @@ export default function NewArrivals() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const q = query(collection(db, 'products'), limit(4))
+        const q = query(collection(db, 'products'), limit(8))
         const querySnapshot = await getDocs(q)
 
         const productList = []
