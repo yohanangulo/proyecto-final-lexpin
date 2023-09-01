@@ -1,70 +1,37 @@
-"use client";
-
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import ProductItem from "@/components/ProductItem";
-import { useScripts } from "@/hooks/useScripts";
-import React, { useEffect, useState } from 'react'
 import { appFirebase } from '@/config/firebase'
-import { getFirestore, collection, addDoc, getDocs, query, limit, where, doc, getDoc } from 'firebase/firestore'
+import { getFirestore, doc, getDoc } from 'firebase/firestore'
+import ProductActions from "@/components/ProductActions";
+import { notFound } from "next/navigation";
+import { formatter } from "@/lib/utils";
+import { Scripts } from "@/components/Scripts";
+import { getAuthSession } from "@/lib/auth";
 
 
-const Product = ({ params : { slug } }) => {
-  useScripts()
+const Product = async ({ params : { slug } }) => {
+  // useScripts()
   const db = getFirestore(appFirebase)
+  
+  const productRef = doc(db, 'products', slug)
 
-  const [product, setProduct] = useState({})
+  const productPromise = getDoc(productRef)
+  const authPromise = getAuthSession()
 
-  useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const productRef = doc(db, 'products', slug)
-        const res = await getDoc(productRef)
-        const productDb = res.data()
-
-        console.log(productDb)
-
-        setProduct(productDb)
-        // const productList = []
-        // querySnapshot.forEach(doc => {
-        //   productList.push({ ...doc.data(), id: doc.id })
-        // })
-
-        
-      } catch (error) {
-        console.error('Error fetching products:', error)
-      }
-    }
-
-    fetchProduct()
-  }, [db])
+  const [res, session] = await Promise.all([productPromise, authPromise])
+  
+  
+  const product = res.data()
 
 
-  console.log(slug)
-
-  const [qty, setQty] = useState(1);
-
-  const handleQtyPress = (e) => {
-    console.log(e.target.name);
-    let { name } = e.target;
-
-    if (name == "qty") {
-      if (e.target.value.includes("-")) return;
-    }
-
-    if (name == "add") {
-      setQty((prev) => prev + 1);
-    } else if (name == "subtract") {
-      setQty((prev) => prev - 1);
-    } else {
-      setQty(+e.target.value);
-    }
-  };
-
-  console.log(slug);
+  if(!product) {
+    notFound()
+  }
 
   return (
     <>
+      <Scripts />
       <Header />
       <main className="content-wrapper oh">
       
@@ -82,13 +49,13 @@ const Product = ({ params : { slug } }) => {
                       className="lightbox-img"
                     >
                       <img
-                        src={!product.imagen ? 'https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/product-item.jpg' : product.imagen }
-                        alt=""
+                        src={product?.imagen }
+                        alt="product imagen"
                       />
                       <i className="icon arrow_expand" />
                     </a>
                   </div>
-                  <div className="gallery-cell">
+                  {/* <div className="gallery-cell">
                     <a
                       href="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/single_img_2.jpg"
                       className="lightbox-img"
@@ -99,8 +66,8 @@ const Product = ({ params : { slug } }) => {
                       />
                       <i className="icon arrow_expand" />
                     </a>
-                  </div>
-                  <div className="gallery-cell">
+                  </div> */}
+                  {/* <div className="gallery-cell">
                     <a
                       href="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/single_img_3.jpg"
                       className="lightbox-img"
@@ -111,8 +78,8 @@ const Product = ({ params : { slug } }) => {
                       />
                       <i className="icon arrow_expand" />
                     </a>
-                  </div>
-                  <div className="gallery-cell">
+                  </div> */}
+                  {/* <div className="gallery-cell">
                     <a
                       href="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/single_img_4.jpg"
                       className="lightbox-img"
@@ -123,8 +90,8 @@ const Product = ({ params : { slug } }) => {
                       />
                       <i className="icon arrow_expand" />
                     </a>
-                  </div>
-                  <div className="gallery-cell">
+                  </div> */}
+                  {/* <div className="gallery-cell">
                     <a
                       href="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/single_img_5.jpg"
                       className="lightbox-img"
@@ -135,10 +102,10 @@ const Product = ({ params : { slug } }) => {
                       />
                       <i className="icon arrow_expand" />
                     </a>
-                  </div>
-                </div>{" "}
+                  </div> */}
+                </div>
                 {/* end gallery main */}
-                <div className="gallery-thumbs">
+                {/* <div className="gallery-thumbs">
                   <div className="gallery-cell">
                     <img
                       src="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/single_img_1.jpg"
@@ -169,7 +136,7 @@ const Product = ({ params : { slug } }) => {
                       alt=""
                     />
                   </div>
-                </div>{" "}
+                </div>{" "} */}
                 {/* end gallery thumbs */}
               </div>{" "}
               {/* end col img slider */}
@@ -180,7 +147,7 @@ const Product = ({ params : { slug } }) => {
                 </span>
                 <span className="price">
                   <ins>
-                    <span className="ammount">{product?.price}</span>
+                    <span className="ammount">{formatter.format(product.price)}</span>
                   </ins>
                 </span>
                 <p className="product-description">
@@ -191,52 +158,7 @@ const Product = ({ params : { slug } }) => {
                   quia.
                 </p>
 
-                <ul className="product-actions clearfix">
-                  <li>
-                    <a
-                      href="#"
-                      className="btn btn-color btn-lg add-to-cart left"
-                    >
-                      <span>Al carrito</span>
-                    </a>
-                  </li>
-                  <li>
-                    <div className="icon-add-to-wishlist left">
-                      <a href="#">
-                        <i className="icon icon_heart_alt" />
-                      </a>
-                    </div>
-                  </li>
-                  <li>
-                    <div className="quantity buttons_added">
-                      <input
-                        onClick={handleQtyPress}
-                        type="button"
-                        name="subtract"
-                        defaultValue="-"
-                        className="minus"
-                        disabled={qty == 1}
-                      />
-                      <input
-                        type="number"
-                        step={1}
-                        min={1}
-                        value={qty}
-                        title="Qty"
-                        name="qty"
-                        className="input-text qty text"
-                        onChange={handleQtyPress}
-                      />
-                      <input
-                        onClick={handleQtyPress}
-                        type="button"
-                        name="add"
-                        defaultValue="+"
-                        className="plus"
-                      />
-                    </div>
-                  </li>
-                </ul>
+                <ProductActions userId={session.user._id} productId={slug} />
                 <div className="product_meta">
                   <span className="posted_in">
                     Categoría: <a href="#">{product?.category}</a>
@@ -269,7 +191,7 @@ const Product = ({ params : { slug } }) => {
                   <ul className="nav nav-tabs">
                     <li className="active">
                       <a href="#tab-description" data-toggle="tab">
-                        {product?.description}
+                        description
                       </a>
                     </li>
                   </ul>{" "}
@@ -280,20 +202,7 @@ const Product = ({ params : { slug } }) => {
                       className="tab-pane fade in active"
                       id="tab-description"
                     >
-                      <p>
-                        We possess within us two minds. So far I have written
-                        only of the conscious mind. I would now like to
-                        introduce you to your second mind, the hidden and
-                        mysterious subconscious. Our subconscious mind contains
-                        such power and complexity that it literally staggers the
-                        imagination.And finally the subconscious is the
-                        mechanism through which thought impulses which are
-                        repeated regularly with feeling and emotion are
-                        quickened, charged. Our subconscious mind contains such
-                        power and complexity that it literally staggers the
-                        imagination.And finally the subconscious is the
-                        mechanism through which thought impulses.
-                      </p>
+                      <p>{ product.description }</p>
                     </div>
                   </div>{" "}
                   {/* end tab content */}

@@ -10,7 +10,6 @@ import {
 import { useEffect, useState } from 'react'
 
 export default function ProductsGrid() {
-  const dummyProducts = Array.from({ length: 12 })
   const [products, setProducts] = useState([])
 
   const db = getFirestore(appFirebase)
