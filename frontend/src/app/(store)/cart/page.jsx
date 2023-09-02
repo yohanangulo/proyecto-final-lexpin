@@ -229,7 +229,7 @@ export default function Cart() {
                             <td>
                               <strong>
                                 <span className="amount">
-                                  ${cartTotal.toFixed(2)}
+                                  {formatter.format(cartTotal)}
                                 </span>
                               </strong>
                             </td>

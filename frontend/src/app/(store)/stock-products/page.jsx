@@ -1,18 +1,27 @@
-"use client";
+'use client'
 
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
-import ProductItem from "@/components/ProductItem";
-import { useScripts } from "@/hooks/useScripts";
+import Footer from '@/components/Footer'
+import Header from '@/components/Header'
+import ProductItem from '@/components/ProductItem'
+import { useScripts } from '@/hooks/useScripts'
 import React, { useEffect, useState } from 'react'
 import { appFirebase } from '@/config/firebase'
-import { getFirestore, doc, getDoc, query, collection, getDocs, deleteDoc } from 'firebase/firestore'
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  query,
+  collection,
+  getDocs,
+  deleteDoc,
+} from 'firebase/firestore'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { formatter } from '@/lib/utils'
 
 const Stokproducts = () => {
-  useScripts();
-  const router = useRouter();
+  useScripts()
+  const router = useRouter()
   const db = getFirestore(appFirebase)
 
   const [products, setProducts] = useState([])
@@ -36,21 +45,21 @@ const Stokproducts = () => {
 
     fetchProducts()
   }, [db])
-  const handleDeleteProduct = async (productId) => {
+  const handleDeleteProduct = async productId => {
     try {
       // Realiza la eliminación del producto en Firestore
-      await deleteDoc(doc(db, 'products', productId));
-  
-      // Actualiza la lista de productos en el estado
-      setProducts(products.filter(product => product.id !== productId));
-    } catch (error) {
-      console.error('Error al borrar el producto:', error);
-    }
-  };
+      await deleteDoc(doc(db, 'products', productId))
 
-  const handleEditProduct = (productId) => {
-    const editProductUrl = `/products/edit-product/${productId}`;
-    router.push(editProductUrl);
+      // Actualiza la lista de productos en el estado
+      setProducts(products.filter(product => product.id !== productId))
+    } catch (error) {
+      console.error('Error al borrar el producto:', error)
+    }
+  }
+
+  const handleEditProduct = productId => {
+    const editProductUrl = `/products/edit-product/${productId}`
+    router.push(editProductUrl)
   }
 
   return (
@@ -62,11 +71,14 @@ const Stokproducts = () => {
           <p>No hay productos disponibles.</p>
         ) : (
           products.map(product => (
-            <section className="section-wrap single-product " key={product.id}>
+            <section className="section-wrap single-product col-sm-offset-2" key={product.id}>
               <div className="container relative">
                 <div className="row">
                   <div className="col-sm-2 col-xs-12 mb-60">
-                    <div className="flickity flickity-slider-wrap mfp-hover" id="gallery-main">
+                    <div
+                      className="flickity flickity-slider-wrap mfp-hover"
+                      id="gallery-main"
+                    >
                       <div className="gallery-cell">
                         <a href={product.imagen} className="lightbox-img">
                           <img src={product.imagen} alt="" />
@@ -78,15 +90,13 @@ const Stokproducts = () => {
 
                   <div className="col-sm-6 col-xs-12 product-description-wrap">
                     <h1 className="product-title">{product.name}</h1>
-               
+
                     <span className="price">
                       <ins>
-                        <span className="ammount">{product.price}$</span>
+                        <span className="ammount">{formatter.format(product.price)}</span>
                       </ins>
                     </span>
-                    <p className="product-description">
-                      {product.description}
-                    </p>
+                    <p className="product-description">{product.description}</p>
 
                     <div className="product_meta">
                       <span className="posted_in">
@@ -95,17 +105,17 @@ const Stokproducts = () => {
                     </div>
                   </div>
                 </div>
-                <Link
-                      href="#"
-                      className="btn btn-color btn-lg add-to-cart left " onClick={() => handleDeleteProduct(product.id)}
-                    >
-                      <span>Borrar Producto</span>
-                    </Link>
-                    <Link href={`/products/edit-product/${product.id}`}>
-                      <div className="btn btn-color btn-lg add-to-cart left">
-                        <span>Editar Producto</span>
-                      </div>
-                    </Link>
+                <a
+                  className="btn btn-sm btn-dark btn-color mr-10"
+                  onClick={() => handleDeleteProduct(product.id)}
+                >
+                  <span>Delete</span>
+                </a>
+                <Link href={`/products/edit-product/${product.id}`}>
+                  <div className="btn btn-sm btn-dark">
+                    <span>Edit</span>
+                  </div>
+                </Link>
                 <div className="row">
                   <div className="col-md-12">
                     <div className="tabs tabs-bb">
@@ -117,8 +127,10 @@ const Stokproducts = () => {
                         </li>
                       </ul>
                       <div className="tab-content">
-                        <div className="tab-pane fade in active" id="tab-description">
-                        </div>
+                        <div
+                          className="tab-pane fade in active"
+                          id="tab-description"
+                        ></div>
                       </div>
                     </div>
                   </div>
@@ -130,7 +142,7 @@ const Stokproducts = () => {
       </main>
       <Footer />
     </>
-  );
-};
+  )
+}
 
-export default Stokproducts;
+export default Stokproducts
