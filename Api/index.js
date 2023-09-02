@@ -331,7 +331,6 @@ app.put('/cart/:userId', async (req, res) => {
     const userId = req.params.userId
 
     const userItems = await Cart.findOne({userId})
-    console.log('antes de f', userItems)
 
     userItems.items = userItems.items.filter(item => item.productId != productId)
 
