@@ -27,7 +27,7 @@ Content-Type: application/json
 
 {
   "userId": "64e5f543b30562f5d3i0ea08a8",
-  "productId": "otroIddproducto",
+  "productId": "id3",
   "quantity": 1050
 }
 

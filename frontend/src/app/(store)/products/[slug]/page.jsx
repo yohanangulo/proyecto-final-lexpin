@@ -157,8 +157,7 @@ const Product = async ({ params : { slug } }) => {
                   Officia at facere eveniet rerum molestiae voluptate blanditiis
                   quia.
                 </p>
-
-                <ProductActions userId={session.user._id} productId={slug} />
+                {session && <ProductActions userId={session.user._id} productId={slug} />}
                 <div className="product_meta">
                   <span className="posted_in">
                     Categoría: <a href="#">{product?.category}</a>

@@ -81,10 +81,10 @@ const Header = () => {
                   {status  === 'unauthenticated' && (
                     <>
                       <li className="top-bar-link">
-                        <Link href="sign-up">sign up</Link>
+                        <Link href="/sign-up">sign up</Link>
                       </li>
                       <li className="top-bar-link">
-                        <Link href="sign-in">sign in</Link>
+                        <Link href="/sign-in">sign in</Link>
                       </li>
                     </>
                   )}
