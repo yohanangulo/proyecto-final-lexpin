@@ -269,6 +269,10 @@ app.get("/cart/:userId", async (req, res) => {
 
     const cartItems = await Cart.findOne({userId})
 
+    if(!cartItems) {
+      return res.send([])
+    }
+
     res.send(cartItems.items)
 
   } catch (error) {
@@ -345,7 +349,7 @@ app.put('/cart/:userId', async (req, res) => {
 // DELETE rout
 // 
 // 
-app.delete("/cart/:cartId/item/:itemId", async (req,res)=>{
+app.delete("/cart/", async (req,res)=>{
   try {
       const id = req.params.id;
       const deleteCart = await User.deleteOne({_id:id});
@@ -356,6 +360,20 @@ app.delete("/cart/:cartId/item/:itemId", async (req,res)=>{
   } catch (error) {
       console.log(error);
       res.status(500).send("Error al eliminar Producto")
+  }
+});
+
+app.delete("/cart/:userId", async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const deleteCart = await Cart.deleteOne({ userId: userId });
+    if (deleteCart.deletedCount === 0) {
+      return res.status(404).send("Carrito no encontrado");
+    }
+    res.send("Todos los elementos del carrito han sido eliminados correctamente");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error al eliminar elementos del carrito");
   }
 });
 
