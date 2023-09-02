@@ -269,6 +269,10 @@ app.get("/cart/:userId", async (req, res) => {
 
     const cartItems = await Cart.findOne({userId})
 
+    if(!cartItems) {
+      return res.send([])
+    }
+
     res.send(cartItems.items)
 
   } catch (error) {
