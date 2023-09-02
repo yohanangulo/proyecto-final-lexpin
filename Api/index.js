@@ -265,9 +265,11 @@ app.get("/cart", async (req, res) => {
 // 
 app.get("/cart/:userId", async (req, res) => {
   try {
-    const { userId } = req.body;
+    const { userId } = req.params
 
-    const cartItems = Cart.findOne({userId})
+    const cartItems = await Cart.findOne({userId})
+
+    res.send(cartItems.items)
 
   } catch (error) {
     res.status(500).send("ha ocurrido un error al consultar datos del carrito");
@@ -279,7 +281,7 @@ app.get("/cart/:userId", async (req, res) => {
 // 
 app.post('/cart', async (req, res) => {
   try {
-    const { productId, quantity, userId } = req.body;
+    const { productId, quantity, userId, productName, image, price } = req.body;
 
     const userItems = await Cart.findOne({ userId });
 
@@ -288,18 +290,29 @@ app.post('/cart', async (req, res) => {
       // crea una nueva entrada
       const addNewItem = new Cart({
         userId,
-        name,
         items: [],
       });
 
-      addNewItem.items.push( { productId, quantity, },)
+      addNewItem.items.push({
+        productId,
+        productName,
+        image,
+        price,
+        quantity,
+      })
 
       await addNewItem.save();
       return res.status(200).send("agregado al carrito");
     }
 
     // si si lo encuentra
-    userItems.items.push({ productId, quantity})
+    userItems.items.push({
+      productId,
+      productName,
+      image,
+      price,
+      quantity,
+    })
     await userItems.save()
 
     res.status(200).send("agregado al carrito");

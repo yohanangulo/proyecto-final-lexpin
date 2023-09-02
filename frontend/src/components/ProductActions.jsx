@@ -3,21 +3,24 @@
 import { useState } from 'react'
 import cartService from '@/services/cart'
 
-export default function ProductActions({name, userId, productId }) {
+export default function ProductActions({name, userId, slug, ...product }) {
   const [qty, setQty] = useState(1)
 
-  console.log(name,userId, productId)
+  console.log(product)
 
   const handleAddToCart = () => {
     const payload = {
-      name,
-      userId,
-      productId,
+      productId: slug,
+      productName: name,
+      userId: userId,
+      image: product.imagen,
+      price: product.price,
       quantity: qty,
     }
+console.log(payload)
     cartService
       .addToCart(payload)
-      .then(res => alert(res.data))
+      .then(res => alert('agregado al carrito'))
       .catch(() => alert('ha ocurrido un error'))
   }
 

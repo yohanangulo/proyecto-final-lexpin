@@ -3,36 +3,27 @@
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import { useScripts } from '@/hooks/useScripts'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import cartService from '@/services/cart';
+import { useSession } from 'next-auth/react';
+import { formatter } from '@/lib/utils';
 
 export default function Cart() {
   useScripts()
-  const [cartItems, setCartItems] = useState([
-    {
-      name: 'Product 1',
-      image: 'url_to_image_1',
-      price: 10.99,
-      quantity: 2,
-      // ... otras propiedades
-    },
-    {
-      name: 'Product 1',
-      image: 'url_to_image_1',
-      price: 10.99,
-      quantity: 2,
-      // ... otras propiedades
-    },
-    {
-      name: 'Product 1',
-      image: 'url_to_image_1',
-      price: 10.99,
-      quantity: 2,
-      // ... otras propiedades
-    },
-  ]);
+  const { data: session, status } = useSession()
+
+  console.log(status)
+
+  const [cartItems, setCartItems] = useState([]);
+
+  useEffect(() => {
+    if(status == 'authenticated') {
+      console.log('hola donde use')
+      cartService.getUserCart(session.user._id).then(res => setCartItems(res.data))
+    }
+  }, [status])
 
   const isLoggedIn = true; // Cambia esto a true o false según el estado de inicio de sesión
-  const status = isLoggedIn ? 'authenticated' : 'unauthenticated';
 
   function handleQuantityChange(index, newQuantity) {
     const updatedCartItems = [...cartItems];
@@ -89,20 +80,13 @@ export default function Cart() {
                           </ul>
                         </td>
                         <td className="product-price">
-                          <span className="amount">${item.price}</span>
+                          <span className="amount">{formatter.format(item.price)}</span>
                         </td>
                         <td className="product-quantity">
-                        <input
-                          type="number"
-                          value={item.quantity}
-                          onChange={(e) => handleQuantityChange(index, e.target.value)}
-                          min="1"
-                          step="1"
-                          className="quantity"
-                        />
+                          <span className="amount">{item.quantity > 1 ? 'PCS ' : 'PC '}{item.quantity}</span>
                         </td>
                         <td className="product-subtotal">
-                          <span className="amount">${item.price * item.quantity}</span>
+                          <span className="amount">{formatter.format(item.price * item.quantity)}</span>
                         </td>
                         <td className="product-remove">
                           <a href="#" className="remove" title="Remove this item" onClick={() => handleRemoveItem(index)}>
