@@ -155,6 +155,7 @@ export default function Cart() {
                         </tbody>
                       </table>
                     </div>
+                    {cartItems.length === 0 && <h2 className='text-muted text-center mt-40 mb-120'>Uh oh... nothing here!</h2>}  
                     <div className="row mb-50">
                       <div className="col-md-5 col-sm-12">
                         <div className="coupon">

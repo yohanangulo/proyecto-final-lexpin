@@ -10,6 +10,7 @@ import SignInForm from '@/components/SignInForm'
 import Orders from './Orders'
 import { useEffect, useState } from 'react'
 import UserService from '@/services/user'
+import { Loader2 } from 'lucide-react/dist/esm/lucide-react'
 
 const initialUserData = {
   name: '',
@@ -78,7 +79,7 @@ const MyAccount = () => {
         </section>
         {/* my account */}
 
-        {status === 'loading' && <h1>loading...</h1>}
+        {status === 'loading' && <Loader2 color={'#1c1c1c'} size={50} strokeWidth={2} className='spinner-loader mt-20 mb-120' />}
         {status === 'authenticated' && (
           <MyAccountLayout
             session={session}
