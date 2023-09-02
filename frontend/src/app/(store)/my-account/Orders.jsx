@@ -2,20 +2,20 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const Orders = () => {
-  const [cartItems, setCartItems] = useState([]);
+  const [sales, setSales] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
 
-    axios.get('http://localhost:3003/cart')
+    axios.get('http://localhost:3003/sales')
       .then((response) => {
-        const cartItemsData = response.data;
-        setCartItems(cartItemsData);
+        const salesData = response.data;
+        setSales(salesData);
         setLoading(false); 
       })
       .catch((error) => {
-        console.error('Error al obtener elementos del carrito:', error);
+        console.error('Error al obtener elementos de ventas:', error);
         setError(error); 
         setLoading(false); 
       });
@@ -44,7 +44,7 @@ const Orders = () => {
           </tr>
         </thead>
         <tbody>
-          {cartItems.map((item) => (
+          {sales.map((item) => (
             <tr key={item._id} className=" cart_item">
               <td className="product-thumbnail">
                 <a href="#">
@@ -52,10 +52,10 @@ const Orders = () => {
                 </a>
               </td>
               <td className="product-name">
-                <a href="#">Nombre del producto</a>
+                <a href="#">{item.name}</a>
                 <ul>
-                  <li>Size: XL</li>
-                  <li>Color: White</li>
+                  <li>Size: {item.size}</li>
+                  <li>Color: {item.color}</li>
                 </ul>
               </td>
               <td className="product-price">
@@ -65,7 +65,7 @@ const Orders = () => {
                 <span className="amount">{item.quantity} pcs</span>
               </td>
               <td className="product-subtotal">
-                <span className="amount">{item.price ? `$${item.price.toFixed(2)}` : 'N/A'}</span>
+                <span className="amount">{item.total ? `$${item.total.toFixed(2)}` : 'N/A'}</span>
               </td>
               <td className="product-remove">
                 <a href="#" className="remove" title="Remove this item">

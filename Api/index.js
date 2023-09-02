@@ -185,7 +185,7 @@ app.delete("/users/:id", async (req,res)=>{
 app.post("/sales", async (req, res) => {
     try {
         const sales = new Sale({
-            userId: mongoose.Types.ObjectId(),
+            // userId: mongoose.Types.ObjectId(),
             productos: [
                 {   cantidad: 3 },              
             ],
