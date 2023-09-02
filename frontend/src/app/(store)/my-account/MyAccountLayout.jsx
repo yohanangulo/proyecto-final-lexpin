@@ -25,6 +25,13 @@ const MyAccountLayout = ({ children, handlePanelNavigation, session }) => {
                   <a href="#my-account">Sales</a>
                 </li>
               )}
+              {session?.user.email === 'admin@coolstore.com' && (
+                <li
+                  className={`woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--orders`}
+                >
+                  <Link href='/users' >Users</Link>
+                </li>
+              )}
 
               {session?.user.email === 'admin@coolstore.com' && (
                 <li

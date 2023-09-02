@@ -288,6 +288,7 @@ app.post('/cart', async (req, res) => {
       // crea una nueva entrada
       const addNewItem = new Cart({
         userId,
+        name,
         items: [],
       });
 

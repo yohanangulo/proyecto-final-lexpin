@@ -116,55 +116,7 @@ const AccountDetails = ({ handleUserData, ...userData }) => {
           />
         </p>
         <div className="clear" />
-        <fieldset>
-          <legend className="heading uppercase mb-30">Password change</legend>
-          <p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-            <label htmlFor="currentPassword">
-              Current password (leave blank to leave unchanged)
-            </label>
-            <span className="password-input">
-              <input
-                type="password"
-                className="woocommerce-Input woocommerce-Input--password input-text"
-                name="currentPassword"
-                id="currentPassword"
-                autoComplete="off"
-                value={userData.currentPassword}
-                onChange={handleUserData}
-              />
-            </span>
-          </p>
-          <p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-            <label htmlFor="newPassword">
-              New password (leave blank to leave unchanged)
-            </label>
-            <span className="password-input">
-              <input
-                type="password"
-                className="woocommerce-Input woocommerce-Input--password input-text"
-                name="newPassword"
-                id="newPassword"
-                autoComplete="off"
-                value={userData.newPassword}
-                onChange={handleUserData}
-              />
-            </span>
-          </p>
-          <p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-            <label htmlFor="confirmNewPassword">Confirm new password</label>
-            <span className="password-input">
-              <input
-                type="password"
-                className="woocommerce-Input woocommerce-Input--password input-text"
-                name="confirmNewPassword"
-                id="confirmNewPassword"
-                autoComplete="off"
-                value={userData.confirmNewPassword}
-                onChange={handleUserData}
-              />
-            </span>
-          </p>
-        </fieldset>
+
         <p>
           <button
             type="submit"

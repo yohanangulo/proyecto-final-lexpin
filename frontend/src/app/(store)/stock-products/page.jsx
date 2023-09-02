@@ -101,11 +101,11 @@ const Stokproducts = () => {
                     >
                       <span>Borrar Producto</span>
                     </Link>
-                    {/* <Link href={`/products/edit-product/${product.id}`}>
+                    <Link href={`/products/edit-product/${product.id}`}>
                       <div className="btn btn-color btn-lg add-to-cart left">
                         <span>Editar Producto</span>
                       </div>
-                    </Link> */}
+                    </Link>
                 <div className="row">
                   <div className="col-md-12">
                     <div className="tabs tabs-bb">

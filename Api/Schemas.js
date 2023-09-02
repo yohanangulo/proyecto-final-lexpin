@@ -46,6 +46,7 @@ const cartSchema = new mongoose.Schema(
   {
     userId: {
       type: String,
+      name: String,
     },
     items: [
       {

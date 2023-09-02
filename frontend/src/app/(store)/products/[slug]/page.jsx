@@ -55,88 +55,10 @@ const Product = async ({ params : { slug } }) => {
                       <i className="icon arrow_expand" />
                     </a>
                   </div>
-                  {/* <div className="gallery-cell">
-                    <a
-                      href="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/single_img_2.jpg"
-                      className="lightbox-img"
-                    >
-                      <img
-                        src="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/single_img_2.jpg"
-                        alt=""
-                      />
-                      <i className="icon arrow_expand" />
-                    </a>
-                  </div> */}
-                  {/* <div className="gallery-cell">
-                    <a
-                      href="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/single_img_3.jpg"
-                      className="lightbox-img"
-                    >
-                      <img
-                        src="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/single_img_3.jpg"
-                        alt=""
-                      />
-                      <i className="icon arrow_expand" />
-                    </a>
-                  </div> */}
-                  {/* <div className="gallery-cell">
-                    <a
-                      href="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/single_img_4.jpg"
-                      className="lightbox-img"
-                    >
-                      <img
-                        src="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/single_img_4.jpg"
-                        alt=""
-                      />
-                      <i className="icon arrow_expand" />
-                    </a>
-                  </div> */}
-                  {/* <div className="gallery-cell">
-                    <a
-                      href="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/single_img_5.jpg"
-                      className="lightbox-img"
-                    >
-                      <img
-                        src="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/single_img_5.jpg"
-                        alt=""
-                      />
-                      <i className="icon arrow_expand" />
-                    </a>
-                  </div> */}
+
                 </div>
                 {/* end gallery main */}
-                {/* <div className="gallery-thumbs">
-                  <div className="gallery-cell">
-                    <img
-                      src="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/single_img_1.jpg"
-                      alt=""
-                    />
-                  </div>
-                  <div className="gallery-cell">
-                    <img
-                      src="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/single_img_2.jpg"
-                      alt=""
-                    />
-                  </div>
-                  <div className="gallery-cell">
-                    <img
-                      src="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/single_img_3.jpg"
-                      alt=""
-                    />
-                  </div>
-                  <div className="gallery-cell">
-                    <img
-                      src="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/single_img_4.jpg"
-                      alt=""
-                    />
-                  </div>
-                  <div className="gallery-cell">
-                    <img
-                      src="https://cdn.jsdelivr.net/gh/yohanangulo/cdn@latest/img/shop/single_img_5.jpg"
-                      alt=""
-                    />
-                  </div>
-                </div>{" "} */}
+                
                 {/* end gallery thumbs */}
               </div>{" "}
               {/* end col img slider */}

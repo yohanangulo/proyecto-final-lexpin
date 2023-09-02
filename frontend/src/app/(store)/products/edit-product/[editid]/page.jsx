@@ -7,7 +7,27 @@ import { appFirebase } from '@/config/firebase.jsx';
 import Header from '@/components/Header'; 
 import Footer from '@/components/Footer';
 
+
 const EditProduct = ({ params }) => {
+  
+  const categories = [
+    "Shirts for Man",
+    "Jens for Man",
+    "Accesories for Man",
+    "Shoes for Man",
+    "Dresses for Woman",
+    "Coats for Woman",
+    "Accesories for Woman",
+    "Sandals for Woman",
+    "Wallets of Accesories",
+    "Watches of Accesories",
+    "Belts of Accesories",
+    "Scarfs of Accesories",
+    "Leather of Bags",
+    "Sports of Bags",
+    "Street Style of Bags",
+    "Creative of Bags"
+  ];
 
   console.log(params)
 
@@ -34,14 +54,15 @@ const EditProduct = ({ params }) => {
 
     fetchProduct();
   }, [db, productId]);
-
+  
   const handleInputChange = (e) => {
     setProduct({ ...product, [e.target.name]: e.target.value });
   };
-
+  
   const handleUpdateProduct = async (e) => {
     e.preventDefault();
 
+    
     try {
       const productRef = doc(db, 'products', productId);
       await updateDoc(productRef, {
@@ -50,9 +71,11 @@ const EditProduct = ({ params }) => {
         description: product.description,
         stock: product.stock,
         category: product.category,
+        
       });
-
-      router.push('/products');
+      alert("UPDATE SUCCESSFUL")
+      router.push('/stock-products');
+      
     } catch (error) {
       console.error('Error al actualizar el producto:', error);
     }
@@ -127,15 +150,19 @@ const EditProduct = ({ params }) => {
                       value={product.category}
                       onChange={handleInputChange}
                     >
-                      <option disabled value="">-- Selecciona una categoría --</option>
-                      {/* Define las opciones de categoría aquí */}
+                     <option disabled value="" >-- Selecciona una categoria --</option> 
+                      {categories.map((category) => (
+                        <option key={category} value={category.toLowerCase()}>
+                          {category}
+                        </option>   
+                        ))}                   
                     </select>
                   </div>
                   <div>
                     <label htmlFor="images">
                       Selecciona imágenes para tu producto
                     </label>
-                    <input name="images" id="images" type="file" onChange={fileHandler}/>
+                    <input name="images" id="images" type="file"  onChange={fileHandler}/>
                   </div>
                 </div>
               </div>

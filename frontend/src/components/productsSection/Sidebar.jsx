@@ -18,13 +18,7 @@ export default function Sidebar() {
           ))}
         </ul>
       </div>
-      {/* Bestsellers */}
-      <div className="widget bestsellers">
-        <div className="products-widget">
-          <h3 className="widget-title uppercase">Bestsellers</h3>
-          <ProductListWidget />
-        </div>
-      </div>
+
     </aside>
   )
 }

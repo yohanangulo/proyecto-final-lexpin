@@ -3,13 +3,14 @@
 import { useState } from 'react'
 import cartService from '@/services/cart'
 
-export default function ProductActions({ userId, productId }) {
+export default function ProductActions({name, userId, productId }) {
   const [qty, setQty] = useState(1)
 
-  console.log(userId, productId)
+  console.log(name,userId, productId)
 
   const handleAddToCart = () => {
     const payload = {
+      name,
       userId,
       productId,
       quantity: qty,

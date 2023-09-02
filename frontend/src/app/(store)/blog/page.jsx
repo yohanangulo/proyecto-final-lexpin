@@ -167,32 +167,7 @@ export default function Bolg() {
                 </article>{' '}
                 {/* end video post */}
                 {/* blockquote post */}
-                <article className="entry-item">
-                  <div className="entry blockquote">
-                    <blockquote className="blockquote-style-1">
-                      <ul className="entry-meta">
-                        <li className="entry-date">19 July, 2015</li>
-                        <li className="entry-category">
-                          <a href="#">Fashion</a>
-                        </li>
-                        <li className="entry-author">
-                          <a href="#">Admin</a>
-                        </li>
-                        <li className="entry-comments">
-                          <a href="blog-single.html">15 Comments</a>
-                        </li>
-                      </ul>
-                      <p>
-                        <a href="blog-single.html">
-                          &quot;Incredible change happens in your life when you
-                          decide to take control of what you do have power over
-                          instead of craving control over what you don&apos;t.&quot;
-                        </a>
-                      </p>
-                      <span>– Steve Maraboli</span>
-                    </blockquote>
-                  </div>
-                </article>{' '}
+
                 {/* end blockquote post */}
                 {/* text only post */}
                 <article className="entry-item">
@@ -234,21 +209,7 @@ export default function Bolg() {
                   </div>
                 </article>{' '}
                 {/* end text only post */}
-                {/* Pagination */}
-                <div className="text-center">
-                  <nav className="pagination clear">
-                    <a href="#">
-                      <i className="fa fa-angle-left" />
-                    </a>
-                    <span className="page-numbers current">1</span>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
-                    <a href="#">4</a>
-                    <a href="#">
-                      <i className="fa fa-angle-right" />
-                    </a>
-                  </nav>
-                </div>
+
               </div>{' '}
               {/* end col */}
               {/* Sidebar */}

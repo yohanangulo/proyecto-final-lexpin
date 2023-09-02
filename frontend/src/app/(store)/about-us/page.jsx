@@ -21,23 +21,18 @@ export default function AboutUs() {
               <div className="col-sm-8">
                 <h4 className="about-intro uppercase">about our shop</h4>
                 <p>
-                  A-ha Shop is a very slick and clean e-commerce template with
-                  endless possibilities. Creating an awesome clothes store with
-                  this Theme is easy than you can imagine. And finally the
-                  subconscious is the mechanism through which thought impulses
-                  which are repeated regularly with feeling. And emotion are
-                  quickened. A-ha Shop is a very slick and clean e-commerce
-                  template with endless possibilities. A-ha Shop is a very slick
-                  and clean e-commerce template with endless possibilities.
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic molestiae cupiditate fugit veniam maiores dolor at sunt consequatur maxime laboriosam perferendis rerum repudiandae ad, ea eaque consectetur debitis laborum facere?
+                  Suscipit dolores repellendus, alias dignissimos sint quo magni vitae ad reprehenderit deleniti veniam nobis voluptates rerum. Cum incidunt, animi praesentium, reiciendis fugit enim fugiat expedita iste quo odio accusantium quos?
+                  Cum, recusandae adipisci possimus, cupiditate corporis vel id assumenda, corrupti ipsam commodi sapiente minima error repudiandae nesciunt ipsa reprehenderit totam ipsum architecto culpa distinctio. Odio culpa delectus nesciunt voluptate nihil?
                 </p>
               </div>
               <div className="col-sm-3 col-sm-offset-1">
                 <div className="statistic">
-                  <span>1999</span>
+                  <span>2023</span>
                   <h4 className="uppercase">year of foundation</h4>
                 </div>
                 <div className="statistic">
-                  <span>120</span>
+                  <span>2</span>
                   <h4 className="uppercase">partners work with us</h4>
                 </div>
               </div>

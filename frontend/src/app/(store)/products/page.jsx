@@ -2,7 +2,7 @@
 
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import Pagination from "@/components/Pagination";
+
 import ProductsGrid from "@/components/productsSection/ProductsGrid";
 import Sidebar from "@/components/productsSection/Sidebar";
 import { useScripts } from "@/hooks/useScripts";
@@ -31,7 +31,7 @@ export default function Products() {
                   </div>
                 </div>
                 <div className="shop-filter">
-                  <p className="result-count">Showing: 1-12 of 80 results</p>
+            
                   <form className="ecommerce-ordering">
                     <select>
                       <option value="default-sorting">Default Sorting</option>
@@ -55,7 +55,7 @@ export default function Products() {
                 </div>
                 {/* end grid mode */}
                 <div className="clear" />
-                <Pagination />
+             
               </div>
               <Sidebar />
             </div>
