@@ -29,12 +29,12 @@ const userSchema = new mongoose.Schema(
 
 
 const productSchema = new mongoose.Schema({
-  // productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: true },
+  productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: true },
   cantidad: { type: Number, required: true, min: 1 },
 });
 
 const saleSchema = new mongoose.Schema({
-    // userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     productos: { type: [productSchema], required: true },
     precioSinIva: { type: Number, required: true, min: 0 },
     precioConIva: { type: Number, required: true, min: 0 },
@@ -46,10 +46,10 @@ const cartSchema = new mongoose.Schema(
   {
     userId: {
       type: String,
-      name: String,
     },
     items: [
       {
+        name: String,
         productId: String,
         quantity: Number,
       },

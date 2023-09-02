@@ -11,14 +11,14 @@ export default function Cart() {
     {
       name: 'Product 1',
       image: 'url_to_image_1',
-      price: 10.99,
+      price: 123.99,
       quantity: 2,
       // ... otras propiedades
     },
     {
       name: 'Product 1',
       image: 'url_to_image_1',
-      price: 10.99,
+      price: 40.99,
       quantity: 2,
       // ... otras propiedades
     },

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import salesService from '@/services/sales'
 import { useFetch } from '@/hooks/useFetch';
 import { formatter } from '@/lib/utils';
@@ -31,7 +30,7 @@ const Orders = () => {
           </tr>
         </thead>
         <tbody>
-          {sales.map((item) => (
+          {cartItems.map((item) => (
             <tr key={item._id} className=" cart_item">
               <td className="product-thumbnail">
                 <a href="#">

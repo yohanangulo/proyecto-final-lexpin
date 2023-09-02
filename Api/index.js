@@ -185,7 +185,7 @@ app.delete("/users/:id", async (req,res)=>{
 app.post("/sales", async (req, res) => {
     try {
         const sales = new Sale({
-            // userId: mongoose.Types.ObjectId(),
+            userId: mongoose.Types.ObjectId(),
             productos: [
                 {   cantidad: 3 },              
             ],
@@ -279,7 +279,7 @@ app.get("/cart/:userId", async (req, res) => {
 // 
 app.post('/cart', async (req, res) => {
   try {
-    const { productId, quantity, userId } = req.body;
+    const { name,productId, quantity, userId } = req.body;
 
     const userItems = await Cart.findOne({ userId });
 
@@ -288,11 +288,10 @@ app.post('/cart', async (req, res) => {
       // crea una nueva entrada
       const addNewItem = new Cart({
         userId,
-        name,
         items: [],
       });
 
-      addNewItem.items.push( { productId, quantity, },)
+      addNewItem.items.push( { name,productId, quantity, },)
 
       await addNewItem.save();
       return res.status(200).send("agregado al carrito");
