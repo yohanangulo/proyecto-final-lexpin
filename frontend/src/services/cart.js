@@ -10,6 +10,10 @@ class CartService {
   async deleteItem({payload, userId}) {
     return await axios.put(`${API}/cart/${userId}`, payload)
   }
+
+  async getUserCart(userId) {
+    return await axios.get(`${API}/cart/${userId}`)
+  }
 }
 
 const cartService = new CartService()

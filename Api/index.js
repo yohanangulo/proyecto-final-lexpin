@@ -265,9 +265,11 @@ app.get("/cart", async (req, res) => {
 // 
 app.get("/cart/:userId", async (req, res) => {
   try {
-    const { userId } = req.body;
+    const { userId } = req.params
 
-    const cartItems = Cart.findOne({userId})
+    const cartItems = await Cart.findOne({userId})
+
+    res.send(cartItems.items)
 
   } catch (error) {
     res.status(500).send("ha ocurrido un error al consultar datos del carrito");
@@ -279,7 +281,7 @@ app.get("/cart/:userId", async (req, res) => {
 // 
 app.post('/cart', async (req, res) => {
   try {
-    const { name,productId, quantity, userId } = req.body;
+    const { productId, quantity, userId, productName, image, price } = req.body;
 
     const userItems = await Cart.findOne({ userId });
 
@@ -291,14 +293,26 @@ app.post('/cart', async (req, res) => {
         items: [],
       });
 
-      addNewItem.items.push( { name,productId, quantity, },)
+      addNewItem.items.push({
+        productId,
+        productName,
+        image,
+        price,
+        quantity,
+      })
 
       await addNewItem.save();
       return res.status(200).send("agregado al carrito");
     }
 
     // si si lo encuentra
-    userItems.items.push({ productId, quantity})
+    userItems.items.push({
+      productId,
+      productName,
+      image,
+      price,
+      quantity,
+    })
     await userItems.save()
 
     res.status(200).send("agregado al carrito");
@@ -332,8 +346,19 @@ app.put('/cart/:userId', async (req, res) => {
 // DELETE rout
 // 
 // 
-app.delete('/cart/:userId', async (req, res) => {
-})
+app.delete("/cart/:cartId/item/:itemId", async (req,res)=>{
+  try {
+      const id = req.params.id;
+      const deleteCart = await User.deleteOne({_id:id});
+      if (!deleteCart) {
+          return res.status(404).send("Producto no existe");
+      }
+      res.send("Producto eliminado correctamente");
+  } catch (error) {
+      console.log(error);
+      res.status(500).send("Error al eliminar Producto")
+  }
+});
 
 //--------------------------------------------------------------------
 app.get('/', (req, res) => {
