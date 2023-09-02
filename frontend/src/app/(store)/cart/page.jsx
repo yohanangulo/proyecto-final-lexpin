@@ -18,7 +18,6 @@ export default function Cart() {
 
   useEffect(() => {
     if (status == 'authenticated') {
-      console.log('hola donde use')
       cartService
         .getUserCart(session.user._id)
         .then(res => setCartItems(res.data))
