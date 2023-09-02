@@ -9,6 +9,7 @@ import { useSession } from 'next-auth/react'
 import { formatter } from '@/lib/utils'
 import SignInForm from '@/components/SignInForm'
 import axios from 'axios'
+import { Loader2 } from 'lucide-react/dist/esm/lucide-react'
 
 export default function Cart() {
   useScripts()
@@ -245,6 +246,7 @@ export default function Cart() {
               {/* end container */}
             </section>
           )}
+          {status == 'loading' && <Loader2 color={'#1c1c1c'} size={50} strokeWidth={2} className='spinner-loader mt-20 mb-120' />}
           {status == 'unauthenticated' && (
             <section className="section-wrap login-register pt-0 pb-40">
               <div className="container">
