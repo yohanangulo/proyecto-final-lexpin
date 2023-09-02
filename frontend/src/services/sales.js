@@ -3,7 +3,7 @@ import axios from 'axios'
 
 class ProductService {
   async getAllSales() {
-    return await axios.get(`${API}/users`)
+    return await axios.get(`${API}/sales`)
   }
 
   async getSalesChart() {
