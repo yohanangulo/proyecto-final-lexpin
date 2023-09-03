@@ -200,7 +200,10 @@ const Header = () => {
                       </form>
                     </li>
                     <li>
-                      <Link href="/">Inicio</Link>
+                      <Link href="/">Home</Link>
+                    </li>
+                    <li >
+                      <Link href="/products">Shop</Link>
                     </li>
                     <li className="dropdown">
                       <a href="#">More</a>
@@ -306,9 +309,6 @@ const Header = () => {
                     {/* end categories */}
                     <li>
                       <Link href="/blog">Blog</Link>
-                    </li>
-                    <li >
-                      <Link href="/products">Shop</Link>
                     </li>
                     {/* <li className="dropdown">
                       <a href="#">Elements</a>

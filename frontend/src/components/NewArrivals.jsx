@@ -1,32 +1,24 @@
 import ProductItem from './ProductItem'
-import { useEffect, useState } from 'react'
 import { appFirebase } from '../config/firebase.jsx'
-import { getFirestore, collection, getDocs, query, limit  } from 'firebase/firestore'
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  query,
+  limit,
+} from 'firebase/firestore'
+import { Suspense } from 'react'
 
-export default function NewArrivals() {
+export default async function NewArrivals() {
   const db = getFirestore(appFirebase)
 
-  const [products, setProducts] = useState([])
+  const q = query(collection(db, 'products'), limit(8))
+  const querySnapshot = await getDocs(q)
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const q = query(collection(db, 'products'), limit(8))
-        const querySnapshot = await getDocs(q)
-
-        const productList = []
-        querySnapshot.forEach(doc => {
-          productList.push({ ...doc.data(), id: doc.id })
-        })
-
-        setProducts(productList)
-      } catch (error) {
-        console.error('Error fetching products:', error)
-      }
-    }
-
-    fetchProducts()
-  }, [db])
+  const products = []
+  querySnapshot.forEach(doc => {
+    products.push({ ...doc.data(), id: doc.id })
+  })
 
   return products.map((product, i) => (
     <div key={product.id} className="col-md-3 col-xs-6">

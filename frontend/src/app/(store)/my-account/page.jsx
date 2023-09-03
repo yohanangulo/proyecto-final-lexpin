@@ -9,7 +9,6 @@ import { useSession } from 'next-auth/react'
 import SignInForm from '@/components/SignInForm'
 import Orders from './Orders'
 import { useEffect, useState } from 'react'
-import UserService from '@/services/user'
 import { Loader2 } from 'lucide-react/dist/esm/lucide-react'
 
 const initialUserData = {

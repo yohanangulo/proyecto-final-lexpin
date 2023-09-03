@@ -5,7 +5,7 @@ import SlideFour from '@/components/HomeSlider/SlideFour'
 
 export default function Slider() {
   return (
-    <div className="entry-slider">
+    <div style={{aspectRatio: 285/134}} className="entry-slider">
       <div className="flexslider" id="flexslider-hero">
         <ul className="slides clearfix">
           <SlideOne />

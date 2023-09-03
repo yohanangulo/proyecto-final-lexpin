@@ -137,7 +137,7 @@ const Product = async ({ params : { slug } }) => {
         </section>
         ,{/* end single product */}
         {/* Related Items */}
-        <section className="section-wrap related-products pt-0">
+        {/* <section className="section-wrap related-products pt-0">
           <div className="container">
             <div className="row heading-row">
               <div className="col-md-12 text-center">
@@ -160,12 +160,9 @@ const Product = async ({ params : { slug } }) => {
                 <ProductItem />
                 <ProductItem />
               </div>
-            </div>{" "}
-            {/* end row */}
-          </div>{" "}
-          {/* end container */}
-        </section>{" "}
-        {/* end related products */}
+            </div>
+          </div>
+        </section> */}
       </main>
       <Footer />
     </>

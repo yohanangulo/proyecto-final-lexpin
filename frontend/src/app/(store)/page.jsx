@@ -1,16 +1,13 @@
-'use client'
-
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
-import { useScripts } from '@/hooks/useScripts'
 import PartnerItems from '@/components/PartnerItems'
 import BestSellers from '@/components/BestSellers'
 import NewArrivals from '@/components/NewArrivals'
 import SubscribeLetter from '@/components/SubscribeLetter'
 import Slider from '@/components/HomeSlider/Slider'
+import { Scripts } from '@/components/Scripts'
 
 export default function Home() {
-  useScripts()
 
   const partners = [
     'adidas',
@@ -25,6 +22,7 @@ export default function Home() {
 
   return (
     <>
+      <Scripts />
       <Header />
       {/* Hero Slider */}
       <main className="content-wrapper oh">
@@ -46,11 +44,11 @@ export default function Home() {
               </div>
             </div>
             <div className="row row-10">
-              <NewArrivals />
-            </div>{' '}
+                <NewArrivals />
+            </div>
             {/* end row */}
           </div>
-        </section>{' '}
+        </section>
         {/* end new arrivals */}
         {/* Newsletter */}
         <div className="container">
@@ -71,11 +69,11 @@ export default function Home() {
               </div>
             </div>
             <div className="row row-10">
-              <BestSellers />
+              {/* <BestSellers /> */}
             </div>
             {/* end row */}
           </div>
-        </section>{' '}
+        </section>
         {/* end best sellers */}
         {/* Partners */}
         <section className="section-wrap partners pt-0 pb-50">
