@@ -7,7 +7,6 @@ import {
   query,
   limit,
 } from 'firebase/firestore'
-import { Suspense } from 'react'
 
 export default async function NewArrivals() {
   const db = getFirestore(appFirebase)

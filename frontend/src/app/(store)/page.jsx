@@ -8,7 +8,6 @@ import Slider from '@/components/HomeSlider/Slider'
 import { Scripts } from '@/components/Scripts'
 
 export default function Home() {
-
   const partners = [
     'adidas',
     'air-jordan',
@@ -44,7 +43,7 @@ export default function Home() {
               </div>
             </div>
             <div className="row row-10">
-                <NewArrivals />
+              <NewArrivals />
             </div>
             {/* end row */}
           </div>
@@ -68,9 +67,7 @@ export default function Home() {
                 </h2>
               </div>
             </div>
-            <div className="row row-10">
-              {/* <BestSellers /> */}
-            </div>
+            <div className="row row-10">{/* <BestSellers /> */}</div>
             {/* end row */}
           </div>
         </section>

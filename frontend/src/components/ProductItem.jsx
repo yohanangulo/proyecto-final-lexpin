@@ -1,7 +1,7 @@
 'use client'
+
 import { formatter } from '@/lib/utils'
 import Link from 'next/link'
-// import ProductImage from './ProductImage'
 import dynamic from 'next/dynamic'
 import { Loader2 } from 'lucide-react/dist/esm/lucide-react'
 import Image from 'next/image'
@@ -75,10 +75,10 @@ const ProductItem = product => {
           </h3>
           <span className="price">
             {/* {product.price && (
-              <del>
-                <span>{product.price}</span>
-              </del>
-            )} */}
+          <del>
+            <span>{product.price}</span>
+          </del>
+        )} */}
             <ins>
               <span className="ammount">{formatter.format(product.price)}</span>
             </ins>
